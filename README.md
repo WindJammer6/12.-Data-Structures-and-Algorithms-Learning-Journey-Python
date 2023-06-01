@@ -17,6 +17,8 @@ the starting code (at the time I didn't know about Object-Oriented Programming a
 was literally unable to understand any of the questions and give any relevant answer. So as you can see, this is how disastrous my first LeetCode experience was. (Eventually
 I found out I was using Python3, after copy-pasting some of the usual codes I've written and asking ChatGPT hahaha...))
 
+Learning and Practices are both organised under each folder for their respective Data Structure/Algorithm.
+
 <br>
 
 **Source(s):**
