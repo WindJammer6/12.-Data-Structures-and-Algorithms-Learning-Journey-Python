@@ -14,8 +14,7 @@ Hence the birth of this repository, for me to bridge this gap.
 (Funnily enough, when I first looked at LeetCode I had no idea how to navigate their website. I saw they had an answer template where you can type in your code answers but 
 it contained many different kinds of programming languages. Obviously I went for the one I knew, Python. But then there was 2 options, Python and Python3. Then I looked at
 the starting code (at the time I didn't know about Object-Oriented Programming and Classes yet) and I couldn't tell which was the one I was supposed to use. Furthermore, I 
-was literally unable to understand any of the questions and give any relevant answer. So as you can see, this is how disastrous my first LeetCode experience was. (Eventually
-I found out I was using Python3, after copy-pasting some of the usual codes I've written and asking ChatGPT hahaha...))
+was literally unable to understand any of the questions and give any relevant answer. So as you can see, this is how disastrous my first LeetCode experience was. (Eventually I found out I was using Python3, which I'm pretty sure is the version everyone using Python is using, after copy-pasting some of the usual codes I've written and asking ChatGPT hahaha...))
 
 Learning and Practices are both organised under each folder for their respective Data Structure/Algorithm.
 
