@@ -1,4 +1,4 @@
-# 12.-Data-Structures-and-Algorithms-Learning-Journey-Python :large_blue_circle::heavy_minus_sign::large_blue_circle::heavy_minus_sign::large_blue_circle: 	:clipboard:
+# 12.-Data-Structures-and-Algorithms-Learning-and-Practice-Python :large_blue_circle::heavy_minus_sign::large_blue_circle::heavy_minus_sign::large_blue_circle: 	:clipboard:
 My learning journey of Data Structures and Algorithms in Python (work in progress)
 
 ## Thoughts on starting this learning journey
