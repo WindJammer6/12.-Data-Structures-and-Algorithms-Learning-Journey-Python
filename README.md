@@ -17,6 +17,11 @@ the starting code (at the time I didn't know about Object-Oriented Programming a
 was literally unable to understand any of the questions and give any relevant answer. So as you can see, this is how disastrous my first LeetCode experience was. (Eventually
 I found out I was using Python3, after copy-pasting some of the usual codes I've written and asking ChatGPT hahaha...))
 
+<br>
+
+**Source(s):**
++ https://www.youtube.com/playlist?list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12 (codebasics) 
+
 ## Table of Contents:
 + [Code Description](#codedescription)
   1. [Tutorial 1 - What are Data Structures](#tutorial1)
