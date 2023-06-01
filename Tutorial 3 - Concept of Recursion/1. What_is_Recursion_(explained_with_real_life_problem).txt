@@ -1,0 +1,45 @@
+What is the concept around Recursion?
+Recursion is a method of solving a computational problem where the solution depends on solutions 
+to smaller instances of the same problem. Recursive function works and are functions that calls itself
+within the function.
+
+//////////////////
+
+Real life scenario:
+5 people queuing for a pizza shop
+
+PIZZASHOP |  MADHAV(1), YANA(2), AARAV(3), SHEILA(4), MEERA(5)....
+
+The pizza shop owner gave 1 bread to MADHAV, 2 bread to YANA and so on (1 more bread to each person down
+the queue) to the people in the queue to compensate for their time (based on position in the queue) 
+to wait.
+
+The pizza owner also decided to give a 10% discount to people in the queue if they can figure out
+the sum of total bread given to people in front and inclusive of them. How can we do this for everyone
+by recursion?
+
+Well, MEERA is smart but lazy, and thought that she will just ask SHEILA for her answer to this question
+so she can just add her number of bread (5) to SHEILA's answer to get her own answer. SHEILA thought this 
+was smart and decided to the same and ask AARAV for his answer and so on. 
+
+Until we reach MADHAV who has a clear and simple answer of 1 number of bread as his answer. He tells this
+to YANA, YANA tells AARAV, and all the way to MEERA which got her number as 15.
+
+//////////////////////////
+
+How does this look like mathematically to answer the quesiton 'find sum numbers 1 to 5'?
+(find sum numbers 1 to 5) = 5 + (find sum numbers 1 to 4)
+(find sum numbers 1 to 4) = 4 + (find sum numbers 1 to 3)
+(find sum numbers 1 to 3) = 3 + (find sum numbers 1 to 2)
+(find sum numbers 1 to 2) = 2 + (find sum numbers 1 to 1)
+
+(find sum numbers 1 to 1) = 1, quite clear cut as an answer.
+
+//////////////////////////
+
+In a recursive approach/function, you are need do these 3 steps:
+1. Divide a bigger problem into smaller and simpler problems
+2. Find a base condition with a simple answer. (This base condition is a criteria for recursion to happen
+   btw, as you need the base condition to tell the program when to stop the recursive loops and arrive 
+   at a final output)
+3. Return or roll back base condition answer to solve all sub problems

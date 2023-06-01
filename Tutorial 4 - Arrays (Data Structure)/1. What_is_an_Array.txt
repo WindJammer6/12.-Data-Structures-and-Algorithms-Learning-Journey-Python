@@ -1,0 +1,69 @@
+Whats an Array?
+An Array is a collection of similar data elements stored at contiguous memory locations.
+
+
+//////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Array Data Structures:
+
+Data Structures	 |   Space Complexity  |	        Average Case Time Complexity
+                      |                     |    Access	  Search	 Insertion 	  Deletion
+    Array	        |         O(n)	  |     O(1)	   O(n)	   O(n)	    O(n)
+
+
+/////////////////////
+
+
+Static vs Dynamic Arrays:
+
+Static Arrays are immutable. Upon creation, have a fixed size (lets say, 5), and cannot the size 
+cannot be modified. (If you try insert/delete elements the computer program will give you an Array)
+
+Dynamic Arrays are mutable. They can vary their size. (it allows inserting/deleting of new elements to
+the Array) How exactly it does this under the hood is a little complicated and not very important.
+(sth about shifting of the whole array to a new space with more space/memory to store more/incoming 
+elements)
+
+
+/////////////////////
+
+
+In Python, Dynamic Arrays are implemented as Lists and Static Arrays are implemented as Tuples.
+
+In Other Programming Languages like Java and C++, Dynamic and Static Arrays are implemented differently 
+as well.
+
+                |     Python    |       Java       |       C++
+Static Array    |     Tuple     |   Native array   |   Native array
+Dynamic Array   |      List     |    Array list    |   std::vector
+
+
+/////////////////////
+
+
+Difference between List (Python's implementation of an array) and Array (Programming Data Structure,
+but can be implmented via Python Libraries such as NumPy) in Python:
+
+S.No.
+ 1	List is used to collect items that usually consist of elements of multiple data types.	
+       Arrays are also a vital component that collects several items of the same data type.
+
+2	List cannot manage arithmetic operations.	
+       Array can manage arithmetic operations.
+
+ 3	List consists of elements that belong to the different data types.	
+       Array consists of elements that belong to the same data type.
+
+ 4	When it comes to flexibility, the list is perfect as it allows easy modification of data.	
+       When it comes to flexibility, the array is not suitable as it does not allow easy 
+       modification of data.
+
+ 5	List consumes a larger memory.
+       Array consumes less memory than a list.
+
+ 6	In a list, the complete list can be accessed without any specific looping.	
+       In an array, a loop is mandatory to access the components of the array.
+
+ 7	List favors a shorter sequence of data.	
+       Array favors a longer sequence of data.

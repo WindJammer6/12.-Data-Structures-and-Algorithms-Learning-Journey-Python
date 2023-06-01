@@ -1,0 +1,155 @@
+Whats a Linked List?
+A Linked List consists of nodes where each node contains a data field and a reference(link)/pointer to 
+the next node in the list. Each node consists of 2 components, data of an element in the Data Structure,
+and a pointer. 
+
+Each node is stored at a random memory space (not continuous to other elements of the Linked List Data 
+Structure, unlike Arrays) and is linked to other nodes via a pointer. (which stores the address of the 
+memory storing the next element)
+
+
+Visual representation on how it looks like:
+
+298|pointer(stores address of the memory storing 305) -> 305|pointer -> 320|pointer -> 301|null
+
+
+//////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Single and Double Linked List Data Structures:
+
+Data Structures	    |   Space Complexity  |	           Average Case Time Complexity
+                    |                     |    Access	  Search	 Insertion 	  Deletion
+Singly Linked List	|         O(n)	      |     O(n)       O(n)	       O(1)	        O(1)
+Doubly Linked List	|         O(n)	      |     O(n)	   O(n)	       O(1)	        O(1)
+
+
+//////////////////////////
+
+
+Issues of the Array Data Structure that Linked List Data Structure attempts to solve:
+
+1. Linked Lists do not need to pre-allocate memory space to store (more) data
+2. Insertion/Deletion is easier
+
+Comparison of Big O Notation of Time and Space Complexity for Array and Linked List Data Structures:
+Data Structures	    |   Space Complexity  |	           Average Case Time Complexity
+                    |                     |    Access	  Search	 Insertion 	  Deletion
+    Array	        |         O(n)	      |     O(1)	   O(n)	       O(n)	        O(n)
+Singly Linked List	|         O(n)	      |     O(n)       O(n)	       O(1)	        O(1)
+Doubly Linked List	|         O(n)	      |     O(n)	   O(n)	       O(1)	        O(1)
+
+Why is the Big O Notation for Time Complexity is O(n) for Insertion/Deletion for Arrays?
+It is so because when an element is added/deleted say as the 2nd element in the Array, all the other
+elements in the Array will need to shift 1 index down/up, hence leading to Big O Notation for Time 
+Complexity of O(n).
+
+Why is the Big O Notation for Time Complexity is O(1) for Insertion/Deletion for Arrays?
+Here's a visual representation:
+Initial:
+    298|pointer(stores address of the memory storing 305) -> 305|pointer -> 320|pointer -> 301|null
+
+To add a new element:
+    298|pointer(storing 284 address) --                                     --> 305|pointer -> etc.
+                                      |                                     |
+                                      --> 284|pointer(storing 305 address) --
+
+From the representation above, we can see that to add a new element to a Linked List, we are simply
+creating a new node, then modifying the pointer (modify where they are pointing) by changing the 
+memory addresses being stored in the pointer of the nodes. There was no need for us to shift the other
+elements anywhere in memory hence process of Insetion/Deletion is Big O Notation for Time Complexity 
+of O(1).
+
+(Note: Linked Lists are not always better than Arrays as Arrays also have its strengths over Linked 
+Lists such as the process of Accessing an element.
+
+The process of Access is Big O Notation for Time Complexity of O(1) for Arrays due to the elements in an 
+Array being indexed and can be accessed directly via the provided index hence O(1).
+
+The process of Access is Big O Notation for Time Complexity of O(n) for Linked Lists due to the elements 
+in a Linked List not being indexed and hence cannot be accessed directly via a provided index hence O(n).
+
+So you need to know when to use which Data Structures. If you do not require much Accessing but only
+have a lot of Insertion/Deletion in your program then Linked Lists would be more favourable compared to
+Arrays and vice versa.)
+
+
+//////////////////////////
+
+
+Common misunderstanding on the process of Insertion/Deletion in Arrays and Linked List Data Structures
+(or potentially all Data Structures):
+
+In reality, the overall process of Insertion/Deletion can also be defined as:
+
+    process of Access(to find the element to be inserted/deleted) + process of Insertion/Deletion itself
+    = overall process of Insertion/Deletion
+
+There is a common misunderstanding of this when the table above is read as the process of 
+Insertion/Deletion shown above is not the overall process of Insertion/Deletion, but only the process of
+Insertion/Deletion itself, excluding the process of Access (finding the element to be inserted/deleted).
+
+If you are looking at the overall process of Insertion/Deletion, meaning you need to consider both the
+Big O Notation for Time Complexity of O(n) for process of Access (finding the element to be 
+inserted/deleted) and process of Insertion/Deletion itself. This is further explained below:
+
+    Arrays:
+    -> Finding/Accessing the point of insertion/deletion = O(1)
+    -> Performing the insertion/deletion itself = O(n)
+    Overall process of Insertion/Deletion = O(n)
+
+    Linked Lists:
+    -> Finding/Accessing the point of insertion/deletion = O(n)
+    -> Performing the insertion/deletion itself = O(1)
+    Overall process of Insertion/Deletion = O(n)
+
+As you can see, both the overall process of Insertion/Deletion has Big O Notation for Time Complexity 
+of O(n) for both Arrays and Linked Lists, so why does it show Big O Notation for Time Complexity of O(1)
+for the process of Insertion/Deletion for Linked Lists in the table?
+
+This is because what they are actually referring to is the process of Insertion/Deletion itself instead
+of the overall process of Insertion/Deletion. So when people sometimes say that the process of
+Insertion/Deletion is of Big O Notation for Time Complexity of O(1) for Linked Lists, they are actually
+talking about just the process of Insertion/Deletion itself, or that sometimes it is assumed that you are
+already at the point of Insertion/Deletion (that the process of Access(to find the element to be 
+inserted/deleted) is already completed) hence it is Big O Notation for Time Complexity of O(1) for 
+Linked Lists.
+
+
+//////////////////////////
+
+
+How many types of Linked Lists are there?
+There are 4 types of Linked Lists:
+1. Singly Linked Lists 
+2. Doubly Linked Lists 
+3. Circular (Singly) Linked Lists 
+4. Circular Doubly Linked Lists 
+
+However, in this tutorial, we will only be learning about the first 2 types, Singly and Doubly Linked 
+Lists.
+
+
+//////////////////////////
+
+
+Whats a Doubly Linked List?
+Singly Linked List is to conventional Linked List. A Doubly Linked List has pointers on both sides of
+each node that points both to the next node, and the previous node, making backwards traversal of the
+elements much easier than Singly Linked Lists.
+
+Visual representation on how it looks like:
+
+null|298|pointer(stores 305's address (not 305 address!)) <-> pointer|305|pointer <-> 
+pointer|320|pointer <-> pointer(stores 320 address)|301|null
+
+
+//////////////////////////
+
+
+In Python, Linked Lists do not exist as a built-in Data Structure. Hence, in this tutorial we have to,
+and will learn how to build our own Linked List in Python.
+
+ Data Structure |      Python      |           Java          |              C++
+  Linked List   |        -         |       Linked List       |           std:list
+

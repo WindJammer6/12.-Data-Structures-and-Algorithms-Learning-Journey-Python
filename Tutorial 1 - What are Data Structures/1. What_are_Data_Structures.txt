@@ -1,0 +1,42 @@
+What are Data Structures?
+They are a specificied way to organise, manage, and store data in a specific memory layout. Similar 
+to that of a physical container, which you can put and keep stuff in it. 
+
+Like how,
+house = building material + house building instructions,
+
+computer program = Data Structures + code instructions (Algorithms)
+
+Data Structures are the building materials/raw material to build any computer program. To build a 
+good computer program, you need to have a sound understanding of Data Structures and which is the 
+right Data Structure (building materials) to use to build a computer program (house). (Example in
+2. using_the_right_data_structure.py)
+
+
+Examples of Data Structures:
+Arrays
+Linked Lists
+Hashtables
+Stack
+Queue
+Tree
+Binary tree and etc.
+
+
+Note: Different Data Structures store their data in memory in different ways:
+E.g. 
+Arrays store data in a continuous manner, each element side by side to one another in memory.
+
+Hash Tables/Hash Maps/Dictionaries (in Python) puts the 'key' element through a hash function to 
+retrieve its corresponding 'value' element.
+
+Stack, Queue, Linked lists, Trees and Binary Trees make use of the concept of 'pointers' to store and 
+locate data.
+
+
+Note: Data Structures are a conceptual thing, different programming languages implement them in different
+ways.
+ Data Structure |      Python      |           Java          |              C++
+     Array      |    List/Tuple    | Native array/Array list |  Native array/std::vector
+   Hash Table   |    Dictionary    |  HashMap/LinkedHashMap  |           std::map
+  Linked List   |        -         |       Linked List       |           std:list
