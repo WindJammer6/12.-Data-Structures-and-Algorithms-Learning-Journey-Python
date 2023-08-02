@@ -2,9 +2,6 @@
 My learning journey of Data Structures and Algorithms in Python (work in progress)
 
 ## Thoughts on starting this learning journey
-
-![Semantic description of image](https://media.gettyimages.com/id/1289650447/vector/academic-achievement.jpg?s=612x612&w=gi&k=20&c=qliNJLoz9seD7MSvBcfRDDv8UX7xNlEBsa_7rWUkVzg=)
-
 Back before I started programming,  I was introduced to a website for programmers to test their skills called LeetCode, which provides coding interview questions for coders
 to try out. Curious, I went to look at the questions and found myself overwhelmed by how bizzare the questions look. I took a look around the internet to see how people solve
 LeetCode questions and realised they understood this important programming concept that I haven't touched before - Data Structures and Algorithms.
