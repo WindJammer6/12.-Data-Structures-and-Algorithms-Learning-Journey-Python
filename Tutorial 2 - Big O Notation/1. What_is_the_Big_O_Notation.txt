@@ -1,0 +1,135 @@
+What is the Big O Notation?
+The Big O notation measures how running time (time complexity) OR space requirements (space complexity)
+for your computer program/Algorithms (Not very accurate to say it measures running time for your Data
+Structure) grow as input grows for the worst case scenario.
+
+The most common types of Big O Notation:
+Constant: O(1)
+Linear time: O(n)
+Logarithmic time: O(nlogn) or O(logn) etc
+Quadratic time: O(n^2)
+Exponential time: O(2^n)
+Factorial time: O(n!)
+
+
+//////////////////////
+
+
+Big O Notation for Time Complexity:
+Time complexity refers to how much time an Algorithm takes to produce the output in terms of the 
+quantity of inputs it receives.
+
+How to calculate the Big O Notation for Time Complexity for your computer program?
+Lets say you have a program that looks like this:
+    def foo(arr):
+    ...
+
+    size(arr) -> 100 -> 0.22 milliseconds
+    size(arr) -> 1000 -> 2.30 milliseconds
+From this program you can clearly see it is growing via a linear function (straight line graph) w.r.t n,
+of,
+    time = a*n + b
+
+To find the Big O Notation for Time Complexity we follow these 2 steps:
+    1. Keep fastest growing term
+    2. Drop constants
+Hence in this case we,
+    For 1. take fastest growing term which is a*n
+    For 2. drop the a constants
+Hence the Big O Notation for Time Complexity of this Algorithm is O(n)
+
+(E.g. If for a code the running time if:
+    def bar(arr):
+    ...
+
+    size(arr) = 100 is 0.22 milliseconds
+    size(arr) = 1000 is 0.23 (roughly 0.22) milliseconds
+It can be said to be time = a (horizontal line graph), of Big O Notation for Time Complexity of this 
+Algorithm isO(1))
+
+
+/////////////////
+
+
+Big O Notation for Space Complexity:
+Space Complexity refers to the amount of memory required to run an Algorithm takes to produce the output
+in terms of the quantity of inputs it receives.
+
+How to calculate the Big O Notation for Space Complexity for your computer program?
+This is a bit trickier and more context-based compared to Time Complexity and depends on the nature of
+the Algorithm whether it creates new variables, or only modifies the original variable without creating
+anything new that needs additional memory/space for it. You need to undertsand how an Algorithm works in
+order to know its Space Complexity
+
+For example:
+For merge sort Algorithm:
+It works by sorting the data structure in 2 halves, left and right and will keep sorting/splitting 
+until all halves have only 1 element. (More in the Data Structures and Algorithms folder later) 
+What's important here is that when the merge sort Algorithm sorts/split the data structure into halves, 
+it stores the halves in a new pieces of memory/space which the amount of memory/space used scales up 
+linearly with n number of elements in the list, hence Big O Notation for Space Complexity of this 
+Algorithm is O(n).
+
+For iterative binary search Algorithm (in CS50 Lectures, the one where the lecturer tears the (already 
+sorted data structure) dictionary in half and half again to find a specific word):
+It works by splitting an already sorted list in half and half again, modifying the original data 
+structure by deleting away the half that does not have the element we are looking for until we find 
+the desired element. For iterative binary search no new variables are created, no new memory/space
+used, hence it is in Big O Notation for Space Complexity of O(1).
+
+For recursive binary search Algorithm (in CS50 Lectures, the one where the lecturer tears the (already 
+sorted data structure) dictionary in half and half again to find a specific word):
+Idea is exactly the same, but in the code it does not delete the irrelevant half, but rather, creates
+a new variable to store each half, but only operating in the next loop on the relevant half where
+the desired element is found. It repeats this process until we find a new variable storing our single
+desired element we are looking for. For recursive binary search new variables are created, and
+new memory/space is used growing in logarithmic scaling, hence it is in Big O Notation for Space 
+Complexity of O(log(n)).
+
+
+///////////////////
+
+
+Comparison of Big O Notation of Time and Space Complexity for different Data Structures:
+
+Data Structures	    |   Space Complexity  |	           Average Case Time Complexity
+                    |                     |    Access	  Search	 Insertion 	  Deletion
+    Array	        |         O(n)	      |     O(1)	   O(n)	       O(n)	        O(n)
+Singly Linked List	|         O(n)	      |     O(n)       O(n)	       O(1)	        O(1)
+Doubly Linked List	|         O(n)	      |     O(n)	   O(n)	       O(1)	        O(1)
+  Hash Table	    |         O(n)	      |     N/A	       O(1)	       O(1)	        O(1)
+    Stack	        |         O(n)	      |     O(n)	   O(n)   	   O(1)         O(1)
+    Queue	        |         O(n)	      |     O(n)	   O(n)	       O(1)	        O(1)
+ General Tree	    |         O(n) 	      |     O(n)	   O(n)   	   O(1)         O(n)
+Binary Search Tree	|         O(n)	      |    O(logn)    O(logn)     O(logn)	   O(logn)
+    Graph           |         O(n)        |-----(Depends on method of implementation)-----
+
+Note: 
+-> Notice how all the Big O Notation of Space Complexity for all the Data Structures is the same
+   of O(n). This is because the space to store data will always grow linearly with the amount of data 
+   there is else it will break the laws of Physics.
+-> The difference between 'Access' and 'Search' is that:
+   -'Access' refers to the process of 'going to' the desired element in the Data Structure (that you know where
+    it is at/located, so you aren't 'Searching' for said element, but is trying to go to it within the Data 
+    Structure)
+   -'Search' refers to the process of 'finding' the desired element in Data Structure (that you don't know where
+    it is at/located, and you are 'Searching' for said element within the Data Structure)
+
+
+Comparison of Big O Notation of Time and Space Complexity for different Algorithms:
+
+For Search Algorithms:
+   Search Algorithms	 |  Space Complexity  |  Time Complexity
+     Linear Search	     |       O(1)	      |       O(n)
+Iterative Binary Search  |     	 O(1)		  |     O(log n)
+Recursive Binary Search  |     O(log n) 	  |     O(log n)
+
+For Sorting Algorithms:
+    Sorting Algorithms   |  Space Complexity  |   Time Complexity
+       Bubble Sort	     |       O(1)		  |       O(n^2)
+       Quick Sort	     |      O(log n)      | 	O(n log n)
+      Insertion Sort     |       O(1)		  |       O(n^2)
+       Shell Sort        |       O(1)         |       O(n^2)
+       Merge Sort	     |       O(n)	      |     O(n log n)
+      Selection Sort     |	     O(1)	      |       O(n^2)
+       Heap Sort	     |       O(1)	      |     O(n log n)

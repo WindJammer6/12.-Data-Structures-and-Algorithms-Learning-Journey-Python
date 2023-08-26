@@ -1,0 +1,143 @@
+Whats an Array?
+An Array is a linear data structure that is a collection of similar data elements stored at 
+contiguous memory locations.
+
+
+//////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Array Data Structures:
+
+Data Structures	 |   Space Complexity  |	        Average Case Time Complexity
+                   |                     |    Access	  Search	 Insertion 	  Deletion
+    Array	       |         O(n)	     |     O(1)	   O(n)	   O(n)	    O(n)
+
+
+//////////////////////////
+
+
+Static vs Dynamic Arrays:
+
+Static Arrays are immutable. Upon creation, have a fixed size (lets say, 5), and cannot the size 
+cannot be modified. (If you try insert/delete elements the computer program will give you an Array)
+
+Dynamic Arrays are mutable. They can vary their size, and can grow, allows inserting/deleting of 
+new elements to the Dynamic Array. It can do this because of Memory Re-allocation
+
+
+What is Memory Re-allocation?
+When a dynamic Array is first created, it will first allocate a fixed space in memory (e.g. 10 
+slots). However we want to store 11 elements in this dynamic Array. So how does a dynamic array
+store 11 elements in the size of 10 memory location? 
+
+Lets say we filled up the first 10 slot, then what happens to the 11th element?
+
+Visual representation on how it looks like:
+                                                Filled up all 10 memory slot and
+Initial fixed space in memory allocated:        attempting to store 11th element:
+            [///////]                                         [///////]
+            [///////]                                         [///////] 
+            [       ] -                                       [  298  ]
+            [       ] |                                       [  305  ]
+            [       ] |                                       [  400  ]
+            [       ] \                                       [  301  ]
+            [       ]  > Capacity = 10                        [  292  ]
+            [       ] /                                       [  450  ]
+            [       ] |                                       [  560  ]
+            [       ] |                                       [  901  ]
+            [       ] |                                       [  455  ] 
+            [       ] -                                       [  602  ]
+            [///////]                        [  139  ] -----> [///////]
+            [///////]                                         [///////]
+
+Legend: [///////] is memory not available to you (cuz used up/not allocated to you)
+
+So what the dynamic Array does is that it will allocate a new memory location, with a larger
+capacity of:
+
+      initial capacity + initial capacity * 2
+
+which will in this case, be 10 + 10 * 2 = 30, and then copy over all 10 elements from the
+initial memory area (of capacity 10) to this new area, and then adding in the 11th element
+to the new memory area. If this new memory area of capacity 30 is filled, the dynamic Array
+will then do another Memory Re-allocation to a new memory area, this time with a bigger memory
+capacity of 30 + 30 * 2 = 90 (this is called geometric progression) and copy over the 30 
+elements from the initial memory area to the new one again.
+
+Visual representation on how it looks like:
+
+Overflowed initial memory area allocated:              New memory area allocated:
+              [///////]                    (Initial memory area [///////]
+              [///////]                        copied over)     [///////] 
+              [  298  ] -                 --------------------> [  298  ] -
+              [  305  ] |                 --------------------> [  305  ] |
+              [  400  ] |                 --------------------> [  400  ] |
+              [  301  ] \                 --------------------> [  301  ] \
+              [  292  ]  > Capacity = 10  --------------------> [  292  ]  > Capacity = 10 
+              [  450  ] /                 --------------------> [  450  ] /
+              [  560  ] |                 --------------------> [  560  ] |
+              [  901  ] |                 --------------------> [  901  ] |
+              [  455  ] |                 --------------------> [  455  ] |
+              [  602  ] -                 --------------------> [  602  ] -
+[  139  ] --> [///////]                                         [  139  ] -
+              [///////]                                         [       ] \
+                                                                [       ]  > Additional Capacity = 20
+                                                                [       ] /
+                                                                [  ...  ] -
+                                                                [///////]
+                                                                [///////]
+
+Note that Memory Re-allocation of dynamic Arrays affect it's Big O Notation as when you re-allocate
+memory, you not only need time to create new memory space, but you also need to copy the number
+of items over to the new memory space. If you have a million elements in your initial memory area,
+then you will need to copy a million elements over to the new memory area during Memory 
+Re-allocation. Hence you could say that Big O Notation for Time complexity for Memory Re-allocation
+is O(n) in dynamic Arrays, something you might to consider when calculating Big O Notation of Time
+Complexity of process of Insertion for Array Data Structure which is on top of its already existing 
+O(n). 
+
+
+///////////////////////////
+
+
+Difference between List (Python's implementation of an array) and Array (Programming Data Structure,
+but can be implmented via Python Libraries such as NumPy) in Python:
+
+S.No.
+ 1	List is used to collect items that usually consist of elements of multiple data types.	
+      Arrays are also a vital component that collects several items of the same data type.
+
+ 2	List cannot manage arithmetic operations.	
+      Array can manage arithmetic operations.
+
+ 3	List consists of elements that belong to the different data types.	
+      Array consists of elements that belong to the same data type.
+
+ 4	When it comes to flexibility, the list is perfect as it allows easy modification of data.	
+      When it comes to flexibility, the array is not suitable as it does not allow easy 
+      modification of data.
+
+ 5	List consumes a larger memory.
+      Array consumes less memory than a list.
+
+ 6	In a list, the complete list can be accessed without any specific looping.	
+      In an array, a loop is mandatory to access the components of the array.
+
+ 7	List favors a shorter sequence of data.	
+      Array favors a longer sequence of data.
+
+
+/////////////////////
+
+
+In Python, Dynamic Arrays are implemented as Lists and Sets, and Static Arrays are implemented as Tuples.
+
+In Other Programming Languages like Java and C++, Dynamic and Static Arrays are implemented differently 
+as well.
+
+                |     Python    |       Java       |       C++
+Static Array    |      Tuple    |   Native array   |   Native array
+Dynamic Array   |     List/Set  |    Array list    |   std::vector
+
+To find out more about the other Python implementations of Array Data Structure, Tuples and Sets, refer to 
+'7. What_are_Tuples_and_Sets_(other_Python_implementations_of_array).py'
