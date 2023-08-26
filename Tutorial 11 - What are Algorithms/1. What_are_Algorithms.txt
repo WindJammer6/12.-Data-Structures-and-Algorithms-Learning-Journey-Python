@@ -1,0 +1,53 @@
+What are Algorithms?
+They are a list set of instructions of how to solve a computational problem. These Algorithms are 
+executed on Data Structures and together, Data Structures and Algorithms, creates a computer program.
+
+Examples are infinite (possibilities are endless, much wider in variety than Data Structures), but 
+common Algorithms that are first taught to new programmers will always be Searching and Sorting 
+Algorithms.
+
+
+///////////////////////////////////////////
+
+
+What is the difference between Searching and Sorting Algorithms?
+Searching Algorithms are designed to check for an element or retrieve an element from any Data 
+Structure where it is used.
+
+Sorting Algorithms are used to arranging the data of a list or array into some specific order. 
+
+
+///////////////////////////////////////////
+
+
+Examples of Searching Algorithms: 
+- Linear Search
+- Binary Search
+
+Examples of Sorting Algorithms: 
+- Bubble Sort
+- Quick Sort
+- Insertion Sort
+  -> Shell Sort (improved Insertion Sort variation)
+- Merge Sort
+- Selection Sort
+  -> Heap Sort (improved Selection Sort variation)(not covered in this tutorial)
+
+
+////////////////////////////////////////////
+
+
+In these Algorithms tutorials, we will only be implementing the Searching and Sorting Algorithms on
+Array Data Structures. It is definitely possible to use these Searching and Sorting Algorithms on 
+other Data Structures depending on the requirements and characteristics of the data. (E.g. Binary 
+Search Algorithm can also be used on sorted Linked List Data Structures and Binary Search Tree Data
+Structures (with some modifications) and Quick Sort can Algorithm can be used on Linked List Data 
+Structures (with some modifications))
+
+But for the sake of learning in these Algorithms tutorials, we will only be implementing these 
+Searching and Sorting Algorithms in Array Data Structures.
+
+(Note: the efficiency of these Searching and Sorting Algorithms may vary depending on the Data 
+Structure they are used with. Some of them may perform better on Array Data Structure due to their 
+random access capabilities, while others might be more efficient on Linked List Data Structures or
+Tree Data Structures, where insertion and deletion operations are faster.)
