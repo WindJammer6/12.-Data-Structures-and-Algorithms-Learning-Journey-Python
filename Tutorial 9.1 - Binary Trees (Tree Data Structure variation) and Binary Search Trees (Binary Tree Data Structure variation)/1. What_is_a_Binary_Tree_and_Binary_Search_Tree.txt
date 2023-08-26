@@ -1,0 +1,587 @@
+Whats a Binary Tree?
+A Binary Tree is a variation of the (General) Tree Data Structure, a non-linear Data Structure with maximum
+of two children nodes for each node. The difference/modification between a General Tree and a Binary Tree is
+that each node in a General Tree can have zero to infinity number of children, while each node in a Binary Tree
+can only have a (zero to) maximum of 2 nodes left and right. 
+
+Similar to a General Tree, a Binary Tree does not have its Nodes sorted. Usually, by itself, the Binary Tree
+is not very applicable/useful as its Nodes are unsorted, hence, it is usually implemented as one of its further
+variations, more commonly in the form of a Binary Search Tree (BST) (aka ordered/sorted Binary Tree).
+
+
+Whats a Binary Search Tree (BST)?
+A Binary Search Tree (BST) is a further variation of the Binary Tree Data Structure, sometimes known as an 
+ordered/sorted Binary Tree. The 2 differences/modifications between a Binary Tree and Binary Search Tree is 
+that a normal Binary Tree is unordered, and allows duplicates, while a Binary Search Tree is ordered
+(by some manner) that allows easy searching of a particular node, and dosen't allow duplicates (its 
+not like BST don't allow, but we tell our BST to not allow it as duplicate data nodes sort of messes up the
+BST's ordering/sorting and subsequently the search function. We will be able to understand this once we learn 
+how the BST's ordering/sorting works)
+
+By the way, Binary Search Tree are called as such as due to their ordered/sorted characteristic, it increases 
+the efficiency (Big O Notation) of searching (search operation) in a Binary Tree.
+
+
+Types of Tree Data Structures (for reference):
+1. General Tree (covered in 'Tutorial 9 - Trees and General Trees (Data Structure)')
+2. Binary Tree (and its variations)
+   => Binary Search Tree 
+      -> AVL Tree
+      -> Red-Black Tree
+      -> Balanced (B-) Tree
+        - B+ Tree
+      -> Splay Tree
+   => Heap
+   => Treap
+3. Ternary Tree
+
+
+Visual representation on how they look like:
+Binary Tree                             Binary Search Tree
+(unordered, may have duplicates):       (ordered, does not have duplicates): 
+        [15]                                    [15]
+        /  \                                    /  \
+    [12]    [6]                             [12]    [27]
+    /  \    /  \                            /  \    /  \
+ [19]  [7][15] [12]                      [7]  [14][20] [88]
+             \                                       \  
+            [40]                                    [23]
+
+
+//////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Binary Search Tree Data Structures:
+
+Data Structures	   |   Space Complexity  |	           Average Case Time Complexity
+                     |                     |    Access	  Search	    Insertion 	  Deletion
+Binary Search Tree	|         O(n)	       |    O(logn)    O(logn)     O(logn)	   O(logn)
+
+
+//////////////////////////
+
+
+How is a Binary Search Tree ordered?
+The BST's ordering depends on what data type it is storing in its Nodes. Usually it will store numbers 
+(ints/float data types). If it is storing other data types then there will be a completely different way
+to order/organise our BST for it to be searchable (a fixed way for us to locate/search for a particular 
+data/Node we are looking for in the BST) (strings or other object classes).
+
+In this tutorial, we will only talk about if the BST is storing numbers.
+
+So how is a usual Binary Search Tree (storing numbers) ordered? 
+For a particular Node in a BST, the numbers on the left sub-tree are organised to be smaller than the number of
+the particular Node chosen, while the numbers on the right sub-tree are organised to be larger than the number of
+the particular Node chosen.
+
+Visual representation on how a Binary Search Tree could look like:
+        [15]
+        /  \
+    [12]    [27]
+    /  \    /  \
+ [7]  [14][20] [88]
+             \  
+            [23]
+
+Lets use the example above. Taking the root Node, storing 15 as our particular Node chosen, all the Nodes at the
+left of our particular Node (15) are storing numbers smaller than 15, while all the Nodes at the right of our
+particular Node (15) are storing numbers larger than 15.
+
+This applies to every Node in the BST. Taking the Node storing 27 as our particular Node chosen, all the Nodes
+at the left of our particular Node (27) are storing numbers smaller than 27 (20 and 23), while all the Nodes at 
+the right of our particular Node (27) are storing numbers larger than 27 (88).
+
+Another thing to note is that there are no duplicates, where 2 Nodes are storing the same number. This is to 
+prevent having no fixed place to place the number relative to all other Nodes in our BST, which may affect the
+BST's searching function.  
+
+
+Note: The same terminology is used here for Binary Search Trees as for in (General) Tree Data Structures
+(such as Root Node, Leaf Node, Parent Node, Levels, etc.) (refer to '1. What_is_a_Tree_and_General_Tree.txt'
+in 'Tutorial 9 - Trees and General Trees (Data Structure)')
+
+
+//////////////////////////
+
+
+Explaining how Scanning/Traversal operation works in Binary Search Tree (for purposes such as needing to traverse 
+the full Binary Search Tree to print out each Node's data when printing the Binary Search Tree):
+
+(Notes: -Scanning/Traversal operation is not Access/Search. Access/Search deals with going to/finding a specific
+         element in the Data Structure, and may not always be n operations, only Big O Notation of Time Complexity
+         of O(n) (worst case scenario) if that element does happen to be the last element of the Data Structure or
+         Access/Search algorithm. Scanning/Traversal deals with going through the whole Data Structure everytime
+         we execute the operation as the operation requires the program to look at every single element in the 
+         Data Structure.
+
+        -Scanning/Traversal operations can actually be used for Searching too when you traverse through the whole
+         BST Data Structure but in this tutorial we will not use Scanning/Traversal operation as our Search 
+         operation is not the most efficient way (of Big O Notation of Time Complexity of O(n)). We will instead 
+         use the Search operation described below under 'Explaining how Search, Access, Insertion and Deletion 
+         operation works in Binary Search Tree', which makes use of the sorted characteristic of BST in Search 
+         operation to achieve a better Big O Notation of Time Complexity of O(logn)
+
+        -Below, we will learn above the various Scanning/Traversal methods, each with their own applications
+         for different scenarios (you can google to find out what they are). But in this tutorial, we will only be
+         using Depth-First Search: In Order traversal to create our BST printing function.
+
+        -I did not include a list of Big O Notation of Time Complexity for Scanning/Traversal for each Data 
+         Structure in '1. What_is_the_Big_O_Notation.txt' in 'Tutorial 2 - Big O Notation' as its going to be O(n)
+         for all Data Structures anyway.)
+
+There are 2 ways to scan/traverse a Binary Search Tree:
+1. Breadth-First Search (BFS)
+2. Depth-First Search (DFS) (there are 3 different methods for Depth-First Search for Binary Search Tree Data 
+                      Structures. Note that 'Left' will always come before 'Right'. The type of traversal is just 
+                      dependent on where does the 'Root' lies in the traversal formula order):
+   a. In order traversal (Formula: Left-Root-Right) (we will be using this scanning/traverse method in our BST 
+                                                     printing function later in the tutorial during our 
+                                                     implementation of BST)
+   b. Pre order traversal (Formula: Root-Left-Right)
+   c. Post order traversal (Formula: Left-Right-Root)
+
+
+
+Visual representation on how a Binary Search Tree could look like (using this example in the explanations below):
+        [15]
+        /  \
+    [12]    [27]
+    /  \    /  \
+ [7]  [14][20] [88]
+             \  
+            [23]
+
+1. Breadth-First Search
+This operation is non-recursive (iterative) in nature. Pretty straight forward, you can sort of think of it 
+scanning the BST level by level, from each element left to right at every level. It first scans the Root Node (15), 
+then the first element in the second level (12), then second element in the second level (27), the first element 
+in the third level (7) and so on. The order of the elements printed if scanned via Breadth-First Search will 
+be: 15,12,27,7,14,20,88,23.
+
+
+2a. Depth-First Search: In Order traversal (Formula: Left-Root-Right)
+This operation is recursive in nature. We start with the Root Node (15) (but we don't print it). According to the 
+formula, we print only the left Node first before printing the Root Node. So we go to its left Node (12). But since
+this operation its recursive, we cannot print this left Node yet and since this left Node (12) it has its own 
+Nodes, hence we will need to go its left Node (7) first (by 'Left-Root-Right'). The program then checks if this 
+left Node (7) has any further Nodes. Since it does not, we will go ahead and print 7 out as the 'Left' in the 
+second 'Left-Root-Right' recursive loop (the first recursive loop occured with the overall BST's Root Node (15) as
+the 'Root' in 'Left-Root-Right' while in the second recursive loop has the Node (12) as the 'Root' in 
+'Left-Root-Right').
+
+We then go back to this left Node (7)'s root, the Node (12) and print that as the 'Root' in the second
+'Left-Root-Right' recursive loop since all its left Nodes (depicted as 'Left' in second 'Left-Root-Right' recursive
+loop) has already been printed. We then go the Node (12)'s right Node (14). The program then checks if this right
+Node (14) has any further Nodes. Since it does not, we will go ahead and print 14 out as the 'Right' in the 
+second 'Left-Root-Right' recursive loop.
+
+We then go back to the overall BST's Root Node (15) and print that out as the 'Root' in the first 'Left-Root-Right'
+recursive loop since all its left Nodes/sub-tree Nodes have been printed (depicted as 'Left' in the first 
+'Left-Root-Right' recursive loop, taken cared of by the second 'Left-Root-Right' recursive loop). We then go its
+right Node (27). But since this operation is recursive, we cannot print this right Node yet and since this right
+Node (12) it has its own Nodes, hence we will need to go its left Node (20) first (by 'Left-Root-Right'). the
+program then checks if this left Node (20) has any further Nodes. Since it does have a (right) Node, by
+'Left-Root-Right', we first print the 'Root' in this fourth 'Left-Root-Right' recurisve loop (since it has no left
+Nodes) (the third recursive loop occured with the Node (27) as the 'Root' in 'Left-Root-Right' while in the fourth
+recursive loop has the Node (20) as the 'Root' in 'Left-Root-Right'). We then print its right Node (23).
+
+We then go back to the third 'Left-Root-Right' recursive loop's 'Root', the Node (27) and print that out since all
+its left Nodes/sub-tree Nodes have been printed.  (depicted as 'Left' in third 'Left-Root-Right' recursive loop, 
+taken cared of by the fourth 'Left-Root-Right' recursive loop). We then go to its right Node (88). The program
+then checks if this right Node (88) has any further Nodes. Since it does not, we will go ahead and print 88 out as
+the 'Right' in the third 'Left-Root-Right' recursive loop.
+
+The order of the elements printed if scanned via Depth-First Search: In Order traversal will be: 
+7,12,14,15,20,23,27,88.
+
+
+2b. Depth-First Search: Pre Order traversal (Formula: Root-Left-Right)
+This operation is recursive in nature. (Try to figure out why the order of the elements is as such based on its 
+formula and the logic explained in '2a. Depth-First Search: In Order traversal (Formula: Left-Root-Right)' above.)
+
+The order of the elements printed if scanned via Depth-First Search: Pre Order traversal will be: 
+15,12,7,14,27,20,23,88
+
+
+2c. Depth-First Search: Post Order traversal (Formula: Left-Right-Root)
+This operation is recursive in nature. (Try to figure out why the order of the elements is as such based on its 
+formula and the logic explained in '2a. Depth-First Search: In Order traversal (Formula: Left-Root-Right)' above.)
+
+The order of the elements printed if scanned via Depth-First Search: Post Order traversal will be: 
+7,14,12,23,20,27,88,15
+
+
+////////////////////////////////////////////
+
+
+Explaining how Search, Access and Insertion operation works in Binary Search Tree (Explanation for Deletion 
+operation is in the below section):
+
+Visual representation on how a Binary Search Tree could look like (using this example in the explanations below):
+        [15]
+        /  \
+    [12]    [27]
+    /  \    /  \
+ [7]  [14][20] [88]
+             \  
+            [23]
+
+Search operation in a Binary Search Tree Data Structure:
+Let's say we want to search for a particular number in BST (say the Node containing the number 14). Our search 
+operation takes advantage of the sorted characteristic of our BST that the left child of every Node will always be
+smaller than the Node itself while the right child for every Node will always be larger than the Node itself 
+(see above section 'How is Binary Search Tree ordered?' for how a BST in this case will be sorted)
+
+We will start from the Root Node (15) and we will check if the number that we are searching (14) is smaller or 
+larger than our Root Node. Since the number we are searching (14) is smaller than our Root Node (15), we will move 
+to its left Node (12) (since 14 will never be at the right sub-tree of the Root Node, and, if it exists, must lie 
+at the left sub-tree of the Root Node). 
+
+Now we compare the number we are searching (14) to this left Node (12). Since  the number we are searching (14) is
+larger than this left Node (12), we will move to this left Node (12)'s right Node, which is the Node we are looking
+for, storing number 14.
+
+
+Access operation in a Binary Search Tree Data Structure:
+The Access operation in a BST is the same as the Search operation. Since Nodes in BST is not indexed, we will need
+to traverse down the BST in the same manner as the Search operation to go to our desired Node despite knowing 
+exactly where the Node is during the Access operation.
+
+
+Insertion operation in a Binary Search Tree Data Structure:
+The Insertion operation in a BST is the same as the Search Operation. Making use of the sorted characteristic of
+a BST, we first start from Root Node and go down the BST, comparing if the number to be inserted (say a Node
+containing the number 13) is smaller or larger than the Node in the BST we are at, and deciding if we should
+move to its left or right-subtree. We will keep moving down the BST until we find a vacant left/right child slot
+under a Node already in the BST to insert our new Node (13) at. (In this example, that vacant spot will be as the
+left child of Node containing the number 14 since the inserted Node (13) is smaller than its parent Node (14))
+
+
+/////////////////////////////////////////////////
+
+
+Explaining how Deletion operation works in Binary Search Tree:
+
+There are 3 scenarios to handle/consider when we are deleting a node from a Binary Search Tree:
+1. Deleting a node with no child nodes/sub-trees (simplest concept)
+2. Deleting a node with 1 child node/sub-tree
+3. Deleting a node with 2 child nodes/sub-trees (trickiest concept)
+
+1. Deleting a node with no child nodes/sub-trees (basically a leaf node)
+Binary Search Tree before deletion:                         Binary Search Tree after deletion:
+        [15]                                                               [15]
+        /  \                                                               /  \
+    [12]    [27]                                                       [12]    [27]
+    /  \    /  \                                                       /       /  \
+ [7]  [14][20] [88]                                                 [7]      [20] [88]
+             \                                                                  \  
+            [23]                                                               [23]
+
+[14] is the node with no child nodes/sub-tree to be deleted
+
+Let's say we want to delete the leaf node (aka a node with no child nodes/sub-trees) storing the number 14. To 
+delete it, we simply just have to set its parent's Node (12)'s 'self.right' attribute (could be the 'self.left'
+attribute, depending on which side the leaf node to be deleted is attached to the parent Node) to be 'None' 
+instead of the leaf node storing the number 14 to remove said leaf node from the BST.
+
+
+
+2. Deleting a node with 1 child node/sub-tree 
+Binary Search Tree before deletion:                         Binary Search Tree after deletion:
+        [15]                                                               [15]
+        /  \                                                               /  \
+    [12]    [27]                                                       [12]    [27]
+    /  \    /  \                                                       /  \    /  \
+ [7]  [14][20] [88]                                                 [7]  [14][23] [88]
+             \                                                                    
+            [23]                                                               
+
+[20] is the node with 1 child node/sub-tree to be deleted
+
+Let's say we want to delete the node storing the number 20. It has 1 child node/sub-tree, the node storing the 
+number 23. To delete the node storing the number 20, we simply have to set the node to delete's (20) parent Node's
+(27) 'self.left' attribute (could be the 'self.right' attribute, depending on which side the node to delete is 
+attached to the parent Node) to be referencing/pointing to the node to delete's (20) only child node/sub-tree (23) 
+instead of referencing to the node to delete (20) to remove it from the BST.
+
+
+
+3. Deleting a node with 2 child nodes/sub-trees
+Binary Search Tree before deletion:                         Binary Search Tree after deletion:
+(added 2 additional nodes for demonstration purposes)
+        [15]
+        /  \ 
+    [12]    [27]
+    /  \    /  \                                                (see below visualisations)
+ [7]  [14][20] [88]
+          /  \    \                                                        
+       [18]  [23] [92]                                                                                                 
+
+[27] is the node with 2 child nodes/sub-trees to be deleted
+
+Let's say we want to delete the node storing the number 27. It has 2 child sub-trees, storing various other nodes in
+the left and right child sub-trees. After we delete the node storing the number 27, we need to somehow re-order the 
+BST while maintaining the 2 properties of a Binary Search Tree remains true. For a refresher, the 2 properties of a 
+BST are:
+
+   -> no duplicates nodes, all nodes in the BST should be unique
+   -> for all nodes in the BST, nodes containing numbers smaller than its parent node should be on its left child 
+      node/sub-tree, while nodes containing numbers larger than its parent node will be on the right child 
+      node/sub-tree
+
+
+So how can we delete such nodes with 2 child nodes/sub-trees and re-order the BST while maintaining the 2 properties 
+of the BST? We can do this in 2 ways:
+   a. Via the right child sub-tree. First, copy and replace the node to delete with the node storing the 
+      smallest/minimum number in the right child sub-tree of said node to delete. Second, delete the duplicate original
+      copy of the node storing the smallest number in the right child sub-tree of said node to delete.
+
+Copying and replacing node to delete with node with           Deleting the duplicate original copy of the node with
+smallest number from node to delete's right child sub-tree:   smallest number from node to delete's right child sub-tree:
+                     [15]                                                               [15]
+                     /  \                                                               /  \
+                 [12]    [88]                                                       [12]    [88]
+                 /  \    /  \                                                       /  \    /  \
+              [7]  [14][20] [88]                                                 [7]  [14][20] [92]
+                       /  \    \                                                          /  \                                                             
+                    [18]  [23] [92]                                                    [18]  [23]    
+
+      [27] is the node with 2 child nodes/sub-trees to be deleted (see above visualisation)
+      [88] is the smallest/minimum number in the right child sub-tree of said node to delete (27)
+
+      Why do we choose the node storing the smallest/minimum number (88) from the node to delete's (27) right child 
+      sub-tree to replace the node to delete's spot? Because by doing this, you are guranteeing the maintaining of the
+      second property of a BST as the remaining of the right child sub-tree of the now replaced parent Node (88) (from 
+      the deleted node (27)) will still be larger than the now replaced parent Node (88) (see the above visualisation) 
+
+      We delete the duplicate original copy of the smallest/minimum number (88) from the node to delete's (27) right 
+      child sub-tree in order to maintain the first property of a BST (there should be no duplicates in a BST)
+
+      Note: The deleted duplicate original copy of the smallest/minimum number (88) from the node to delete's (27) 
+      right child sub-tree might have in turn either no child nodes/sub-tree or 1 child nodes/sub-tree (in this case
+      its 1 child node/sub-tree) (it is not possible for it to have 2 child nodes/sub-trees since it wouldn't be the 
+      smallest/minimum number if it did have a left child node, as left child nodes in a BST will always contain a 
+      smaller number than its parent Node). Hence, in order to delete this duplicate original copy, we will need to 
+      make use of the deletion operation for scenarios '1. Deleting a node with no child nodes/sub-trees' and 
+      '2. Deleting a node with 1 child node/sub-tree'.
+
+   b. Via the left child sub-tree. First, copy and replace the node to delete with the node storing the 
+      largest/maximum number in the left child sub-tree of said node to delete. Then we delete the duplicate original
+      copy of the node storing the largest number in the left child sub-tree of said node to delete.
+
+Copying and replacing node to delete with node with           Deleting the duplicate original copy of the node with
+largest number from node to delete's left child sub-tree:     largest number from node to delete's left child sub-tree:
+                     [15]                                                               [15]
+                     /  \                                                               /  \
+                 [12]    [23]                                                       [12]    [23]
+                 /  \    /  \                                                       /  \    /  \
+              [7]  [14][20] [88]                                                 [7]  [14][20] [92]
+                       /  \    \                                                          /  \                                                             
+                    [18]  [23] [92]                                                    [18]  [23] 
+
+      [27] is the node with 2 child nodes/sub-trees to be deleted (see above visualisation)
+      [23] is the largest/maximum number in the left child sub-tree of said node to delete (27)
+
+      Why do we choose the node storing the largest/maximum number (23) from the node to delete's (27) right child 
+      sub-tree to replace the node to delete's spot? Because by doing this, you are guranteeing the maintaining of the
+      second property of a BST as the remaining of the left child sub-tree of the now replaced parent Node (23) (from 
+      the deleted node (27)) will still be smaller than the now replaced parent Node (23) (see the above visualisation) 
+
+      We delete the duplicate original copy of the largest/maximum number (23) from the node to delete's (27) left 
+      child sub-tree in order to maintain the first property of a BST (there should be no duplicates in a BST)   
+
+      Note: The deleted duplicate original copy of the largest/maximum number (23) from the node to delete's (27) 
+      left child sub-tree might have in turn either no child nodes/sub-tree or 1 child nodes/sub-tree (in this case
+      its no child nodes/sub-trees) (it is not possible for it to have 2 child nodes/sub-trees since it wouldn't be the 
+      largest/maximum number if it did have a right child node, as right child nodes in a BST will always contain a 
+      larger number than its parent Node). Hence, in order to delete this duplicate original copy, we will need to 
+      make use of the deletion operation for scenarios '1. Deleting a node with no child nodes/sub-trees' and 
+      '2. Deleting a node with 1 child node/sub-tree'.
+
+
+//////////////////////////
+
+
+Explaining the Big O Notation of Time Complexity for Search and comparing it to that of other linear Data 
+Structures:
+Lets say we have a list (not necessarily Python's List) of elements of,
+
+    7, 12, 14, 15, 20, 23, 27, 88
+
+If we searched through it linearly, which, we would for other linear Data Structures (Arrays, Linked Lists, 
+etc), the Big O Notation of Time Complexity for Search would be O(n) as you would need to look at each individual
+element through the full Data Structure in worst case scenario in order to find a particular element. (Number of
+steps (worst case scenario) to find a particular element in a linear Data Structure in this example would be 8, 
+which happens to also be the size of this list of elements hence O(n))
+
+If we searched through it non-linearly (if this list of elements is in the form of a BST),
+
+        [15]
+        /  \
+    [12]    [27]
+    /  \    /  \
+ [7]  [14][20] [88]
+             \
+            [23]
+
+the Big O Notation of Time Complexity for Search would be O(logn) instead. This is because whenever you traverse
+one level down in a BST Data Structure, you are eliminating the search area of the Data Structure by half. Using 
+an example from the above visualisation, lets say you are searching for the Node containing number 14. You start at 
+the Root Node, and when you decided that the number you are searching (14) can only lie at the left sub-tree of 
+Root Node, you are effectively eliminating the problem by half by knowing that the right-subtree of the Root Node 
+will definitely not have the number you are searching (14). 
+
+This process is recursive and in a BST of 8 Nodes, you will be able to find the Node you are looking for in 3 
+recursive loops/steps as after halving the BST of size 8 three times (after 3 recursive loops/steps), and halving
+the search area of you Data Structure after every recursive loop,
+
+    8 -> 4 -> 2 -> 1 (each '->' represents 1 recursive loop/step)
+
+you are left with 1 last element left, which should either be the number you are looking for, or is not the number 
+you are looking for, telling you that the number you are searching for does not exist in the BST Data Structure. 
+
+Mathematically, n represents the size of your Data Structure (8), and since you are able to determine whether you
+have found the number you are looking for/if it exists in 3 recursive loops/steps, the Big O Notation of Time 
+Complexity for Search should be log2(8) = 3, or more generally O(logn). (There should be a base number of 2 in
+the logarithm but we usually ignore the logarithm's base number when writing it as the Big O Notation)
+
+Since Access, Insertion and Deletion operation is quite similar to the Search operation for BST, Big O Notation 
+of Time Complexity for Access, Search, Insertion and Deletion are all O(logn).
+
+
+//////////////////////////
+
+
+State types of Binary Trees and their names/terms (applies to all its variations):
+State types (this term is self-defined by me) refers to some terminology that we use to reflect the state of a 
+Binary Tree, depending on how the Binary Tree is filled by Nodes.
+
+The 5 State types of Binary Trees:
+1. Full/Strict/Proper Binary Tree
+2. Complete Binary Tree
+3. Perfect Binary Tree
+4. Balanced Binary Tree
+5. Degenerate/Pathological Binary Tree
+
+Some terminology to know beforehand:
+-> Height - height of a node is defined as the distance in terms of level from its furthest leaf node to the node
+            (first count is zero (see example below))
+-> Depth - depth of a node is defined as the distance in terms of level from the root node to the node
+            (first count is zero (see example below))
+   Visualisation example:
+            [15] (h = 3, d = 0)
+            /  \
+        [12]    [6] (h = 2, d = 1)
+        /       / \
+     [19]    [15] [12] (h = 1, d = 2)     Legend:
+     /  \         /  \                    'h' stands for Height
+   [90] [4]     [28][40]                  'd' stands for Depth
+
+-> Maximum nodes per level = 2^(level number)
+-> Maximum nodes in a Binary Tree = 2^(number of levels) - 1
+
+
+1. Full/Strict/Proper Binary Tree
+A full/strict/proper binary tree is as such when each node in a binary tree either has 2, or 0 children. If a node
+in the binary tree have 1 children, then it is not a full/strict/proper binary tree.
+
+This is not a Full/Strict/Proper        This is a Full/Strict/Proper
+Binary Tree:                            Binary Tree:
+         [15]                                    [15]
+         /  \                                    /  \
+     [12]    [6]                             [12]    [6]      
+     /  \    /  \                            /  \    /  \    
+  [19]  [7][15] [12]                      [19]  [7][15] [12]     
+  /     / \   \                                 / \      
+[90]  [4][28] [40]                            [4][28] 
+
+
+2. Complete Binary Tree
+A complete binary tree is as such when all levels, with the exception of the last level are completely filled
+and all nodes must be as left as possible. So for nodes at the last level, if not completely filled, the nodes
+needs to be flushed all the way to the left at that level.
+
+This is not a Complete                              These are Complete
+Binary Tree:                                           Binary Trees:
+         [15]                                    [15]                    [15]
+         /  \                                    /  \                    /  \
+     [12]    [6]                             [12]    [6]             [12]    [6]      
+     /  \    /  \                            /  \    /  \            /  \    /  \    
+  [19]  [7][15] [12]                      [19]  [7][15] [12]      [19]  [7][15] [12]    
+        / \                               /  \                    / \   /  
+      [4][28]                           [4] [28]                [4][28][9] 
+
+The first diagram is not a Complete Binary Tree as the nodes at the last level are not completely flushed to the
+left.
+
+
+3. Perfect Binary Tree
+A perfect binary tree is as such when all levels are completely filled, including the last row.
+
+This is not a Perfect        This is a Perfect
+Binary Tree:                 Binary Tree:
+         [15]                     [15]
+         /  \                     /  \
+     [12]    [6]              [12]    [6]      
+     /  \    /                /  \    /  \    
+  [19]  [7][15]            [19]  [7][15] [12]     
+
+
+4. Balanced Binary Tree
+This concept is a little trickier. A balanced binary tree is as such when the difference in height of left and 
+right sub-tree for every node is not more than 1. 
+
+This is not a Balanced                  This is a Balanced
+Binary Tree:                            Binary Tree:
+            [15]                                    [15]
+            /  \                                    /  \
+(hd = 2) [12]   [6] (hd = 1)           (hd = 1) [12]    [6] (hd = 1)   
+          /     /  \                            /  \    /  \    
+       [19]   [15] [12]                      [19]  [7][15] [12]                Legend:
+       /         \                           / \   / \     /  \                'hd' stands for Height Difference
+     [90]        [40]                     [90][9][4][28]  [40][8]
+
+The rest of the unmarked nodes have a Height Difference of 0.
+
+
+5. Degenerate/Pathological Binary Tree
+A degenerate binary tree is as such when each node have only 1 children. They are essentially similar visually
+and performance-wise as Linked Lists.
+
+This is a Degenerate/Pathological
+Binary Tree:
+         [15]
+         /
+     [12]     
+        \
+        [7]
+        /
+      [4]
+
+
+//////////////////////////
+
+
+Some real life applications of Binary Search Tree Data Structure (other Tree Data Structures may have different
+applications):
+-> Used for internal implementation of Set Data Structures (a Python implementation of a Dynamic Array) (you can 
+   sort of see how it does this since both Set and Binary Search Tree Data Structures do not allow duplicates)
+-> Used to sort an unsorted list in a certain manner (in this tutorial we will see how to sort an unsorted list 
+   of numbers by order of increasing number using a BST)
+-> Used for indexing in databases.
+-> Used to implement searching algorithms.
+-> Used to implement Huffman coding algorithm.
+-> Used to implement dictionaries.
+-> Used for data caching.
+-> Used in Priority queues.
+-> Used in spell checkers.
+
+
+//////////////////////////
+
+
+There is no built-in Data Structure for Trees (and all its variations) in all of these languages. In 
+this tutorial we have to, and will learn how to build our own Binary Search Tree Data Structure in Python 
+
+ Data Structure |      Python      |           Java          |              C++
+      Tree      |         -        |             -           |               -
