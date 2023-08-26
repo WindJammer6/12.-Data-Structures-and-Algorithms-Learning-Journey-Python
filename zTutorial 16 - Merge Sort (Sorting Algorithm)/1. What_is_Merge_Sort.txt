@@ -1,0 +1,510 @@
+What is Merge Sort?
+Merge Sort is a sorting algorithm that sorts a list by using the Divide and Conquer technique that divides
+an array into smaller subarrays, sorting each subarray recursively (via the same Merge Sort Algorithm),
+and then merging the sorted subarrays back together to form the final sorted array. (In these Algorithm 
+tutorials, the only 2 Algorithms (both Sorting Algorithms) that uses the Divide and Conquer paradigm is 
+Quick Sort Algorithm and Merge Sort Algorithm)
+
+The way Merge Sort Algorithm does this is by continuously splitting the array in half until it cannot be 
+further divided i.e., the array has only one element left (an array with one element is always sorted). 
+Then the sorted subarrays are merged into one sorted array.
+
+Note: You may think that during the Merge Sort Algorithm, as it is splitting the initial unsorted List
+      into smaller subarrays, if that smaller subarray is coincidentally already pre-sorted, the Merge
+      Sort Algorithm should not be breaking that coincidentally pre-sorted smaller subarray into even smaller 
+      subarrays since its already pre-sorted. But, actually the Merge Sort Algorithm does not do this, and
+      will continue to divide this coincidentally pre-sorted smaller subarray into halves until each smaller
+      subarray only has one element left. 
+
+      Why does the Merge Sort Algorithm do this, instead of not breaking down these coincidentally
+      pre-sorted smaller subarrays to save time? On the contrary, doing this actually wastes more time
+      instead. This is because the process of breaking down the initial unsorted List into smaller
+      subarrays of one element each actually saves more time than having to check every single smaller
+      subarray during each division if it is already pre-sorted or not especially when it comes to
+      larger data sets.
+
+Hence, what Merge Sort Algorithm effectively does is that (will be in more detail in the 
+'How does Merge Sort Algorithm work?' section),
+-> it is breaking down the initial unsorted List into smaller subarrays of one element each (which is 
+   when the subarray is considered sorted by itself, since an array with one element is always sorted)
+-> then merging these smaller subarrays of one element each in such a way that the resulting array 
+   is sorted (how exactly the merging process work algorithmically is explained in the 'How does 
+   Merge Sort Algorithm work?' section below)
+
+
+//////////////////////////////////////////////
+
+
+Is the Merge Sort Algorithm implemented iteratively or recursively?
+
+Merge Sort Algorithm is more commonly implemented recursively (implementing it iteratively is possible
+too but recursive implementation is easier to understand and less complicated to implement)
+
+In this tutorial we will be learning how to implement Merge Sort recursively.
+
+
+//////////////////////////////////////////////
+
+
+Before we delve into how Merge Sort Algorithm works, lets figure out how we can create a bigger sorted 
+List from merging 2 smaller, pre-sorted Lists
+
+We know that in Sorting Algorithms, the Sorting Algorithm usually should be creating a sorted List from 
+an unsorted List. So why are we creating a sorted List from merging 2 smaller, pre-sorted Lists? Hold this 
+thought, we will get back to this later.
+
+
+Here are the steps to create a sorted List from merging 2 smaller, pre-sorted Lists:
+a. First, create a seperate empty array, which will be the Merged Sorted List 
+b. Then, initiate 2 pointers, with each pointer pointing at the first element in the each of the smaller 
+   sorted List 
+c. Now we will compare the 2 elements in each respective smaller sorted Lists that their own pointer is 
+   pointing at. Whichever element that each smaller sorted Lists' pointer is pointing at is smaller, will 
+   be appended into the Merged Sorted List (in the case where both elements that each smaller sorted 
+   Lists' pointer is pointing at is equal due to the presence of duplicates in the initial unsorted List, 
+   we can decide to append either of the elements from either of the smaller sorted Lists that their 
+   pointer is pointing at into the Merged Sorted List)
+d. The smaller sorted List that has its element appended into the Merged Sorted List will then have to 
+   shift its pointer one index to the right, and now should be pointing at the next element in that smaller 
+   sorted List (unless that element being appended into the Merged Sorted List is the last element of that 
+   smaller sorted List, then we will not shift the pointer one index to the right, and we will just keep it 
+   pointing at the last element of that smaller sorted List)
+e. Repeat steps c and d iteratively until all the elements in the 2 smaller sorted Lists have been appended
+   to the Merged Sorted List
+
+Visualisation of how to create a sorted List from merging 2 smaller, pre-sorted Lists:
+a. One way we could do this is to first create a seperate empty array, which will be the Merged Sorted List.
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+
+                     Merged Sorted List:
+               [][][][][][][][]
+
+b. Then we will initiate 2 pointers, the first pointer pointing at the first element in smaller sorted List 1
+   ('17'), and the second pointer pointing at also the first element in smaller sorted List 2 ('4').
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+        ^                                 ^
+                     Merged Sorted List:
+               [][][][][][][][]
+
+(Starting iteration, for the first element's iteration)
+c. Now, we will compare the 2 elements in each respective smaller sorted Lists that their own pointer is 
+   pointing at (Smaller Sorted List 1's pointer is pointing at its first element ('17') and Smaller
+   Sorted List 2's pointer is pointing at its first element ('4')). Whichever element that each smaller
+   sorted Lists' pointer is pointing at is smaller, will be appended into the currently empty Merged Sorted 
+   List. Since the element the Smaller Sorted List 2's pointer is pointing at ('4') is smaller than the 
+   element the Smaller Sorted List 1's pointer is pointing at ('17'), it is appended into the currently 
+   empty Merged Sorted List.
+   Appending the smaller element out of the 2 elements that each smaller sorted Lists' pointer is pointing at
+   into the Merged Sorted List:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+        ^                                 ^
+                     Merged Sorted List:
+               [4][][][][][][][]
+
+d. The smaller sorted List that has its element appended into the Merged Sorted List will then have to shift
+   its pointer one index to the right, and now should be pointing at the next element in that smaller sorted
+   List (unless that element being appended into the Merged Sorted List is the last element of that smaller
+   sorted List, then we will not shift the pointer one index to the right, and we will just keep it pointing 
+   at the last element of that smaller sorted List). Since the element the Smaller Sorted List 2's pointer is 
+   pointing at ('4') is appended to the Merged Sorted List, we will then have to shift Smaller Sorted List 2's 
+   pointer one index to the right, and is now pointing at the next element at index 1 ('9') instead of the
+   element at index 0 ('4')
+   Shifting the pointer of the smaller sorted List that had their element appended into the Merged Sorted List
+   above one index to the right:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+        ^                                    ^
+                     Merged Sorted List:
+               [4][][][][][][][]
+
+(Step e, for the second element's iteration)
+c. Now, we will repeat the process above, comparing the 2 elements in each respective smaller sorted Lists 
+   that their own pointer is pointing at (Smaller Sorted List 1's pointer is still pointing at its first 
+   element ('17') and Smaller Sorted List 2's pointer is now pointing at its second element ('9')). Whichever
+   element that each smaller sorted Lists' pointer is pointing at is smaller, will be appended into the Merged 
+   Sorted List. Since the element the Smaller Sorted List 2's pointer is pointing at ('9') is still smaller 
+   than the element the Smaller Sorted List 1's pointer is pointing at ('17'), it is appended into the Merged 
+   Sorted List.
+   Appending the smaller element out of the 2 elements that each smaller sorted Lists' pointer is pointing at
+   into the Merged Sorted List:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+        ^                                    ^
+                     Merged Sorted List:
+               [4][9][][][][][][]
+
+d. The smaller sorted List that has its element appended into the Merged Sorted List will then have to shift
+   its pointer one index to the right, and now should be pointing at the next element in that smaller sorted
+   List (unless that element being appended into the Merged Sorted List is the last element of that smaller
+   sorted List, then we will not shift the pointer one index to the right, and we will just keep it pointing 
+   at the last element of that smaller sorted List). Since the element the Smaller Sorted List 2's pointer is 
+   pointing at ('9') is appended to the Merged Sorted List, we will then have to shift Smaller Sorted List 2's 
+   pointer one index to the right again, and is now pointing at the next element at index 2 ('25') instead of 
+   the element at index 1 ('9')
+   Shifting the pointer of the smaller sorted List that had their element appended into the Merged Sorted List
+   above one index to the right:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+        ^                                        ^
+                     Merged Sorted List:
+               [4][9][][][][][][]
+
+(Step e, for the third element's iteration)
+c. Now, we will repeat the process above again, comparing the 2 elements in each respective smaller sorted 
+   Lists that their own pointer is pointing at (Smaller Sorted List 1's pointer is still pointing at its first 
+   element ('17') and Smaller Sorted List 2's pointer is now pointing at its third element ('25')). Whichever
+   element that each smaller sorted Lists' pointer is pointing at is smaller, will be appended into the Merged 
+   Sorted List. Since the element the Smaller Sorted List 1's pointer is pointing at ('17') is finally smaller 
+   than the element the Smaller Sorted List 2's pointer is pointing at ('25'), it is appended into the Merged 
+   Sorted List.
+   Appending the smaller element out of the 2 elements that each smaller sorted Lists' pointer is pointing at
+   into the Merged Sorted List:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+        ^                                        ^
+                     Merged Sorted List:
+               [4][9][17][][][][][]
+
+d. The smaller sorted List that has its element appended into the Merged Sorted List will then have to shift
+   its pointer one index to the right, and now should be pointing at the next element in that smaller sorted
+   List (unless that element being appended into the Merged Sorted List is the last element of that smaller
+   sorted List, then we will not shift the pointer one index to the right, and we will just keep it pointing 
+   at the last element of that smaller sorted List). Since the element the Smaller Sorted List 1's pointer is 
+   pointing at ('17') is appended to the Merged Sorted List, we will then have to shift Smaller Sorted List 1's 
+   pointer one index to the right, and is now pointing at the next element at index 1 ('21') instead of 
+   the element at index 0 ('17')
+   Shifting the pointer of the smaller sorted List that had their element appended into the Merged Sorted List
+   above one index to the right:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+            ^                                    ^
+                     Merged Sorted List:
+               [4][9][17][][][][][]
+
+
+For the remaining elements in the smaller sorted Lists, here is a visualisation on how the merging process will 
+be like for these remaining elements:
+(Step e, for the fourth element's iteration)
+c. Appending the smaller element out of the 2 elements that each smaller sorted Lists' pointer is pointing at
+   into the Merged Sorted List:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+            ^                                    ^
+                     Merged Sorted List:
+               [4][9][17][21][][][][]
+
+d. Shifting the pointer of the smaller sorted List that had their element appended into the Merged Sorted List
+   above one index to the right:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+                ^                                ^
+                     Merged Sorted List:
+               [4][9][17][21][][][][]
+
+(Step e, for the fifth element's iteration)
+c. Appending the smaller element out of the 2 elements that each smaller sorted Lists' pointer is pointing at
+   into the Merged Sorted List:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+                ^                                ^
+                     Merged Sorted List:
+               [4][9][17][21][25][][][]
+
+d. Shifting the pointer of the smaller sorted List that had their element appended into the Merged Sorted List
+   above one index to the right:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+                ^                                    ^
+                     Merged Sorted List:
+               [4][9][17][21][25][][][]
+
+(Step e, for the sixth element's iteration)
+c. Appending the smaller element out of the 2 elements that each smaller sorted Lists' pointer is pointing at
+   into the Merged Sorted List:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+                ^                                    ^
+                     Merged Sorted List:
+               [4][9][17][21][25][29][][]
+
+d. Shifting the pointer of the smaller sorted List that had their element appended into the Merged Sorted List
+   above one index to the right:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+                    ^                                ^
+                     Merged Sorted List:
+               [4][9][17][21][25][29][][]
+
+(Step e, for the seventh element's iteration)
+c. Appending the smaller element out of the 2 elements that each smaller sorted Lists' pointer is pointing at
+   into the Merged Sorted List:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+                    ^                                ^
+                     Merged Sorted List:
+               [4][9][17][21][25][29][32][]
+
+d. Shifting the pointer of the smaller sorted List that had their element appended into the Merged Sorted List
+   above one index to the right. Since the element being appended into the Merged Sorted List is the last element
+   of the Smaller Sorted List 2, then we will not shift the pointer one index to the right, and we will just keep 
+   it pointing at the last element of the Smaller Sorted List 2:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+                    ^                                ^
+                     Merged Sorted List:
+               [4][9][17][21][25][29][32][]
+
+(Step e, for the eighth element's iteration)
+c. Appending the smaller element out of the 2 elements that each smaller sorted Lists' pointer is pointing at
+   into the Merged Sorted List:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+                    ^                                ^
+                     Merged Sorted List:
+               [4][9][17][21][25][29][32][38]
+
+d. Shifting the pointer of the smaller sorted List that had their element appended into the Merged Sorted List
+   above one index to the right. Since the element being appended into the Merged Sorted List is the last element
+   of the Smaller Sorted List 1, then we will not shift the pointer one index to the right, and we will just keep 
+   it pointing at the last element of the Smaller Sorted List 1:
+   Smaller Sorted List 1:             Smaller Sorted List 2:
+      [17][21][29][38]                   [4][9][25][32]
+                    ^                                ^
+                     Merged Sorted List:
+               [4][9][17][21][25][29][32][38]
+
+
+
+How does Merge Sort Algorithm work?
+
+Here is where we will use what we have learnt just now, where we learnt how to create a sorted List from merging 
+2 smaller, pre-sorted Lists (see step 2 of 'Here are the steps of Merge Sort Algorithm')
+
+Here are the steps of Merge Sort Algorithm:
+1. Break down the initial unsorted List by recursively breaking down the initial unsorted List and the 
+   subsequent smaller subarrays by half and half again (if the initial unsorted List/subsequent smaller 
+   subarray is an odd number, then we will just split it into 2 smaller subarrays of different lengths,
+   with the maximum difference in length between these 2 smaller subarrays of different lengths of 1),
+   until we are left with just smaller subarrays of one element each.
+
+   (Even if a particular subsequent smaller subarray is coincidentally sorted, we will still continue 
+   to break down this coincidentally sorted smaller subarray (the reason why we don't keep this 
+   coincidentally sorted smaller subarray is explained above in the 'What is Merge Sort?' section))
+
+2. Now we will merge each of these smaller subarrays of one element each. We will need to merge them
+   (via the merging process on how to create a sorted List from merging 2 smaller, pre-sorted Lists as we 
+   have learnt above) in reverse of the recursive loops was used to break the initial unsorted List down 
+   into smaller subarrays of one element each in step 1, after the recursive loop reaches the base case. 
+   (which is when the length of a smaller subarray is 1 (it only contains one element)).
+   
+   The merging process will be what we learnt in the section above, creating a sorted List from 
+   merging 2 smaller, pre-sorted Lists. We will start from the smaller subarrays of one element each.
+   Since these smaller subarrays of one element each can be automatically considered sorted, we can apply
+   this method to merge 2 of these smaller subarrays of one element each into a merged sorted List (which
+   will now contain 2 elements).
+   
+   Here are the steps to create a sorted List from merging 2 smaller, pre-sorted Lists:
+   a. First, create a seperate empty array, which will be the Merged Sorted List 
+   b. Then, initiate 2 pointers, with each pointer pointing at the first element in the each of the smaller 
+      sorted List 
+   c. Now we will compare the 2 elements in each respective smaller sorted Lists that their own pointer is 
+      pointing at. Whichever element that each smaller sorted Lists' pointer is pointing at is smaller, will 
+      be appended into the Merged Sorted List (in the case where both elements that each smaller sorted 
+      Lists' pointer is pointing at is equal due to the presence of duplicates in the initial unsorted List, 
+      we can decide to append either of the elements from either of the smaller sorted Lists that their 
+      pointer is pointing at into the Merged Sorted List)
+   d. The smaller sorted List that has its element appended into the Merged Sorted List will then have to 
+      shift its pointer one index to the right, and now should be pointing at the next element in that smaller 
+      sorted List (unless that element being appended into the Merged Sorted List is the last element of that 
+      smaller sorted List, then we will not shift the pointer one index to the right, and we will just keep it 
+      pointing at the last element of that smaller sorted List)
+   e. Repeat steps c and d iteratively until all the elements in the 2 smaller sorted Lists have been appended
+      to the Merged Sorted List
+      
+   Then, we will need to repeat this same method for the now slightly larger, smaller subarrays of 2 elements,
+   merging 2 such slightly larger, smaller subarrays of 2 elements into a Merged Sorted List (which will now 
+   contain 4 elements) and so on... until we get back a Merged Sorted List, containing all the elements of 
+   the initial unsorted List, except that this List is now sorted
+
+
+Visualisation of how Merge Sort Algorithm works:
+1. Break down the initial unsorted List by recursively breaking down the initial unsorted List and the 
+   subsequent smaller subarrays by half and half again until we are left with just smaller subarrays of
+   one element each.
+                  [21][38][29][17][4][25][32][9]
+                        /                 \
+          [21][38][29][17]               [4][25][32][9]
+            /          \                  /          \
+     [21][38]          [29][17]     [4][25]          [32][9]
+       /  \              /  \        /  \              /  \
+    [21]  [38]        [29]  [17]   [4]  [25]        [32]  [9]
+
+
+2. Now we will merge each of these smaller subarrays of one element each. We will need to merge them
+   (via the merging process on how to create a sorted List from merging 2 smaller, pre-sorted Lists as we 
+   have learnt above) in reverse of the recursive loops was used to break the initial unsorted List down 
+   into smaller subarrays of one element each in step 1, after the recursive loop reaches the base case.
+    [21]  [38]        [29]  [17]   [4]  [25]        [32]  [9]
+       \  /              \  /        \  /              \  /
+     [21][38]          [17][29]     [4][25]          [9][32]
+           \            /                \            /
+          [17][21][29][38]               [4][9][25][32]
+                        \                 /
+                  [4][9][17][21][25][29][32][38]
+
+   (Notice that the way the smaller subarrays are merged follows the reverse of the recursive loops 
+   was used to break the initial unsorted List down into smaller subarrays of one element each in step 1. 
+   E.g. the smaller subarray that only contains the element '21' was not merged with some other smaller
+   subarray that also only contain one element each that is further away like the smaller subarray of one 
+   element each that only contained the element '9' or '4'.
+
+   The way these smaller subarrays are merged has to follow the reversal way which they were broken down
+   to in step 1. Since during step 1, the elements '21' and '38' were initially in the same smaller 
+   subarray of 2 elements before they were broken down, in step 2, during merging of the smaller subarrays
+   of one element each, the smaller subarray that only contains the element '21' can only merge with 
+   the smaller subarray that only contains the element '38')
+
+
+//////////////////////////////////////////
+
+
+Explaining the Big O Notation of Time and Space Complexity of Merge Sort:
+
+For Big O Notation of Time Complexity of Merge Sort:
+Recall the steps of Merge Sort Algorithm from the 'Here are the steps of Merge Sort Algorithm' section,
+and since Merge Sort Algorithm makes use of the Divide and Conquer paradigm:
+1. Dividing stage   - Break down the initial unsorted List by recursively breaking down the initial 
+   (aka step 1)       unsorted List and the subsequent smaller subarrays by half and half again (if the 
+                      initial unsorted List/subsequent smaller subarray is an odd number, then we will 
+                      just split it into 2 smaller subarrays of different lengths, with the maximum 
+                      difference in length between these 2 smaller subarrays of different lengths of 1),
+                      until we are left with just smaller subarrays of one element each.
+
+                      This stage will take O(logn) time since e.g. If your initial unsorted List has 8 
+                      elements, it will take you 3 doublings, or log(8) operations until you will be able
+                      to fully break down this initial unsorted List of 8 elements into individual smaller
+                      subarrays of one element each
+
+2. Conquering stage - Now we will merge each of these smaller subarrays of one element each. We will need 
+   (aka step 2)       to merge them (via the merging process on how to create a sorted List from merging 2 
+                      smaller, pre-sorted Lists as we have learnt above) in reverse of the recursive loops 
+                      was used to break the initial unsorted List down into smaller subarrays of one 
+                      element each in step 1, after the recursive loop reaches the base case. (which is 
+                      when the length of a smaller subarray is 1 (it only contains one element)).
+   
+                      The merging process will be what we learnt in the section above, creating a sorted 
+                      List from merging 2 smaller, pre-sorted Lists. 
+                      
+                      During each stage's merging processes, we will need to make O(n) comparison/operations, 
+                      and hence take O(n) time, between the 2 elements the 2 smaller sorted Lists' 
+                      pointers are pointing at to determine which one is smaller (step c of 'here are the 
+                      steps to create a sorted List from merging 2 smaller, pre-sorted Lists')
+
+                      During each stage's merging processes, we will also need to append the smaller element 
+                      between the 2 elements the 2 smaller sorted Lists' pointers are pointing at after
+                      every comparison, and since the number of comparisons made in each stage is O(n), the
+                      number of such append operations that will be made is also O(n) (step d of 'here are 
+                      the steps to create a sorted List from merging 2 smaller, pre-sorted Lists')
+                     
+Visualisation on why Big O Notation of Time Complexity of Merge Sort Algorithm is O(nlogn):
+1. Dividing stage:
+   (aka step 1)                                                                             Total number of 
+                                                                                            stages/halvings:
+                  [21][38][29][17][4][25][32][9]                                                \
+                        /                 \                                                      |
+          [21][38][29][17]               [4][25][32][9]                                           \
+            /          \                  /          \                                             > logn
+     [21][38]          [29][17]     [4][25]          [32][9]                                      /
+       /  \              /  \        /  \              /  \                                      |
+    [21]  [38]        [29]  [17]   [4]  [25]        [32]  [9]                                   /
+
+2. Conquering stage: 
+   (aka step 2)                                                Total number of comparison   Total number of
+                                                                  + append operations       stages/halvings:
+    [21]  [38]        [29]  [17]   [4]  [25]        [32]  [9] --------- n + n                   \
+       \  /              \  /        \  /              \  /                                      |
+     [21][38]          [17][29]     [4][25]          [9][32] ---------- n + n                     \
+           \            /                \            /                                            > logn
+          [17][21][29][38]               [4][9][25][32] --------------- n + n                     /
+                        \                 /                                                      |
+                  [4][9][17][21][25][29][32][38]                                                / 
+
+From the above visualisation, we can see that the Merge Sort Algorithm will take this amount of operations:
+   logn + (n+n) * logn = logn + 2nlogn ~ nlogn 
+
+giving us O(nlogn) overall complexity.
+
+
+For Big O Notation of Space Complexity of Merge Sort:
+During step 2 of the Merge Sort Algorithm, during each stage of the merging process, temporary Lists/memory 
+are allocated to hold the smaller subarrays being merged, which should be, in total, be the same size as the
+initial unsorted List, n.
+
+In between stages of the merging process, a new set of temporary Lists/memory of size n are allocated. But 
+after every stage of the merging process, these temporary Lists/memory of size n, are freed/released and not 
+used before moving on to the next stage of the merging process. Hence the overall space/memory required for 
+the Merge Sort Algorithm throughout the stages of the merging process will remain stagnant at n, hence 
+Big O Notation of Space Complexity of Merge Sort is O(n)
+
+
+//////////////////////////////////////////
+
+
+Advantages and Disadvantages of Merge Sort Algorithm compared to other sorting algorithms:
+
+Advantages of Merge Sort:
+1. Efficiency: Merge Sort's time complexity of O(n log n) makes it efficient for sorting large datasets. 
+   Its divide-and-conquer approach minimizes the number of comparisons and swaps needed to sort the data.
+2. Stable Sorting: Merge Sort is a stable sorting algorithm, which means that equal elements maintain 
+   their relative order after sorting. This property is important in certain applications where 
+   maintaining the original order of equal elements is crucial.
+3. Predictable Performance: Merge Sort has a consistent and predictable performance across different 
+   inputs. Its worst-case and average-case time complexity are both O(n log n), making it a reliable 
+   choice for sorting large datasets.
+4. No Worst-Case Performance Variability: Unlike some other sorting algorithms like Quick Sort, Merge 
+   Sort's performance doesn't degrade in certain cases, providing a more reliable and consistent 
+   performance.
+5. Suitable for External Sorting: Merge Sort is also well-suited for external sorting, where data 
+   doesn't fit entirely in memory. The algorithm's merging step allows for efficient sorting of data 
+   stored on external storage like hard drives.
+
+Disadvantages of Merge Sort:
+1. Additional Memory Requirement: Merge Sort requires additional memory space proportional to the size 
+   of the input array. This can be a limitation when working with very large datasets, as it might lead 
+   to increased memory usage.
+2. Slower for Small Datasets: Merge Sort's efficiency becomes more apparent with larger datasets due 
+   to its overhead in dividing and merging. For small datasets, the constant factors associated with 
+   these operations can make Merge Sort slower compared to some other sorting algorithms.
+3. Recursive Nature: The recursive nature of Merge Sort can lead to overhead in function calls and stack 
+   usage, which might impact performance in certain cases. However, tail recursion optimization can 
+   mitigate this to some extent.
+4. Not In-Place: Merge Sort is not an in-place sorting algorithm, meaning that it requires additional 
+   memory space for sorting. This is in contrast to algorithms like Quick Sort or Heap Sort, which sort the 
+   data within the original array without using additional memory.
+5. Complexity of Implementation: Implementing Merge Sort can be more complex compared to simpler sorting 
+   algorithms like Bubble Sort or Insertion Sort. It involves managing the recursive calls and the merging 
+   process accurately.
+
+
+/////////////////////////////////////////
+
+
+Why is Merge Sort called 'Merge Sort'?
+
+Merge sort is called as such from the "merge" step, which is a crucial part of the algorithm. In merge sort, 
+the idea is to divide an array into smaller subarrays, sort them individually, and then merge them back 
+together in a way that maintains the overall sorted order. The "merge" operation combines two smaller sorted 
+arrays into a larger sorted array.
+
+
+//////////////////////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Merge Sort Algorithm:
+
+    Sorting Algorithms   |  Space Complexity  |   Time Complexity
+       Merge Sort	       |        O(n)	       |     O(n log n)
+
