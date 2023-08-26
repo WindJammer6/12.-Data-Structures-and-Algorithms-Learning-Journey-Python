@@ -1,0 +1,184 @@
+Whats a Queue?
+A Queue is a linear data structure. It is open at both ends, stores items and perform operations
+using the First In First Out (FIFO) method. Whenever a new element is added, it is added from
+one end of the queue, and all deletions froma Queue are made from the other end, always first 
+removing the first element added into the queue. 
+
+Visual representation on how it looks like:
+
+(Action of 'Pushing')                                FIFO
+      | DATA |                                       (First In First Out Operation)
+      |  5   | ---
+                 |      --------------------------
+                 ----->   | DATA | DATA | DATA |    
+                          |  4   |  3   |  2   |   ----
+                        --------------------------    |   (Action of 'Popping')
+                                                      --------> | DATA |
+                                                                |  1   |
+
+
+You can sort of imagine a Queue Data Structure like a queue of people queuing up to enter a cinema.
+
+When the queue is made, whoever that first 'push'/insert from one end of the queue, will end up being
+the first in queue, and appear as the first person at the other end, who will hence be the first to enter
+the cinema, then the next person joins the queue behind the first person, who will be second person at 
+the other end, being the second the enter the cinema and so on, until the last person joins the
+queue, and will be the last to enter the cinema, and this forms a queue. This explains the action of 
+'Pushing' in a Queue, inserting an element from one end, and appearing as the first at the other end, 
+and being the first to go out of the Queue Data Structure. 
+
+When someone finishes and exits a queue, the person to be the first to 'pop'/remove from a queue will
+have been the first person to join/'push' into the queue from the end that the person joined from,
+then the second person behind the first at the other end, which would have been the second to join/'push'
+into the queue from the end the person also joined from, and so on. This explains the Action of 'Popping'
+in a Queue, where the first element to enter the queue from one end will be the first to exit from the
+other end of the Queue Data Structure. 
+
+
+///////////////////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Queue Data Structures:
+
+Data Structures  |   Space Complexity  |	        Average Case Time Complexity
+                 |                     |    Access	  Search	  Insertion   Deletion
+    Queue	     |         O(n)	      |     O(n)	   O(n)      O(1)	       O(1)
+
+
+//////////////////////////////////////////
+
+
+Real life scenario:
+Lets take a look at stock prices portals online e.g. Yahoo Finance or Google Finance, where you can view 
+on-time stock prices in the market. Where these portals get the on-time stock prices are from stock 
+exchanges e.g. New York Stock Exchange (central locations, real actual places where trading happens and
+where stock prices are determined). A team at NYSE will be continuously supply stock prices for particular
+stocks e.g. Walmart stocks to these stock prices portals e.g. 11.01am: $131.10, 11.02am: $132.12, where
+they will display these stock prices data in their portal as charts, graphs etc.
+
+                           Supplying Stock prices data
+    New York Stock    (11.02am: $132.12, 11.01am: $131.10)          Yahoo Finance 
+       Exchange       ------------------------------------>  (where it will display stock 
+                                                              prices to public consumers)
+
+So as a web developer, how would manage this transaction of stock prices data from NYSE to stock prices
+portals such as Yahoo Finance? 
+
+One software architecture (or a software system in between NYSE and stock prices portals), using Tightly 
+Coupled Structure (can Google to see what this is) is for stock prices portals to set up a HTTP (HyperText
+Transfer Protocol) Server to receive the HTTP POST request (can Google to see what this is) of the stock 
+prices data coming from the team in NYSE (as HTTP POST calls along with the stock prices data as JSON 
+(JavaScript Object Notation (can Google to see what this is)) objects). This would work and NYSE will be 
+able to transmit stock prices data to the stock prices portals. 
+
+                    www.finance.yahoo.com/api/post_price (HTTP POST)
+
+                           Supplying Stock prices data
+    New York Stock     (Stock prices data as JSON objects)   Yahoo Finance 
+       Exchange       ------------------------------------>  |   HTTP   |
+                                                             |  Server  |
+
+    JSON objects looks like this:
+    {
+        'company':'Walmart'
+        'timestamp': '15 apr, 11.01am'
+        'price': $131.10
+    }
+
+However, there are some issues with this software architecture.
+
+First issue: Loss of messages if HTTP Server is down.
+There will be a loss of data messages as NYSE and stock prices portals' HTTP Server must always be 
+synchronous so that everytime NYSE makes HTTP POST calls, the HTTP Server needs to be up and connected to
+receive these HTTP POST requests. However, when the HTTP Server is down, the time when it is down, it is
+not synchronous/connected to NYSE and any data being transmitted in this time will not be received and
+lost/unretrievable even when the HTTP Server comes back up.
+
+Second issue: Managing multiple consumers becomes problematic.
+
+                 www.finance.yahoo.com/api/post_price (HTTP POST)
+    New York Stock         Supplying Stock prices data       Yahoo Finance 
+       Exchange       ------------------------------------>  |   HTTP   |
+                       \                                     |  Server  |
+                        \
+                         \                                  Google Finance
+                          -------------------------------->  |   HTTP   |
+                             Supplying Stock prices data     |  Server  |
+                 www.finance.google.com/api/post_price (HTTP POST)
+
+If there is another stock prices portal, say Google Finance, also wants to receive stock prices data
+from NYSE, the team at NYSE will need to change their HTTP POST to Google's URL in order to supply
+them the stock prices data. Hence this software architecture is not good as whenever you want to get 
+a new customer on board you have to make code changes which makes things very inefficient basically.
+
+
+THE SOLUTION:
+To solve these 2 issues, we can use another software architecture, consisting of a Memory Buffer, using 
+Loosely Coupled Structure (can Google to see what this is).
+
+Whats a Memory Buffer?
+It is a temporary storage area in the main memory (RAM) that stores data transferring between two or more 
+devices or between an application and a device.
+
+Visual representation of how a Memory Buffer looks like:
+
+                              Memory Buffer (Queue)
+                                               --------------- 
+                                               |             | 
+                                              \ /            |    Yahoo Finance 
+                           ---------------------------       ----  |   HTTP   |
+    New York Stock            | Walmart | Walmart |                |  Server  |
+       Exchange     ---->     | 11.02am | 11.01am |            
+                              | $132.12 | $131.10 |               Google Finance
+                           ---------------------------       ----  |   HTTP   |
+                                   ^                         |     |  Server  |
+                                   |                         | 
+                                   --------------------------- 
+
+How this software architecture works is that NYSE will 'push' the stock prices data JSON objects into the
+Memory Buffer from one end, while the stock price portals consumers can receive the stock prices data from
+the other end using pointers in the order the stock prices data were 'pushed' into the Memory Buffer (how 
+exactly the HTTP Server works with pointers I'm not sure but is thats not very important here). So it will
+receive the stock price data that was 'pushed' in at the earliest time (first) and more recent stock price
+data later. Once, lets say Yahoo Finance consumes the earlier stock price at 11.01am, its pointer will then
+move to the next, more recent stock price at 11.02am. So its not like once Yahoo Finance consumes the 11.01am
+stock price data, then it won't be available to Google Finance. Each pointer of the consumers are independent
+of one another and do not affect the stock price data at the central Memory Buffer.
+
+It solves issue 1 as it prevents any loss of data messages sent to the stock prices portal as these data 
+will be safekept in the Memory Buffer if a HTTP Server is down, and resume feeding those data messages that
+the stock price portals may have missed when it comes back up. 
+
+It solves issue 2 as instead of sending unique HTTP POST calls to each of NYSE's consumers (such as stock 
+price portals), it puts them into the central Memory Buffer pool, where all their consumers can retrieve
+from using pointers, removing the need to change their code whenever there is a new consumer wanting to
+consume NYSE stock prices data. So if there is a new consumer wants to consume these stock price data, NYSE
+dosen't have to make any changes andd the new consumer can just start to consume the stock price data from 
+the central Memory Buffer.
+
+So the Data Structure we use at the Memory Buffer in this real life scenario is called Queue, and this is one
+example of real life application of the Queue Data Structure.
+
+
+/////////////////////
+
+
+Some real life applications of Queue Data Structure (some of which we have seen in above's real life scenario):
+-> Managing requests on a single shared resource such as CPU scheduling and disk scheduling
+-> Handling hardware or real-time systems interrupts
+-> Handling website traffic
+-> Routers and switches in networking
+-> Maintaining the playlist in media players
+
+
+/////////////////////
+
+
+In Python, Queues are implemented from list or collections.deque or queue.LifoQueue (Note that 
+'collections' and 'queue' are different Python Libraries and 'deque' and 'LifoQueue' are special
+Data Structures within those Python Libraries that we use as a Queue Data Structure)
+
+ Data Structure |      Python      |           Java          |              C++
+     Queue      |       list/      |        LinkedList       |           std::queue
+                |collections.deque/|                         |
+                |  queue.LifoQueue |                         |

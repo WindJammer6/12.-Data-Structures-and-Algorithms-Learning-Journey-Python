@@ -1,0 +1,97 @@
+A minor detour here, to understand what Multithreading is so that I can do Excercise 1 in the 
+Queue Data Structure tutorial.
+
+
+//////////////////////////////////////////
+
+
+What is Multithreading?
+Lets define what a thread is first: A thread is a seperate flow of code execution. 
+
+Each program has one thread by default, but we may need to create new threads to execute tasks 
+concurrently within a single program.
+
+Multithreading is a model of program execution that allows for multiple threads to be created
+and executed within a process, executing independently but concurrently sharing process 
+resources. 
+
+
+Lets dive a little further. True Multithreading does not actually occur in Python because some
+restrictions built into the Python language such as Global Interpreter Lock (GIL), which 
+safeguards coding in Python (something about making dynamic memory management work correctly), 
+but also prevents multiple threads from running Python code at the same time in a program.
+However there are other languages like Java and C++ that do allow true Multithreading as they
+handle dynamic memory differently and dosen't face the same issue Python does to require GIL.
+
+What Python is doing when 'Multithreading' is it rapidly switches running of seperate threads. 
+Whenever the code provides idle time in one thread, the code moves over to run a seperate thread,
+and switches back to the first thread when the second thread provides idle time. Hence, providing 
+some idle time is vital in Python threads via means such as Python's time module's 'time.sleep()' 
+function tp provide idle time in each thread for the Python program to switch between threads, else
+the Python program won't be able to multithread.
+
+
+/////////////////////////////////////////////
+
+
+Real life analogy of Multithreading:
+
+You can think of a 'busy mom' as a Python program. Usually, a 'busy mom' needs to multitask,
+juggling between tasks such as 'cooking food', 'taking care of baby' and 'making phone call' all
+at the same time, in parallel.
+
+Visual representation of how it looks like:
+'Busy mom' analogy:                          In a Python program (example from Programming scenario
+                                             in '5.2. implementing_Multithreading.py'):
+
+            |                                           |
+            |--->----                                   |--->---- 
+    Cooking |       |                            Main   |       |     
+     food   |-------|--->----                   Program |-------|--->---- 
+            |  Take | Phone |                           | calc_ | calc_ | 
+            |  care |  call |                           | square|  cube |   
+            |   of  |       |                           |       |       |   
+            |  baby |       |                           |       |       |   
+            |       |       |                           |       |       |   
+            |---<----       |                           |---<----       | 
+            |               |                           |               |    
+            |-------<--------                           |-------<-------- 
+            |                                           |
+            |                                           |
+
+As you can see, 'busy mom' starts by 'cooking food', then at some point in time while 'cooking food', 
+she needs switch to another task of 'taking care of baby', then at another point in time later, she 
+needs to handle a 'phone call'. Each line represents an individual task 'busy mom' is handling (length
+of line represents the time duration she is handling each task). In programming, each of this task is
+called a thread and in our 'busy mom' scenario, our 'busy mom'/Python program can be said to be 
+handling multiple threads at the same time, and can be said to be doing Multithreading.
+
+The arrow branching out from the main thread 'cooking food' represents the 'start()' (a threading
+function, you'll see in '5.2. implementing_Multithreading.py') of a new thread (like 'taking care of
+baby') being executed (while the main thread, 'cooking food' is still being executed).
+
+The arrow joining back to the main thread 'cooking food' from the seperate thread like 'taking care of
+baby' represents the end of the seperate thread's execution and re-'join()' (a threading function, 
+you'll see in '5.2. implementing_Multithreading.py') the main thread (note that the main thread is 
+still being executed even after this seperate thread ends)
+
+
+////////////////////////////////////////////////
+
+
+What is Multiprocessing? (not relevant to our Excercise 1 in our Queue tutorial, but is a programming 
+term usually confused with Multithreading)(just some general info)
+
+Mutliprocessing is the utilization of two or more processors/central processing unit (CPU) in a single 
+computer system.
+
+
+Multithreading vs Multiprocessing:
+Multithreading refers to the ability of a processor to execute multiple threads concurrently, where 
+each thread runs a process. 
+
+Multiprocessing refers to the ability of a system to run multiple processors in parallel, where each 
+processor can run one or more threads.
+
+In a process, multiple threads can occur. So you can think of a process being on one level larger-scale
+compared to a thread.

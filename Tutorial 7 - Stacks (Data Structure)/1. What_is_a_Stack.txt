@@ -1,0 +1,171 @@
+Whats a Stack?
+A Stack is a linear data structure. It is only open at one end, stores items and perform operations
+using the Last In, First Out (LIFO) method. Whenever a new element is added to a stack, it is added
+to the top of the stack, and the top element is always removed first from a stack.
+
+Visual representation on how it looks like:
+
+(Action of 'Pushing')  (Action of 'Popping')
+     [ DATA4 ] ----    ----> [ DATA4 ]
+                  |    |
+               | \ /   | |        LIFO 
+               |         |        (Last In First Out Operation)
+               |[ DATA3 ]|
+               |[ DATA2 ]|
+               |[ DATA1 ]|
+               -----------
+
+You can sort of imagine a Stack Data Structure like a stack of dishes in the kitchen. 
+
+When you start making the stack, you will first 'push'/insert a dish to the bottom of the stack, and then
+one on top of it, and so on, to form a stack. This explains the action of 'Pushing' in a Stack, inserting 
+an element to the top of the Stack Data Structure. 
+
+When you try to remove a dish from the stack, you will first 'pop'/remove a dish from the top of the 
+stack, and then the second top dish (which will be the top dish after the initial top dish in removed),
+and so on. This explains the Action of 'Popping' in a Stack, removing an element at the top of the Stack
+Data Structure. 
+
+
+///////////////////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Stack Data Structures:
+
+Data Structures	 |   Space Complexity  |	        Average Case Time Complexity
+                 |                     |    Access	  Search	 Insertion 	  Deletion
+    Stack	     |         O(n)	       |     O(n)	   O(n)   	   O(1)         O(1)
+
+
+///////////////////////////////////////
+
+
+Common misunderstanding on the Big O Notation of Time Complexity for action of 'Pushing' and 'Popping'
+(not only for Stack Data Structure, but for in general):
+
+In Big O Notation of Time Complexity for insertion and deletion is NOT equivalent to the Big O 
+Notation of Time Complexity for action of 'Pushing' and 'Popping' respectively. The Big O Notation of 
+Time Complexity for action of 'Pushing'/'Popping' is actually:
+
+    process of Accessing the first index + process of Insertion/Deletion = action of 'Pushing'/'Popping'
+
+which can vary for different Data Structures. For example:
+
+Arrays:
+    process of Access = O(1) (cuz Arrays are indexed)
+    process of Insertion/Deletion = O(1) (I know that in the cheat sheet table back in 
+                                          'Tutorial 2 - Big O Notation' says for Stack Data Structure is 
+                                          O(n), however in this case the latest element will be 
+                                          added/removed at the end of the Array/List, hence when it is
+                                          added/removed, there is no element behind it and there is no
+                                          requirement to shift any elements behind it, hence O(1))
+    action of 'Pushing'/'Popping' = O(1)
+
+Linked Lists:
+    process of Access = O(n) (It is O(n) for Linked Lists because whenever a new/latest element is 
+                              added/removed, it is done at the end of the Linked List. Hence, in order to
+                              access/go to the last element of the Linked List to execute process of 
+                              Insertion/Deletion, we need to traverse through Linked List
+                              to access it hence O(n) for access as Linked Lists are not indexed)
+    process of Insertion/Deletion = O(1)
+    action of 'Pushing'/'Popping' = O(n)
+
+Stack:
+    process of Access = O(1) (I know that in the cheat sheet table back in 'Tutorial 2 - Big O Notation'
+                              says for Stack Data Structure is O(n), but for action of 'Pushing'/'Popping'
+                              we are always dealing with the first index, as the most latest element added
+                              will always appear at the first index of a Stack Data Structure (the 
+                              technicalities of the code to make this possible is pre-done by others 
+                              when during implementation of a Stack we import pre-existing special Data 
+                              Structures (LifoQueue and deque, which we can choose to use as a Stack 
+                              from other Python Libraries)). This is unlike Arrays and Linked Lists, 
+                              where the latest element added will appear at the last index (the end) of 
+                              the Data Structure. Hence we technically don't have to traverse the whole 
+                              Stack to access the latest element added since it is already at the first 
+                              index!)
+    process of Insertion/Deletion = O(1)
+    action of 'Pushing'/'Popping' = O(1)
+
+In reality, you can also modify the Linked List such as we have a reference point in the 'LinkedList' 
+class to the tail of the Linked List so that process of Access for such a Linked List for action of
+'pushing'/'popping' is O(1) and cause the action of 'pushing'/'popping' for such a Linked List to be
+O(1).
+
+However, in the end, a Stack is still the best for such scenarios due to their design and that their
+implementation is precisely for such scenarios making them, in more advanced ways which I won't
+delve into, more efficient than Arrays and Linked Lists.
+
+
+//////////////////////////////////////////
+
+
+Real life scenario:
+Lets say you are using a news website, and you want navigate between websites showing news from different
+countries. First you enter the news website's homepage. Then, you navigate to world news. Then you first
+went look at India's news, then China's news. 
+
+Then you wanted to go back to the previous page, hence you click the back button, and you returned from
+China's news page, back to India's news page, and so on for the number of times you click the back button,
+traversing the order of website accessed in reverse. Hence, as a web developer, how would you manage 
+this data history using a Data Structure? 
+
+Visual representation on how traversing through the website might looks like:
+
+        https://www.cnn.com/China --
+                    ^               |
+                    |               |                    
+        https://www.cnn.com/India <-
+                    ^               |
+                    |               |
+        https://www.cnn.com/world <-
+                    ^               |
+                    |               |
+           https://www.cnn.com/   <-
+
+
+Would an Array or Linked List Data Structure work for this scenario?
+There are other Data Structure options to choose for this problem such as an Array or Linked List other
+than a Stack. However they are not as efficient as a Stack. Here's why:
+
+Visual representation on how an Array and Linked List looks like respectively:
+
+Array:
+1                     2                          3                          4
+[https://www.cnn.com/][https://www.cnn.com/world][https://www.cnn.com/India][https://www.cnn.com/China]
+
+Linked List:
+https://www.cnn.com/|pointer -> https://www.cnn.com/world|pointer -> https://www.cnn.com/India|pointer 
+-> https://www.cnn.com/China|null
+
+The problem that makes Arrays inefficient to solve such a scenario is due to static Arrays being unable
+to grow, and the inefficiency for dynamic Arrays with memory relocation and copy-pasting the whole Array 
+over to a new area in memory.
+
+The problem that makes Linked Lists inefficient to solve such a scenario is that during the action of
+'Pushing'/'Popping', to insert/remove the most recently added element (the element latestly added), 
+which will be at the end of the Linked List, we have to first to traverse the whole Linked List to access/go to 
+its last element, in order to execute the process of Insertion/Deletion, which we already establised 
+above to be Big O Notation of O(n).
+
+
+/////////////////////
+
+
+Some real life applications of Stack Data Structure:
+-> Function calling in any programming language in managed by a Stack (e.g. if you have another function
+   in a function, a Stack Data Structure is used to manage the callings of these functions in the 
+   programming language)
+-> Undo (Ctrl + Z) functionality in any editor uses to track last set of operations
+
+
+/////////////////////
+
+
+In Python, Stacks are implemented from list or collections.deque or queue.LifoQueue (Note that 
+'collections' and 'queue' are different Python Libraries and 'deque' and 'LifoQueue' are special
+Data Structures within those Python Libraries that we use as a Stack Data Structure)
+
+ Data Structure |      Python      |           Java          |              C++
+     Stack      |       list/      |        Stack/Deque      |           std::stack
+                |collections.deque/|                         |
+                |  queue.LifoQueue |                         |

@@ -1,0 +1,187 @@
+Whats a Tree?
+A Tree is a collection of non-linear data structures with a hierarchy-based structure with a set of connected
+nodes. (like those used in Linked Lists Data Structure)
+
+Whats a General Tree?
+You can sort of think of General Tree as the foundational Tree Data Structure blueprint for all other Tree 
+Data Structure variations, such that other Tree Data Structure variations are modifications of the General 
+Tree.
+
+A General Tree is a Tree Data Structure where each node may have zero or more children nodes for every node.
+(number of children nodes may vary depending on the Tree Data Structure variation)
+
+Visual representation on how a General Tree looks like:
+
+                                 [DATA1]
+                                /   |   \
+                        --------    |    ------------
+                       /           /                 \
+                [DATA2]          [DATA3]              [DATA4]
+               /   |   \        /   |   \               / \
+       --------  ---    |      /     \   ----           |  ------
+      /         /        \    /       \      \         /         \
+[DATA5]   [DATA6]   [DATA7] [DATA8] [DATA9] [DATA10] [DATA11]   [DATA12]
+
+All the Data Structures we learnt so far (Arrays, Linked Lists, Hash Tables, Stacks, Queues) are all Linear 
+Data Structures that stores data in sequence. However, Tree Data Structures and Graph Data Structure (which
+we will learn in 'Tutorial 10 - Graphs (Data Structure)') are Non-Linear Data Structures, storing data in 
+multiple levels instead of in a s ingle level, connected in sequence, storing data adjacent to one another.
+
+Difference in Non-Linear Data Structures Trees and Graphs is that Trees stores data in multi-level, with 
+each node connected to each other hierarchically, while nodes in Graphs can be connected to other nodes in 
+any order.
+
+
+//////////////////////////////////////////
+
+
+Types of Tree Data Structures:
+1. General Tree (will be covered in this tutorial)
+2. Binary Tree (and its variations) (will be covered in 'Tutorial 9.1 - Binary Trees  (Tree Data Structure 
+                variation) and Binary Search Trees (Binary Tree Data Structure variation)')
+   => Binary Search Tree (will be covered in 'Tutorial 9.1 - Binary Trees  (Tree Data Structure variation) 
+                          and Binary Search Trees (Binary Tree Data Structure variation)')
+      -> AVL Tree
+      -> Red-Black Tree
+      -> Balanced (B-) Tree
+        - B+ Tree
+      -> Splay Tree
+   => Heap
+   => Treap
+3. Ternary Tree
+
+
+///////////////////////////////////////
+
+
+Big O Notation of Time and Space Complexity for General Tree Data Structures:
+
+Data Structures  |   Space Complexity  |	        Average Case Time Complexity
+                 |                     |    Access	  Search	 Insertion 	  Deletion
+  General Tree	 |         O(n)        |     O(n)	   O(n)        	    O(1)            O(n)
+
+
+//////////////////////////////////////////
+
+
+Real life scenario of when we would use a General Tree Data Structure:
+Lets say you are building an e-commerce website (an online website for buying and selling goods) for 
+electronic items, and your e-commerce's have electronic items, Laptops, Cell Phones and Televisions. And under
+these electronic items there are brand names for each of these electronic item. For example: for Cell Phones,
+you e-commerce store have brands under Cell Phone category such as iPhone, Google Pixel and Vivo. You may have seen
+such product hierarchy in real life e-commerce such as Amazon and ebay. 
+
+Visual representation on how your e-commerce's electronic items hierarchy might looks like:
+
+                              [Electronics]
+                                /   |   \
+                        --------    |    -------------
+                       /           /                  \
+                  [Laptops]      [Cell Phones]         [Televisions]
+                  /   |   \        /   |   \                / \
+          --------  ---    --      |    \   ----            |  ------
+         /         /         \    /      \      \          /         \
+[Macbook] [Microsoft [Thinkpad] [iPhone] [Google [Vivo] [Samsung]   [LG]
+           Surface]                       Pixel]
+
+To represent these data in a Data Structure, you may try to use all the previous Data Structures we have learnt 
+(Arrays, Linked Lists, Hash Tables, Stacks, Queues) but you will find yourself being able to use them because they
+are Linear Data Structures, which stores data in sequence instead of storing data hierarchically. Hence, it is here
+that we will learn this new Data Structure that looks like the visualisation above, like an (inverted) Tree, where
+the 'Electronics' node is the root of the Tree, 'Laptops', 'Cell Phones' and 'Televisions' being branches of the 
+Tree, and nodes without any further children nodes at the end (like the end of the branching)(such as 'Macbook', 
+'iPhone' and 'Samsung'), being the leaves of the Tree.
+
+Hence, the takeaway here is that we use General Tree Data Structures whenever we want to represent hierarchical 
+data. Other scenarios of using hierarchical data where we might use General Tree Data Structures for is described
+further below.
+
+
+Some Tree Data Structures terminology:
+
+1. Root Node, Nodes and Leaf Nodes:
+-Node is the name for each of the entities in the Tree Data Structure. (that stores data)
+-Root Node refers to the top/starting Node.
+-Nodes in the middle levels of the Tree Data Structure are simply called Nodes as well
+-Leaf Nodes refer to Nodes that have no children Nodes/sub-categories/Nodes at the bottom of the Tree Data Structure
+
+
+                              [Electronics]  (Root Node)
+                                /   |   \
+                        --------    |    -------------
+                       /           /                  \
+                  [Laptops]      [Cell Phones]         [Televisions]  ((Regular) Nodes)
+                  /   |   \        /   |   \                / \
+          --------  ---    --      |    \   ----            |  ------
+         /         /         \    /      \      \          /         \
+[Macbook] [Microsoft [Thinkpad] [iPhone] [Google [Vivo] [Samsung]   [LG]  (All nodes at this level are Leaf Nodes)
+           Surface]                       Pixel]
+
+
+2. Parent Node, Children Node (relative terminology):
+-From the example below, 'Macbook', 'Microsoft Surface' and 'Thinkpad' are the children nodes of 'Laptop'
+-From the example below, 'Laptop' is the parent node of 'Macbook', 'Microsoft Surface' and 'Thinkpad'
+
+                           [Laptops] (Parent Node of 'Macbook', 'Microsoft Surface' and 'Thinkpad' Children Nodes)
+                           /   |   \  
+                   --------  ---    --------- 
+                  /         /                \  
+            [Macbook]  [Microsoft Surface]  [Thinkpad] (each of these Node is a Children Node 
+                                                        of the 'Laptop' Parent Node)
+
+
+3. Ancestor Node, Descendant Node (relative terminology):
+-From the example below, relative to 'iPhone' 'Cell Phones' and 'Electronics' are its Ancestor Nodes
+-From the example below, relative to 'Electronics', 'Cell Phones' and 'iPhone' are its Descendant Nodes
+
+Relative to 'iPhone':                       Relative to 'Electronics':
+      [Electronics] (Ancestor)               [Electronics]
+            |                                      |
+            |                                      |
+           /                                      /
+      [Cell Phones] (Ancestor)               [Cell Phones] (Descendant)
+            \                                      \ 
+             \                                      \
+              \                                      \
+             [iPhone]                               [iPhone] (Descendant)
+
+
+4. Levels:
+-Level refer to each Nodes level in the Tree Data Structure. (just see below visualisation) Root Node will be at 
+ Level: 0. Tree Data Structures can have n Level of Nodes. (as many as you want)
+
+                               [Electronics]  (Level 0)
+                                /   |   \
+                        --------    |    -------------
+                       /           /                  \
+                  [Laptops]      [Cell Phones]         [Televisions]  (Level: 1)
+                  /   |   \        /   |   \                / \
+          --------  ---    --      |    \   ----            |  ------
+         /         /         \    /      \      \          /         \
+[Macbook] [Microsoft [Thinkpad] [iPhone] [Google [Vivo] [Samsung]   [LG]  (Level: 2)
+           Surface]                       Pixel]
+
+
+
+/////////////////////
+
+
+Some real life applications of General Tree Data Structure (other Tree Data Structures may have different
+applications):
+-> An organisation's members position chart
+-> Decision trees in machine learning
+-> File systems (A folder structure in your computer (e.g. 'photos' folder have more sub-folders, containing photos 
+   organised according to year taken))
+-> Family trees
+
+
+/////////////////////
+
+
+There is no built-in Data Structure for Trees (and all its variations) in all of these languages. In this 
+tutorial we have to, and will learn how to build our own General Tree Data Structure in Python (and later 
+Binary Search Tree Data Structure in 'Tutorial 9.1 - Binary Trees  (Tree Data Structure variation) and Binary
+Search Trees (Binary Tree Data Structure variation)')
+
+ Data Structure |      Python      |           Java          |              C++
+      Tree      |         -        |             -           |               -

@@ -1,0 +1,110 @@
+Whats a Hash Table?
+Hash Table is a linear data structure that maps keys to values. 
+
+A Hash Table uses a hash function to compute an index, also called a hash code, into an array of buckets 
+or slots in memory, from which the desired value can be found. During lookup, the key (object name/string)
+is hashed (is put through the hash function) and the resulting hash (result after the key is put through
+the hash function) indicates where the corresponding value is stored.
+
+Note: You might sometime come across the term 'Hash Map' which is essentially the same thing as a Hash
+Table (with some very minor differences)
+
+Visual representation on how it looks like (the context and code where these visual representation
+is based on is shown in '2. Array_vs_Hash_Table_Scenario.py'):
+In memory:
+                                                              Index:
+march 6 (key) -> [hash function] --                 [       ]   1
+                                   |                [       ]   2
+                                    \               [       ]   3                                         
+                                     \              [       ]   4
+march 7 (key) -> [hash function] --   |             [       ]   5
+                                   |  |             [       ]   6
+                                   |  |             [       ]   7
+                                   |  |             [       ]   8
+                                   |   -----------> [  310  ]   9  (value)
+                                    --------------> [  340  ]   10 (value)
+
+
+(Note that when a Hash Table is created, in memory, contiguous memory is created, an array is created.
+However, do note that the way the values are stored may not be in order, e.g. March 7 might not 
+come behind of March 6 depending on the hash function (indexing may look like this: March 9, March 11, 
+March 6, March 10, March 5, etc)).
+
+This is unlike Array Data Structures, where March 6 must be before March 7, March 7 must be before March 
+8 and so on. 
+
+
+Another way to think about Hash Tables is that it has some similarities with Array Data Structure:
+Visual representation on how it looks like:
+Array Data Structure in memory:                    Hash Table Data Structure in memory:     
+          Index:                                             Index:                              
+[       ]   1                                      [       ]   
+[       ]   2                                      [       ]   
+[  380  ]   3    stock_prices[3]                   [       ]                                
+[       ]   4                                      [       ]   
+[       ]   5                                      [       ]   
+[       ]   6                                      [       ]   
+[  310  ]   7    stock_prices[7]                   [       ]
+[       ]   8                                      [       ]
+[       ]   9                                      [  310  ]   march 6  stock_prices['march 6'] 
+[       ]   10                                     [  340  ]   march 7  stock_prices['march 7']
+
+From the above visualisations, if you think about it, in Array Data Structure, it uses integer indexes
+to access a specific memory in the Array Data Structure.
+
+In Hash Table Data Structure, it uses string indexes (or could be any data type) to access a specific
+memory in the Hash Table Data Strucutre (after these string/other data type indexes passes through a
+hash function)
+
+
+///////////////////////////
+
+
+What is a Hash Function?
+A hash function is an algorithm that produces an index of an array/list of where a value can be stored, 
+after the key (object data) is passed through it.
+
+There are many ways of implementing a hash function. 
+
+This is abit higher level, but there are a 4 types of hash functions to map an alphanumeric 
+key to a smaller practical integer value, which we will use as the index in the 'HashTable' object's
+array/list in memory to store the corresponding value of the alphanumeric key.
+      1. Division Method
+      2. Mid Square Method
+      3. Folding Method
+      4. Multiplication Method
+
+One such algorithm/way to do this (which we will do in this in tutorial), which makes use of 
+'1. Division Method' is by using ASCII values to calculate the sum of each character in the
+date string such as 'March 6', which will give us a number say 609, and then put that number through 
+Python's Modulo Operator ((modding (not dividing!)) by 10 (we decided to use 10, the size of our Hash 
+Table's array)) which gives us the remainder of 609 % 10 = 9, 9 being the index location in the array/list
+in memory of where our value, 310 is stored. 
+
+
+//////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Hash Table Data Structures:
+
+Data Structures	    |   Space Complexity  |	           Average Case Time Complexity
+                    |                     |    Access	  Search	 Insertion 	  Deletion
+  Hash Table	      |         O(n)	      |     N/A	       O(1)	       O(1)	        O(1)
+
+
+//////////////////////////
+
+
+Scenarios where it would make more sense to use Hash Table Data Structure instead of Array Data 
+Structure:
+
+We will be exploring this in the next file, '2. Array_vs_Hash_Table_Scenario.py'
+
+
+//////////////////////////
+
+
+In Python, Hash Tables are implemented as Dictionaries
+
+ Data Structure |      Python      |           Java          |              C++
+   Hash Table   |    Dictionary    |  HashMap/LinkedHashMap  |           std::map
