@@ -1,0 +1,324 @@
+What is Bubble Sort?
+Bubble Sort is a sorting algorithm that sorts a list by examining each set of adjacent elements in the list, 
+from left to right, switching their positions if they are out of order. The Bubble Sort Algorithm then 
+repeats this process until it can run through the entire string and find no two elements that need to be 
+swapped.
+
+
+//////////////////////////////////////////////
+
+
+Is the Bubble Sort Algorithm implemented iteratively or recursively?
+
+Bubble Sort Algorithm is more commonly implemented iteratively. (implementing it recursively is possible
+but its not very useful or practical)
+
+In this tutorial we will be learning how to implement Bubble Sort iteratively.
+
+
+//////////////////////////////////////////////
+
+
+How does Bubble Sort Algorithm work?
+
+Here are the steps of Bubble Sort Algorithm (the steps are split into 3 phases):
+1. During the first iteration through the unsorted List,
+   -> Starting from the first index, compare the first and the second elements.
+   -> If the first element is greater than the second element, they are swapped. Else, we don't do anything
+      to them and just move on to compare the next pair of elements
+   -> The above process goes on until the last element. (For example, now, compare the second and the 
+      third elements. Swap them if they are not in order, if the second element is greater than the 
+      third element) After the first iteration, the last (and will be the largest) element is guranteed
+      to be sorted.
+
+2. During the remaining iterations through the unsorted (but now semi-sorted) List, 
+   -> The same process goes on for the remaining iterations as that in the first iteration
+   -> After each iteration, the largest element among the unsorted elements is placed at the end. (For 
+      the second round, this excludes the last element as it is already guranteed to be 'sorted' by the 
+      first iteration. For the third round, the unsorted elements will exclude the last and second last
+      element as they are already guranteed to be 'sorted' by the first and second iterations respectively
+      so you can think of it as after every iteration, the size of the unsorted elements gets smaller and
+      smaller. The cycle repeats until all the elements in the List are considered 'sorted' and there are
+      no more unsorted elements)
+   -> The minimum number of iterations (including the first iteration) through the unsorted List required 
+      will be (n-1) times (n representing the size of the unsorted List). This is because after every 
+      iteration, it is guranteed that one element in the unsorted List will become 'sorted'. You might 
+      think that it should minimumly require n iterations to fully get all the elements to become 'sorted'
+      in the unsorted List, but since at the very last iteration, when there is only one last element left 
+      'unsorted', it will automatically be guranteed to fall in the right place to become 'sorted'. So we 
+      can omit running the last iteration of Bubble Sort, meaning it will minimumly take us (n-1) 
+      iterations of Bubble Sort in order to get the unsorted List fully sorted instead of n 
+
+3. Ending the Algorithm and when to stop iterating through the List,
+   -> The Bubble Sort Algorithm is stopped when the entire List is sorted when all the unsorted elements
+      are placed at their correct positions or are considered 'sorted'
+
+
+Lets say we want to sort an unsorted number Array Data Structure/Python's List.
+
+Visualisation of how Bubble Sort Algorithm works:
+1. During the first iteration through the unsorted List,
+a. First, we will compare the first 2 elements in the unsorted Array/List, of the elements at index 0 ('38')
+   and index 1 ('9').
+        <-->
+        0  1   2  3  4   5   6  
+      [38][9][29][7][2][15][28]
+        ^  ^
+   If the left element (the element at index 0 ('38')) of the 2 elements is greater than the right element
+   (the element at index 1 ('9')), which it is in this case, then we will swap their positions.
+    Swapping the 2 elements:
+        0  1   2  3  4   5   6  
+      [9][38][29][7][2][15][28]
+        ^  ^
+
+b. Next, we will compare the next 2 elements in the unsorted Array/List, of the elements at index 1 ('38')
+   and index 2 ('29').
+            <-->
+       0   1   2  3  4   5   6  
+      [9][38][29][7][2][15][28]
+           ^   ^
+   If the left element (the element at index 1 ('38')) of the 2 elements is greater than the right element
+   (the element at index 2 ('29')), which it is in this case, then we will swap their positions.
+    Swapped the 2 elements:
+       0   1   2  3  4   5   6  
+      [9][29][38][7][2][15][28]
+            ^  ^
+
+c. Next, we will compare the next 2 elements in the unsorted Array/List, of the elements at index 2 ('38')
+   and index 3 ('7').
+               <-->
+       0   1   2  3  4   5   6  
+      [9][29][38][7][2][15][28]
+               ^  ^
+   If the left element (the element at index 2 ('38')) of the 2 elements is greater than the right element
+   (the element at index 3 ('7')), which it is in this case, then we will swap their positions.
+    Swapped the 2 elements:
+       0   1  2   3  4   5   6  
+      [9][29][7][38][2][15][28]
+              ^   ^
+
+d. Next, we will compare the next 2 elements in the unsorted Array/List, of the elements at index 3 ('38')
+   and index 4 ('2').
+                  <-->
+       0   1  2   3  4   5   6  
+      [9][29][7][38][2][15][28]
+                  ^  ^
+   If the left element (the element at index 3 ('38')) of the 2 elements is greater than the right element
+   (the element at index 4 ('2')), which it is in this case, then we will swap their positions.
+    Swapped the 2 elements:
+       0   1  2  3   4   5   6  
+      [9][29][7][2][38][15][28]
+                 ^   ^
+
+e. Next, we will compare the next 2 elements in the unsorted Array/List, of the elements at index 4 ('38')
+   and index 5 ('15').
+                      <-->
+       0   1  2  3   4   5   6  
+      [9][29][7][2][38][15][28]
+                     ^   ^
+   If the left element (the element at index 4 ('38')) of the 2 elements is greater than the right element
+   (the element at index 5 ('15')), which it is in this case, then we will swap their positions.
+    Swapped the 2 elements:
+       0   1  2  3   4   5   6  
+      [9][29][7][2][15][38][28]
+                     ^   ^
+
+f. Next, we will compare the next 2 elements in the unsorted Array/List, of the elements at index 5 ('38')
+   and index 6 ('28').
+                          <-->
+       0   1  2  3   4   5   6  
+      [9][29][7][2][15][38][28]
+                         ^   ^
+   If the left element (the element at index 5 ('38')) of the 2 elements is greater than the right element
+   (the element at index 6 ('28')), which it is in this case, then we will swap their positions.
+    Swapped the 2 elements:
+       0   1  2  3   4   5   6  
+      [9][29][7][2][15][28][38]
+                         ^   ^
+   (The last element, element at index 6 is guranteed to be 'sorted')
+
+
+2. During the remaining iterations through the unsorted (but now semi-sorted) List,
+   (the process is the same as in the first iteration, so I'll just show the visualisation for the next 2
+    iterations without having to re-explain the full process. The only difference between each iteration 
+    is that we will go to the next iteration one element earlier than the previous iteration (since after
+    each iteration the last element of the unsorted elements is guranteed to be 'sorted'). For example, 
+    if the first iteration went to the next iteration after reaching the element at index 6, then the 
+    second iteration will go the next iteration after reaching the element at index 5, and the third 
+    iteration will go to the next iteration after reaching the element at index 4 and so on, until either
+    the whole List is already sorted, or when we complete (n-1) iterations (in this example n = 7, so 
+    (n-1) = 6)(see above in the step 2 in the 'Here are the steps of Bubble Sort Algorithm' section to 
+    see why its (n-1) iterations instead of n))
+
+    Second iteration (Notice that the second        Third iteration (Notice that the third        Fourth iteration
+    iteration took one step less than the           iteration took one step less than the         (and so on...):
+    first iteration):                               second iteration):
+    a.    <-->                                      a.   <-->                                 
+         0   1  2  3   4   5   6                         0  1  2   3   4   5   6  
+        [9][29][7][2][15][28][38]                       [9][7][2][15][28][29][38]
+         ^   ^               ////                        ^  ^            ////////
+      No need to swap the 2 elements:
+      (since left element of the 2 elements 
+      is smaller than the right element of 
+      the 2 elements)                                 Swapped the 2 elements:
+         0   1  2  3   4   5   6                         0  1  2   3   4   5   6  
+        [9][29][7][2][15][28][38]                       [7][9][2][15][28][29][38]
+         ^   ^               ////                        ^  ^            ////////
+
+    b.       <-->                                   b.      <-->
+         0   1  2  3   4   5   6                         0  1  2   3   4   5   6  
+        [9][29][7][2][15][28][38]                       [7][9][2][15][28][29][38]
+             ^  ^            ////                           ^  ^         ////////
+      Swapped the 2 elements:                         Swapped the 2 elements:
+         0  1   2  3   4   5   6                         0  1  2   3   4   5   6  
+        [9][7][29][2][15][28][38]                       [7][2][9][15][28][29][38]
+            ^   ^            ////                           ^  ^         ////////
+
+    c.          <-->                                c.         <-->
+         0  1   2  3   4   5   6                         0  1  2   3   4   5   6  
+        [9][7][29][2][15][28][38]                       [7][2][9][15][28][29][38]
+                ^  ^         ////                              ^   ^     ////////
+      Swapped the 2 elements:                         No need to swap the 2 elements:
+         0  1  2   3   4   5   6                         0  1  2   3   4   5   6  
+        [9][7][2][29][15][28][38]                       [7][2][9][15][28][29][38]
+               ^   ^         ////                              ^   ^     ////////
+
+    d.              <-->                            d.             <-->
+         0  1  2   3   4   5   6                        0  1  2   3   4   5   6  
+        [9][7][2][29][15][28][38]                      [7][2][9][15][28][29][38]
+                   ^   ^     ////                                 ^   ^ ////////
+      Swapped the 2 elements:                         No need to swap the 2 elements:
+         0  1  2   3   4   5   6                        0  1  2   3   4   5   6  
+        [9][7][2][15][29][28][38]                      [7][2][9][15][28][29][38]
+                   ^   ^     ////                                 ^   ^ ////////
+                                                    (The last, second last and third last
+                                                     element, elements at 6, 5, and 4
+    e.                  <-->                         are guranteed to be 'sorted') 
+         0  1  2   3   4   5   6  
+        [9][7][2][15][29][28][38]
+                       ^   ^ ////
+      Swapped the 2 elements:
+         0  1  2   3   4   5   6  
+        [9][7][2][15][28][29][38]
+                       ^   ^ ////
+       (The last and second last element, 
+        elements at index 6 and 5 are 
+        guranteed to be 'sorted')
+
+(the 2 '^' represents the 2 elements we are comparing)
+(the '////' represents the elements that are already guranteed to be 'sorted')
+
+
+3. Ending the Algorithm and when to stop iterating through the List,
+   There are 2 scenarios, 
+   
+   a. In the worst case scenario, the Bubble Sort Algorithm will need to do (n-1) number of iterations (see 
+      above in the step 2 in the 'Here are the steps of Bubble Sort Algorithm' section to see why its (n-1) 
+      iterations instead of n), n representing the size of the unsorted List (in this case n = 7, so 
+      (n-1) = 6), until all the elements are guranteed to be 'sorted' before ending the Bubble Sort Algorithm
+      like so:
+      After the sixth iteration:
+            0  1  2   3   4   5   6  
+           [2][7][9][15][28][29][38]
+              //////////////////////
+
+   b. If not worst case scenario, lets say at the end of the fourth iteration, where you realised that despite only 
+      4 out of the 7 elements (which will be the last 4 elements in the semi-unsorted List) is guranteed to be
+      'sorted', but you realised during the fourth iteration there was no need for you to swap any of the 2 
+      elements in the remaining unsorted List (the remaining 3 elements), you can exit the Bubble Sort Algorithm
+      earlier since if there was no need swap any of the remaining 3 elements, the List must already be fully
+      sorted and there is no longer a need for you to carry out any more further iterations and you can complete/end
+      the Bubble Sort Algorithm earlier in 4 iterations instead of (n-1) = 6 number of iterations to save time/make
+      your Bubble Sort Algorithm more efficient:
+      After the fourth iteration:
+            0  1  2   3   4   5   6  
+           [2][7][9][15][28][29][38]
+                    ////////////////
+
+
+//////////////////////////////////////////
+
+
+Explaining the Big O Notation of Time and Space Complexity of Bubble Sort:
+
+For Big O Notation of Time Complexity of Bubble Sort:
+There's 2 ways of thinking about it,
+1. Lets take a look at this table (for a Bubble Sort Algorithm on an unsorted List of n size),
+
+      Iteration   |  Number of Comparisons
+        First     |        n - 1	  
+        Second    |        n - 2	  
+        Third     |        n - 3	  
+         ...                ...
+      Last (n-1)  |          1
+
+    Using mathematical proof:
+    The number of comparisons is:
+        (n - 1) + (n - 2) + (n - 3) + ... + 1 = n(n - 1)/2 ~ n^2
+
+    Hence, Big O Notation of Time Complexity of Bubble Sort is O(n^2)
+
+2. By observing the code, Bubble Sort runs a for loop within another for loop, which is an immediate give away
+   that it will have a Big O Notation of Time Complexity of O(n^2)
+
+
+For Big O Notation of Space Complexity of Bubble Sort:
+It is Big O Notation Space Complexity of O(1) because when you are swapping the elements in the unsorted List, 
+you are not using any additional variables/memory (at least any additional variables/memory proportional to 
+the input size to perform the sorting process), and just doing the swaps of the 2 elements within the same 
+unsorted List. At most you are just using extra variables to facilitate the swapping of every 2 elements, but 
+since this amount of space/memory used is fixed regardless of the n size of the List it means that the Big O 
+Notation of Space Complexity is still O(1).
+
+
+//////////////////////////////////////////
+
+
+Advantages and Disadvantages of Bubble Sort Algorithm compared to other sorting algorithms:
+
+Advantages of Bubble Sort:
+1. Simplicity: Bubble sort is easy to understand and implement, making it an excellent choice for educational 
+   purposes or small datasets.
+2. Minimal memory usage: Bubble sort is an in-place sorting algorithm, meaning it doesn't require additional 
+   memory to store temporary data or auxiliary arrays.
+3. Stable: Bubble sort preserves the relative order of elements with equal keys, making it a stable sorting 
+   algorithm.
+
+Disadvantages of Bubble Sort:
+1. Inefficiency: Bubble Sort has a time complexity of O(n^2) in the worst and average case scenarios. This 
+   means it becomes inefficient and impractical for large datasets, as the number of comparisons and swaps 
+   grows exponentially.
+2. Slow: Due to its quadratic time complexity, Bubble Sort is significantly slower than more advanced 
+   algorithms like Quick Sort, Merge Sort, or Heap Sort.
+3. Not adaptive: Bubble sort's performance doesn't improve based on the initial order of elements. It takes
+   the same number of iterations and comparisons regardless of whether the data is partially sorted or 
+   completely unsorted.
+4. Lack of scalability: As the size of the input array increases, the execution time of Bubble Sort increases 
+   significantly, making it unsuitable for large-scale data sorting tasks.
+5. Better alternatives: Modern sorting algorithms like QuickSort, MergeSort, and HeapSort offer much better 
+   average-case and worst-case time complexities (O(n log n)), making them more efficient choices for most 
+   practical applications.
+6. Limited use cases: Due to its inefficiency, Bubble Sort is not commonly used in real-world applications, 
+   except for educational purposes or when dealing with very small datasets.
+
+
+//////////////////////////////////////////
+
+
+Why is Bubble Sort called 'Bubble Sort'?
+After looking at how the Bubble Sort Algorithm works, just like how air bubbles that are more buoyant than 
+surrounding water rise to the top. Similarly, List elements with greater value than their surrounding elements 
+'bubble' to the end of the List.
+
+Alternate way to think about it is that 'Bubble Sort' is named the way that it is because elements will slowly
+move to the desired end of the List, similar to how bubbles will move towards a surface.
+
+
+//////////////////////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Bubble Sort Algorithm:
+
+    Sorting Algorithms   |  Space Complexity  |   Time Complexity
+       Bubble Sort	    |        O(1)		    |       O(n^2)
+

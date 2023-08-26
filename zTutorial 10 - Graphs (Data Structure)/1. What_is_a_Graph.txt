@@ -1,0 +1,902 @@
+Quick note, due to the sheer volume of concepts for Graph Data Structures, I had to source from 3 different
+websites to cover sufficient concepts for a good understanding of Graph Data Structures. 
+
+Here's the directory:
+1. From the sections 'Whats a Graph?' to 'Real life scenario of Undirected, Directed and Directed Weighted 
+   Graphs', the theory is sourced from codebasics' Youtube playlist on Data Structure and Algorithms covering 
+   Graph Data Structures
+   -> Link: https://www.youtube.com/watch?v=j0IYCyBdzfA&t=872s
+2. From the sections 'Big O Notation of Time and Space Complexity for Graph Data Structures' to 'Explaining 
+   how Deletion operation works in Graph Data Structures', the theory are sourced from Amulya's Academy's
+   Youtube channel (she did not compile her Graph Data Structures videos into a playlist)
+   -> Link: https://www.youtube.com/@AmulsAcademy/videos
+3. From the sections 'State types of Graphs and their names/terms' to the last section, the theory are sourced
+   from the website, simplilearn
+   -> Link: https://www.simplilearn.com/tutorials/data-structure-tutorial/graphs-in-data-structure 
+   
+
+///////////////////////////////////////
+
+
+Whats a Graph?
+A Graph is a non-linear data structure consisting of nodes and edges. The nodes are sometimes also referred
+to as vertices and the edges are lines or arcs that connect any two nodes in the Graph. 
+
+A node refers to the individual entity storing data, while an edge refers to the line connecting 2 nodes 
+(see below visualisation)
+
+There are 2 types of Graph Data Structures:
+1. Undirected Graph
+2. Directed Graph (will be covered in this tutorial's code)
+
+Also, the edges of Graph Data Structures may or may not be weighted.
+
+
+Whats an Undirected Graph?
+It is a Graph Data Structure where there is no direction in the way two nodes are connected. 
+
+You can think of Undirected Graphs being Directed Graphs, but with edges pointing in both directions, similar 
+to the pointers pointing in both directions in Doubly Linked List Data Structures. Implementations of Undirected
+Graphs in code makes use of this idea (see the section 'There are 2 common ways to implement a Graph Data 
+Structure' below)
+
+Whats a Directed Graph?
+It is a Graph Data Structure where there is a direction in the way two nodes are connected.
+
+What does it mean for the edges in Graph Data Structures to be weighted?
+It means to add a 'cost' or a weight to the edges in a Graph Data Structure. An example would be the distance 
+(km) between 2 cities around the world (nodes) in a Graph Data Structure representing flight routes (see real 
+life scenarios where we will use a Graph Data Structure)
+
+
+Visual representation on how they look like:
+Undirected Graph:                       Directed Graph:
+(see below Facebook example):           (see below Flight Routes example):
+                [Nikisha]                   ------->[Paris]--------
+                  /                         |          |          |
+          [Bhawin]                   (node) |          |         \ /
+             |                          [Mumbai]       |      [New York]------
+(node)       |     (edge)                   |          |          ^          |
+[David]---[Dhavel]--------[Rahul]           |         \ /         |         \ /
+             |                              ------->[Dubai]--------      [Toronto]
+             |                            (edge)
+          [Shukul]
+
+Directed Weighted Graph:
+(see below Flight Routes example):
+          2000           8000
+        ------->[Paris]--------
+        |          |          |
+        |          | 2000    \ /      400
+    [Mumbai]       |      [New York]------
+        |          |          ^          |
+        |         \ /         |         \ /
+        ------->[Dubai]--------      [Toronto]
+          5000           3000
+
+
+//////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Graph Data Structures:
+
+Data Structures	  |   Space Complexity  |	       Average Case Time Complexity
+                    |                     |    Access	  Search	 Insertion 	  Deletion
+     Graph          |         O(n)        |-----(Depends on method of implementation)-----
+
+(see the 2 methods of implementing Graph Data Structures below in the section 'These are the 2 common ways 
+to implement a Graph Data Structure')
+
+
+//////////////////////////
+
+
+Real life scenario for Undirected Graphs:
+A real life application of Undirected Graphs Data Structure would be Facebook's user network where each
+node represents a Facebook user, and each edge represents the connection between 2 nodes/Facebook user.
+
+Visual representation on how a Facebook user network could look like:
+                [Nikisha]
+                  /
+          [Bhawin]
+             |
+             |
+[David]---[Dhavel]--------[Rahul] 
+             |
+             |
+          [Shukul]
+
+As the Facebook user network grows, it can get more and more complex. To represent the Facebook user network,
+we would want to be using a Undirected Graph Data Structure, where there is no direction between 2 nodes. 
+
+The implementation of the friend suggestions feature in Facebook also leverages on one of the Facebook user 
+network's Undirected Graph Data Structure's utility, by checking for close connections of your connections 
+(nodes that are seperated by not too many edges from a specific node/user) and recommending them to you as 
+a friend suggestion since they might potentially be your in-real-life friend as well (being a friend of your
+friend online). From the above example, lets say Bhawin is Dhavel's friend, and Bhawin have some other 
+connection online (who dosen't currently have a connection with Dhavel online), say Nikisha. Nikisha is 
+considered a close connection to Bhawin who has close connection with Dhavel. Hence, it can be thought that
+it is likely for Nikisha to be a friend in-real-life of Dhavel, hence Facebook might suggest Nikisha in 
+Dhavel's friend suggestions.
+
+
+
+Real life scenario for Directed Graphs and Directed Weighted Graphs:
+
+For Directed Graphs:
+A real life application of Directed Graphs Data Structure would be a Flight Route network where each
+node represents a city around the world, and each edge represents the presence of a flight route between 2
+nodes/cities, with a direction aspect to the edges representing the direction of the flight between 2 cities
+(e.g. [Mumbai] -> [Paris] indicates the presence of a flight route in the direction from Mumbai to Paris 
+(but the reverse flight direction dosen't exist)).
+
+Visual representation on how a Flight Route network could look like:
+        ------->[Paris]--------
+        |          |          |
+ (node) |          |         \ /      
+    [Mumbai]       |      [New York]------
+        |          |          ^          |
+        |         \ /         |         \ /
+        ------->[Dubai]--------      [Toronto]
+    (edge)
+
+As the Flight Routes network grows, it can get more and more complex. To represent the Flight Routes network,
+we would want to be using a Directed Graph Data Structure, where there is direction between 2 nodes. 
+
+The implementation of finding the shortest route or all possible routes between 2 nodes/cities in Flight 
+Route networks also leverages on one of the Flight Routes network's Directed Graph Data Structure's utility.
+Lets say we want to find all possible paths between the cities Mumbai and New York, we can utilise our 
+Directed Graph Data Structure to see that there are 3 possible routes:
+    Mumbai -> Paris -> New York
+    Mumbai -> Paris -> Dubai -> New York
+    Mumbai -> Dubai -> New York
+
+while the shortest path between the cities, in terms of minimum number of stops will be:
+    Mumbai -> Paris -> New York
+    Mumbai -> Dubai -> New York
+
+
+For Directed Weighted Graphs:
+However, in real life context, there is an actual distance between 2 nodes/cities, so it might not be 
+accurate to determine the shortest route between 2 nodes/cities by finding the minimum number of stops for
+that flight route. But how could we first add the distance factor between 2 nodes/cities in our Flight Route
+network's Directed Graph Data Structure? 
+
+Visual representation on how a Flight Route network (with distance(km)) could look like:
+          2000           8000
+        ------->[Paris]--------
+        |          |          |
+        |          | 2000    \ /      400
+    [Mumbai]       |      [New York]------
+        |          |          ^          |
+        |         \ /         |         \ /
+        ------->[Dubai]--------      [Toronto]
+          5000           3000
+
+To represent the Flight Routes network with the distance factor between 2 nodes/cities, we would want to be 
+using a Directed Weighted Graph Data Structure, where the edges will have a 'cost', or a weight to them, with
+a certain number value attached to them, which in this case will the distance(km) between 2 nodes/cities.
+
+Now when we try to find the shortest path between the cities Mumbai and New York, by first looking at all
+the possible paths:
+    Mumbai -> Paris -> New York (10000)
+    Mumbai -> Paris -> Dubai -> New York (7000)
+    Mumbai -> Dubai -> New York (8000)
+
+we can see that the shortest path between the cities, in terms of distance will actually be:
+    Mumbai -> Paris -> Dubai -> New York (7000)
+
+
+//////////////////////////
+
+
+These are the 2 common ways to implement a Graph Data Structure:
+1. Adjacency Matrix
+   -> An Adjacency Matrix is a 2D Array that represents the Graph Data Structure by storing a '1' at position 
+      (i,j) if there is an edge from vertex i to vertex j, and '0' otherwise.
+
+      Visual representation on how an Adjacency Matrix Graph Data Structures could look like:
+      Undirected Graph:          Directed Graph:         Directed Weighted Graph:
+        A B C D E                  A B C D E               A B C D E    
+      A 0 1 1 0 0                A 0 1 1 0 0             A 0 5 2 0 0
+      B 1 0 0 1 1                B 0 0 0 0 1             B 0 0 0 0 8
+      C 1 0 0 1 0                C 0 0 0 1 0             C 0 0 0 7 0 
+      D 0 1 1 0 1                D 0 1 0 0 1             D 0 9 0 0 4
+      E 0 1 0 1 0                E 0 0 0 0 0             E 0 0 0 0 0   
+
+      Note: Difference between Undirected Graph and Directed Graph is that the 2D Array for the Undirected Graph
+      the '1's and '0's are symmetrical across the diagonal line (imagine there is a diagonal line) of the 2D Array
+      while the Directed Graph is not.
+
+2. Adjacency List (will be used to implement the Directed Graph Data Structure in this tutorial's code)
+   -> An Adjacency List represents a Graph Data Structure as a List that has vertex-edge mappings (in Python, this 
+      mapping is done using Dictionaries).
+
+      Visual representation on how an Adjacency List Graph Data Structure could look like:
+      Undirected Graph:          Directed Graph:         Directed Weighted Graph:
+      A : [B, C]                 A : [B, C]              A : [(B,5), (C,2)]
+      B : [A, D, E]              B : [E]                 B : [(E,8)]
+      C : [A, D]                 C : [D]                 C : [(D,7)]
+      D : [B, C, E]              D : [B, E]              D : [(B,9), (E,4)]
+      E : [B, D]                 E : []                  E : []
+
+Note: Each of the Undirected Graph, Directed Graph and Directed Weighted Graph from the respective methods of 
+implementation, Adjacency Matrix and Adjacency List, are both creating the same Graph Data Structure visually. Here
+is what each of the Graph Data Structure variations look like visually.
+
+      Visual representation on how each Graph Data Structure look like visually:
+      Undirected Graph:            Directed Graph:              Directed Weighted Graph:
+      [A]------[B]-------[E]       [A]----->[B]------>[E]       [A]----->[B]------>[E]
+       |        |         |         |        ^         ^         |   5    ^    8    ^
+       |        |         |         |        |         |       2 |        | 9       |
+       |        |         |        \ /       |         |        \ /       |         |
+      [C]------[D]---------        [C]----->[D]---------        [C]----->[D]---------
+                                                                     7          4
+
+
+About the explanations for the various operations (Traversal, Access, Search, Insertion and Deletion) for Graph 
+Data Structures below:
+As we have learnt, there are 2 types of Graph Data Structures, Undirected and Directed Graphs, which can either be
+weighted or unweighted. There are also 2 methods of implementing Graph Data Structures, as an Adjacency Matrix or
+an Adjacency List.
+
+The general concept of the various operations will be the same regardless of the types of Graph Data Structure or 
+the method of implementation. However, the code implementation may differ slightly based on the type of Graph Data 
+Structure or the method of implementation. 
+
+The explanations of the various operations (Traversal, Access, Search, Insertion and Deletion) for Graph Data 
+Structures below will be focusing more on Adjacency List Undirected Graph.
+
+
+For other types of Adjacency List Graph Data Structures:
+With some thinking, you should be able to easily modify the code for the various operations from the explanations
+below on Adjacency List Undirected Graph to work for the other varations of Adjacency List Graph Data Structure 
+(Undirected Graph, Directed Graph, Directed Weighted Graph). 
+
+One example would be the code in the tutorial, which is able to implement the various operations for an Adjacency 
+List Directed Graph after some modifications of the explanations below on the various operations despite it being
+more on Adjacency LIst Undirected Graph.
+
+For Adjacency Matrix Graph Data Structures:
+It would be a bit trickier if you want to modify the code for the various operations from the explanations below
+on Adjacency List Undirected Graph Data Structures to work for Adjacency Matrix Graph Data Structure.
+
+To find out more on Adjacency Matrix Graph Data Structures and its various operations, you can refer to the link
+provided at the top of this and explore Amulya's Academy's Youtube channel on her videos on Graph Data Structures.
+
+
+//////////////////////////
+
+
+Explaining how Scanning/Traversal operation works in Graph:
+
+There are 2 ways to scan/traverse a Graph:
+1. Breadth-First Search (BFS)
+2. Depth-First Search (DFS) (note that compared to Binary Search Tree Data Structure (see 
+                       '1. What_is_a_Binary_Tree_and_Binary_Search_Tree.txt' in 'Tutorial 9.1 - Binary Trees 
+                       (Tree Data Structure variation) and Binary Search Trees (Binary Tree Data Structure 
+                       variation)'), there is only 1 type of DFS of Graph Data Structures while Binary Search
+                       Tree Data Structures have 3 different types)
+
+Visual representation on how a Directed and Undirected Graph could look like (using these examples in the 
+explanations below):
+Undirected Graph:
+   --------[Paris]-------- 
+   |          |          |
+   |          |          | 
+[Mumbai]      |      [New York]------
+   |          |          |          |
+   |          |          |          |
+   --------[Dubai]--------      [Toronto]
+
+
+1. Breadth-First Search (uses a Queue Data Structure during implementation)
+Definition of BFS (for Graph Data Structures): BFS is a traversal approach in which we first walk through all
+nodes on the same level before moving on to the next level.  
+
+Breadth-First Search in Tree and Graph is almost the same, such as the operation being iterative in nature.
+The only difference is that the Graph may contain cycles, so we may traverse to the same node again. Hence, 
+in order to make sure we don't traverse to the same node more than once, we will need to be able to classify
+nodes that we have traversed before as 'Visited' and nodes that we have not traversed before as 'Not Visited'.
+And to do that for BFS, we will need to use a Queue Data Structure.
+
+
+These are the steps of BFS for Graph Data Structures:
+1. You can start from any node (only for Undirected Graphs, for Directed Graphs, you must start from the root
+   node) in the Graph Data Structure. So, we will start by enqueuing any one of the Graph’s nodes at the rear
+   of the Queue.
+2. Now take the front item of the Queue and append it to the 'Visited' List.
+3. Create a List of that node's adjacent nodes. Enqueue all those which are not within the 'Visited' List and 
+   Queue to the rear of the Queue. The adjacent nodes can be added in any order to the rear of the Queue. We 
+   will ignore the adjacent nodes that has already been visited before since they should already either be in 
+   the  'Visited' List or is currently in the Queue already.
+4. Keep repeating steps 2 and 3 till the Queue is empty.
+
+The following will be the visualisation of the steps of the BFS on the Undirected Graph example (assume we 
+start from the node storing 'Mumbai'):
+
+(Note: '*' means you are here)
+1.                                                                             
+   --------[Paris]--------                   'Visited' List
+   |          |          |                   [Mumbai][     ][ ][ ][ ]
+   |   *      |          |                   Queue Data Structure
+[Mumbai]      |      [New York]------        [Paris ][Dubai][ ][ ][ ]
+   |          |          |          |      Front                   Rear
+   |          |          |          |  
+   --------[Dubai]--------      [Toronto]
+
+2.               *
+   --------[Paris]--------                   'Visited' List
+   |          |          |                   [Mumbai][Paris   ][ ][ ][ ]
+   |          |          |                   Queue Data Structure
+[Mumbai]      |      [New York]------        [Dubai ][New York][ ][ ][ ]
+   |          |          |          |      Front                      Rear
+   |          |          |          |  
+   --------[Dubai]--------      [Toronto]
+
+3.
+   --------[Paris]--------                   'Visited' List
+   |          |          |                   [Mumbai   ][Paris][Dubai][ ][ ]
+   |          |          |                   Queue Data Structure
+[Mumbai]      |      [New York]------        [New York ][     ][     ][ ][ ]
+   |          |          |          |      Front                          Rear
+   |          | *        |          |  
+   --------[Dubai]--------      [Toronto]
+
+4.
+   --------[Paris]--------                   'Visited' List
+   |          |          |                   [Mumbai ][Paris][Dubai][New York ][ ]
+   |          |          |    *              Queue Data Structure
+[Mumbai]      |      [New York]------        [Toronto][     ][     ][         ][ ]
+   |          |          |          |      Front                                Rear
+   |          |          |          |  
+   --------[Dubai]--------      [Toronto]
+
+5.
+   --------[Paris]--------                   'Visited' List
+   |          |          |                   [Mumbai ][Paris][Dubai][New York ][Toronto]
+   |          |          |                   Queue Data Structure
+[Mumbai]      |      [New York]------        [       ][     ][     ][         ][       ]
+   |          |          |          |      Front                                      Rear
+   |          |          |          |   *
+   --------[Dubai]--------      [Toronto]
+
+
+
+2. Depth-First Search (uses a Stack Data Structure during implementation)
+Definition of DFS (for Graph Data Structures): DFS is a traversal approach in which the traverse begins at the
+root node and proceeds through the nodes as far as possible until it reaches an end, which it will then try to
+go deeper from other adjacents of the last visited node. This process will repeat until we reach the node with
+no unvisited nearby nodes.
+
+Depth-First Search in Tree and Graph is quite different (at least, to me), however, the nature of the operation
+is the same that it is still recursive in nature. Similar to the problem faced in BFS, since Graphs may contain
+cycles, so we may traverse to the same node again. Hence, in order to make sure we don't traverse to the same 
+node more than once, we will need to be able to classify nodes that we have traversed before as 'Visited' and 
+nodes that we have not traversed before as 'Not Visited'. And to do that for DFS, we will need to use a Stack
+Data Structure.
+
+
+More context for DFS: What do we do once have to solve a maze? We tend to take a route, keep going until we 
+discover a dead end. When touching the dead end, we again come back and keep coming back till we see a path we
+didn't attempt before, and take that new route. Once more keep going until we discover a dead end. Take a come 
+back again. This is exactly how Depth-First Search works.
+
+DFS uses the concept of backtracking. It involves thorough searches of all the nodes by going ahead, else by 
+backtracking. Here, the word 'backtrack' means once you are moving forward and there are not any more nodes along
+the present path, you progress backward on an equivalent path to seek out nodes to traverse. All the nodes are 
+progressing to be visited on the current path until all the unvisited nodes are traversed after which subsequent
+paths are going to be selected.
+
+
+These are the steps of DFS for Graph Data Structures:
+1. You can start from any node (only for Undirected Graphs, for Directed Graphs, you must start from the root
+   node) in the Graph Data Structure. So, we will start by pushing any one of the Graph's nodes on the top of 
+   the Stack.
+2. Now take the top item of the Stack and add it to the 'Visited' List.
+3. Create a List of that node's adjacent nodes. Append all the ones which aren't in the 'Visited' List and 
+   Stack to the top of the Stack. The adjacent nodes can be pushed in any order to the top of the Stack. We 
+   will  ignore the adjacent nodes that has already been visited before since they should already either be in 
+   the  'Visited' List or is currently in the Stack already.
+4. Keep repeating steps 2 and 3 until the stack is empty.
+
+The following will be the visualisation of the steps of the DFS on the Undirected Graph example (assume we 
+start from the node storing 'Mumbai'):
+
+(Note: '*' means you are here)
+1.                                                                             
+   --------[Paris]--------                   'Visited' List
+   |          |          |                   [Mumbai][     ][ ][ ][ ]
+   |   *      |          |                   Stack Data Structure
+[Mumbai]      |      [New York]------        [Dubai ][Paris][ ][ ][ ]
+   |          |          |          |      Top                    Bottom
+   |          |          |          |  
+   --------[Dubai]--------      [Toronto]
+
+2.               
+   --------[Paris]--------                   'Visited' List
+   |          |          |                   [Mumbai   ][Dubai][ ][ ][ ]
+   |          |          |                   Stack Data Structure
+[Mumbai]      |      [New York]------        [New York ][Paris][ ][ ][ ]
+   |          |          |          |      Top                       Bottom
+   |          |  *       |          |  
+   --------[Dubai]--------      [Toronto]
+
+3.
+   --------[Paris]--------                   'Visited' List
+   |          |          |                   [Mumbai ][Dubai][New York][ ][ ]
+   |          |          |    *              Stack Data Structure
+[Mumbai]      |      [New York]------        [Toronto][Paris][        ][ ][ ]
+   |          |          |          |      Top                            Bottom
+   |          |          |          |  
+   --------[Dubai]--------      [Toronto]
+
+4.
+   --------[Paris]--------                   'Visited' List
+   |          |          |                   [Mumbai][Dubai][New York][Toronto][ ]
+   |          |          |                   Stack Data Structure
+[Mumbai]      |      [New York]------        [Paris ][     ][        ][       ][ ]
+   |          |          |          |      Top                                 Bottom
+   |          |          |          |   *
+   --------[Dubai]--------      [Toronto]
+
+5.               *
+   --------[Paris]--------                   'Visited' List
+   |          |          |                   [Mumbai][Dubai][New York][Toronto][Paris]
+   |          |          |                   Stack Data Structure
+[Mumbai]      |      [New York]------        [      ][     ][        ][        ][     ]
+   |          |          |          |      Top                                       Bottom
+   |          |          |          |   
+   --------[Dubai]--------      [Toronto]
+
+
+////////////////////////////////////////////
+
+
+Explaining how Search and Access operations works in Adjacency List Graph:
+
+Search operation in a Adjacency List Graph Data Structure:
+Since nodes in Graph is not indexed, we will need to use the traversal operations (BFS and DFS) to traverse each node 
+in the Graph to manually search for the node you are looking for. (Graph Data Structures are usually not the best 
+Data Structures to do Search operations on in terms of Big O Notation of Time and Space Complexity)
+
+
+Access operation in an Adjacency List Graph Data Structure:
+The Access operation in a Graph is the same as the Search operation. Since nodes in Graph is not indexed, we will need
+to use the traversal operations (BFS and DFS) to traverse each node in the Graph to manually find the node you are 
+looking for to access it. (Graph Data Structures are usually not the best Data Structures to do Access operations on 
+in terms of Big O Notation of Time and Space Complexity)
+
+
+///////////////////////////////////////
+
+
+Explaining how Insertion operation works in Adjacency List Graph:
+
+Insertion in a Graph Data Structure:
+A Graph Data Structure is made up of 2 types of components, nodes and edges. Hence, there is sort of '2 types' of 
+Insertion:
+1. Insertion of a node to a Graph
+2. Insertion of an edge to a Graph
+
+Usually, you will run the 'Insertion of a node to a Graph' operation to just add the node to the Graph, then later run 
+the 'Insertion of an edge to a Graph' operation to insert an edge to connect the newly inserted node to the overall 
+Graph.
+
+
+1. Insertion of a node to a Graph
+
+Visual representation on how Insertion of a node to an Undirected Graph could look like:
+Before Insertion of a node to a Graph:       After Insertion of a node to a Graph:
+[A]------[B]-------[E]                       [A]------[B]-------[E]       [F]
+ |        |         |                         |        |         | 
+ |        |         |                         |        |         | 
+ |        |         |                         |        |         | 
+[C]------[D]---------                        [C]------[D]---------  
+
+During Insertion of a node to a Graph (the node storing 'F'), we add the node to the Graph as shown above, with 
+no edges connecting from the node (the node storing 'F') to any other nodes in the Graph. Think of it as the 
+number of nodes in the Graph being incremented by 1, but the number of edges in the Graph remaining the same.
+
+Visual representation on how Insertion of a node to an Adjacent List Undirected Graph could look like:
+Before Insertion of a node to a Graph:       After Insertion of a node to a Graph:
+A : [B, C]                                   A : [B, C]
+B : [A, D, E]                                B : [A, D, E]
+C : [A, D]                                   C : [A, D]
+D : [B, C, E]                                D : [B, C, E]
+E : [B, D]                                   E : [B, D]
+                                             F : []
+
+When the node to be Inserted to the Graph (the node storing 'F') is Inserted, in the Dictionary, the node (which
+will be the key) will just have an empty List as its value in the key-value pair.
+
+
+2. Insertion of an edge to a Graph
+
+Visual representation on how Insertion of an edge to an Undirected Graph could look like:
+Before Insertion of an edge to a Graph:       After Insertion of an edge to a Graph:
+                                                               (Inserted edge)
+[A]------[B]-------[E]       [F]             [A]------[B]-------[E]-------[F]
+ |        |         |                         |        |         | 
+ |        |         |                         |        |         | 
+ |        |         |                         |        |         | 
+[C]------[D]---------                        [C]------[D]---------
+
+During Insertion of an edge to a Graph (the edge connecting the node storing 'E' and node storing 'F'), we add the
+edge to the Graph as shown above. Think of it as the number of edges in the Graph being incremented by 1, but the 
+number of nodes in the Graph remaining the same.
+
+Visual representation on how Insertion of an edge to an Adjacent List Undirected Graph could look like:
+Before Insertion:          After Insertion:
+A : [B, C]                 A : [B, C]
+B : [A, D, E]              B : [A, D, E]
+C : [A, D]                 C : [A, D]
+D : [B, C, E]              D : [B, C, E]
+E : [B, D]                 E : [B, D, F]
+F : []                     F : [E]
+
+For Undirected Graphs, when an edge is Inserted to the Undirected Graph, you will need to change 2 key-value
+pairs. Lets say we want to add an edge between the node storing 'E' and the node storing 'F'. To do this, in the
+(key-value pair) value Lists of the (key-value pair) keys 'E' and 'F', you will need to append the the element 
+'F' and 'E' respectively. This is because when the edge is created connecting the node storing 'E' and the node
+storing 'F', the node storing 'E' will now be an adjacent node of the node storing 'F' and the opposite will also
+be true that the node storing 'F' will now be an adjacent node of the node storing 'E'. (or you can think of it
+as Undirected Graphs are Directed Graphs, but instead of the edges pointing in one direction, they are pointing 
+in both directions) 
+
+For Directed Graphs and Directed Weighted Graphs, when an edge is Inserted to them, you only need to change 1 
+key-value pair. 
+
+
+/////////////////////////////////////////
+
+
+Explaining how Deletion operation works in Adjacency List Graph:
+
+Deletion in a Graph Data Structure:
+A Graph Data Structure is made up of 2 types of components, nodes and edges. Hence, there is sort of '2 types' of 
+Deletion:
+1. Deletion of a node from a Graph
+2. Deletion of an edge from a Graph
+
+While the 'Insertion of a node to a Graph' operation and the 'Insertion of an edge to a Graph' operation are 2 
+seperate operations with no overlapping in terms of its operation, the 'Deletion of a node from a Graph' involves
+Deleting all the connecting edges from other nodes to the node to be Deleted as you Delete the node itself, which
+basically means you will have to run the 'Deletion of an edge from a Graph' operation during a 'Deletion of a 
+node from a Graph' operation (so there is some overlapping in terms of its operations between the '2 types' of 
+Deletion operations)
+
+
+1. Deletion of a node from a Graph
+
+Visual representation on how Deletion of a node from an Undirected Graph could look like:
+Before Deletion of a node         Deletion of the node            Deletion of the edges connecting to the node
+from a Graph:                     itself:                         to be deleted from a Graph:
+[A]------[B]-------[E]            [A]------   -------[E]          [A]                [E]
+ |        |         |              |        |         |            |                  | 
+ |        |         |              |        |         |            |                  | 
+ |        |         |              |        |         |            |                  | 
+[C]------[D]---------             [C]------[D]---------           [C]------[D]---------  
+
+During Deletion of a node from a Graph (the node storing 'B'), the operation is split into 2 steps, 
+a. Deletion of the node itself
+b. Deletion of the edges connecting to the node to be deleted
+
+Visual representation on how Deletion of a node from an Adjacent List Undirected Graph could look like:
+Before Deletion of a node         Deletion of the node            Deletion of the edges connecting to the node
+from a Graph:                     itself:                         to be deleted from a Graph:
+A : [B, C]                        A : [B, C]                      A : [C]
+B : [A, D, E]                    
+C : [A, D]                        C : [A, D]                      C : [A, D]
+D : [B, C, E]                     D : [B, C, E]                   D : [C, E]
+E : [B, D]                        E : [B, D]                      E : [D]
+
+a. Deletion of the node itself is done by removing the key-value pair in the Dictionary that has the node to be 
+deleted as the key (the node storing 'B').
+
+b. For Undirected Graphs, Deletion of the edges connecting to the node to be deleted is done by searching the 
+   value List for all the remaining key-value pairs if the value Lists contain the element of the node to be deleted
+   (the node storing 'B') and deleting them from the value Lists.
+
+   For Directed Graphs and Directed Weighted Graphs, Deletion of the edges connecting to the node to be deleted 
+   can be done by just searching the value Lists of the elements in the value List of the node to be deleted (key)
+   for the element of the node to be deleted and deleting them from those value Lists, instead of searching for the
+   element of the node to be deleted in all value Lists for the key-value pairs to make your Deletion operation save
+   time/be better designed.
+
+After the 2 steps, the Adjacency List Graph Data Structure will not longer contain the node to be deleted (the 
+node storing 'B') in both its keys and within the value Lists, effectively deleting the node (the node storing 
+'B').
+
+
+2. Deletion of a edge from a Graph (partially explained already in '1. Deletion of a node from a Graph' above)
+
+Visual representation on how Deletion of an edge From an Undirected Graph could look like:
+Before Deletion of a edge from a Graph:       After Deletion of a edge from a Graph:
+[A]------[B]-------[E]                        [A]------[B]-------[E]
+ |        |         |                          |        |          
+ |        |         |                          |        |          
+ |        |         |                          |        |         
+[C]------[D]---------                         [C]------[D]
+
+During Deletion of a edge from a Graph (the edge connecting the node storing 'D' and node storing 'E'), we Delete
+the edge from the Graph as shown above.
+
+Visual representation on how Deletion of an edge to an Adjacent List Undirected Graph could look like:
+Before Deletion:          After Deletion:
+A : [B, C]                 A : [B, C]
+B : [A, D, E]              B : [A, D, E]                    
+C : [A, D]                 C : [A, D]
+D : [B, C, E]              D : [B, C]
+E : [B, D]                 E : [B]
+
+For Undirected Graphs, Deletion of the edges from a Graph is done by searching the value List for the 2 nodes 
+(key) (the node storing 'D' and the node storing 'E') that the edge is connecting and Deleting the latter adjacent
+node from each of the 2 nodes' value List. For example, to Delete the edge connecting the the node storing 'D' and
+the node storing 'E', we need to Delete the node storing 'E' from the value List of the node storing 'D' (key) and
+Delete the node storing 'D' from the value List of the node storing 'E' (key).
+
+For Directed Graphs and Directed Weighted Graphs, Deletion of the edge connecting 2 nodes can be done by just 
+Deleting the node being pointed at by the edge from the value List of the node the edge is being pointed from. 
+(Instead of having to Delete each other from each other's value Lists)
+
+
+//////////////////////////
+
+
+A Problem on the Graph Data Structure implemented in this tutorial:
+A Binary Search Tree Data Structure cannot handle duplicates, but a Graph Data Structure is able to. However, in
+the code implementation of the Graph Data Structures in this tutorial, it dosen't allow the Graph Data Structure to 
+be able to (for its various operations and other Instance Methods)
+
+A way to solve this problem, but I will not be implementing it here in this tutorial, is to create an indexing for 
+each data that you will be storing in the nodes, hence in this way you can refer to each data by its index (which
+will always be unique) instead of the data (which might have duplicates, and will lead to bugs in code) in your code
+implementation of the Graph Data Structure to allow it to handle duplicates.
+
+One way to do it is to store the index and its corresponding data in a List or Dictionary (Python's implementation
+of a Hash Table Data Structure):
+
+Storing the index and its corresponding      Storing the index and its corresponding
+data in a List:                              data in a Dictionary:
+Index:   1  2  3  4  5  6  7  8              Dictionary:   {1:A, 2:B, 3:C, 4:D, 5:E, 6:F, 7:A, 8:B} 
+List:   [A][B][C][D][E][F][A][B]
+
+
+//////////////////////////
+
+
+State types of Graphs and their names/terms (applies to all its variations):
+State types (this term is self-defined by me) refers to some terminology that we use to reflect the state of a 
+Graph, depending on how the nodes and edges are connected in the Graph.
+
+The State types of Graphs:
+1. Finite Graph
+2. Infinite Graph
+3. Trivial Graph
+4. Null Graph
+5. Simple Graph
+6. Regular Graph
+7. Multi Graph
+8. Pseudo Graph
+9. Complete/Full Graph
+10. Connected Graph
+11. Disconnected Graph
+12. Cyclic Graph
+13. Acyclic Graph
+14. Bipartite Graph
+15. Complete Bipartite Graph
+16. Star Graph
+17. Sub-Graph
+
+(Note: In a sense, Linked List and Tree Data Structures can be considered special Graph Data Structures, that is
+to say they can be thought of as Graph Data Structures arranged in a specific manner.)
+
+1. Finite Graph
+A Graph is as such if the number of vertices and edges in the graph is limited in number.
+This is a Finite Graph:
+[A]------[B]-------[C]
+ | \      |         |
+ |   --   |         |
+ |      \ |         |
+[D]------[E]-------[F]
+
+2. Infinite Graph
+A Graph is as such if the number of vertices and edges in the graph is interminable/endless.
+This is an Infinite Graph:
+     |        |         |
+----[A]------[B]-------[C]----
+     |        |         |
+     |        |         |
+     |        |         |
+----[D]------[E]-------[F]----
+     |        |         |
+
+3. Trivial Graph
+A Graph is as such if it contains only a single vertex and no edges.
+This is a Trivial Graph:
+
+        [A]
+
+
+4. Null Graph
+A Graph is as such if it contains several vertices but no edges connect them. (a reworked version of a trivial graph)
+[A]         [B]
+    [C]         [E]
+
+      [D]
+       
+5. Simple Graph 
+A Graph is as such if it is an Undirected Graph with no parallel edges and no loops.
+This is a Simple Graph:
+[A]------[B]
+ | \    / |
+ |   --   |
+ | /    \ |
+[D]------[E]
+
+6. Regular Graph
+A Graph is as such if the degree of all the vertices is the same.
+These are Regular Graphs:
+[A]----[B]      [A]-------[B]
+ |     /         |         |
+ |    /          |         |
+ |   /           |         |
+ |  /           [C]-------[D]
+ | /
+[C]
+
+7. Multi Graph
+A Graph is as such if it contains numerous edges between a pair of vertices. There are no self-loops in a Multi 
+Graph.
+This is a Multi Graph:
+    ----------
+    |        |
+---[A]------[B]
+|   | \    / |
+|   |   --   |
+|   | /    \ |
+---[D]------[E]
+
+8. Pseudo Graph
+A Graph is as such if it contains a self-loop besides other edges.
+This is a Pseudo Graph:
+-----
+|   |
+---[A]------[B]
+    | \    / |
+    |   --   |
+    | /    \ |
+   [D]------[E]---
+             |   |
+             -----
+
+9. Complete/Full Graph
+A Graph is as such if it contains every pair of vertices joined by exactly one edge. It contains all possible 
+edges.
+These are Complete/Full Graphs:
+[A]----[B]      [A]------[B]
+ |     /         | \    / |
+ |    /          |   --   |
+ |   /           | /    \ |
+ |  /           [C]------[D]
+ | /
+[C]
+
+10. Connected Graph
+A Graph is as such if we can visit from any one vertex to any other vertex. In a Connected Graph, at least one 
+edge or path exists between every pair of vertices.
+This is a Connected Graph:
+    [B]                [E]
+   /   \              /   \
+[A]     [C]--------[F]     [H]
+   \   /              \   /
+    [D]                [G]
+
+11. Disconnected Graph
+A Graph is as such if any path does not exist between every pair of vertices.
+This is a Disconnected Graph:
+    [B]                [E]
+   /   \              /   \
+[A]     [C]        [F]     [H]
+   \   /              \   /
+    [D]                [G]
+
+12. Cyclic Graph
+A Graph is as such if it contains at least one cycle in it.
+These are Cyclic Graphs:
+[A]----[B]      [A]-------[B]          [E]
+ |     /         |         |          /   \
+ |    /          |         |        [F]    [H]
+ |   /           |         |         |      |
+ |  /           [C]-------[D]       [G]----[I]
+ | /
+[C]
+
+13. Acyclic Graph
+A Graph is as such if it does not contain any cycle in it.
+This is a Acyclic Graph:
+    [B]     [E]
+   /   \       \
+[A]     [C]     [F]
+       /   \   /
+    [D]     [G]
+
+14. Bipartite Graph
+A Graph is as such if the vertex set can be partitioned into two sets such that edges only go between sets, not 
+within them.
+These are Bipartite Graphs:
+[A]------[B]        [A]----    [E]
+   \    /                  \ /
+     --             [B]-----/--[F]
+   /    \                  /
+[D]------[E]        [C]----
+
+15. Complete Bipartite Graph
+A Graph is as such if it is a bipartite graph in which each vertex in the first set is joined to each vertex in 
+the second set by exactly one edge. A complete bipartite graph is a bipartite graph which is complete (see 
+'9. Complete/Full Graph')
+This is a Complete Bipartite Graph:
+[A]--------[E]
+    /  \ /
+[B]-----/--[F]
+       / /
+[C]------
+
+16. Star Graph
+A Graph is as such if it is a complete bipartite graph in which n-1 vertices have degree 1 and a single vertex 
+have degree (n -1). This exactly looks like a star where (n - 1) vertices are connected to a single central vertex.
+These are Star Graphs:
+                                                 [E]           [I]   [E]   [H]
+                                                  |               \   |   /
+                                                  |                \  |  /
+[B]----[A]    [B]----[A]    [B]----[A]    [B]----[A]----[D]   [B]----[A]----[D]  
+                      |          /  |             |                /  |  \
+                      |         /   |             |               /   |   \
+                     [C]     [D]   [C]           [C]           [F]   [C]   [G]
+
+17. Sub-Graph
+The vertices and edges of a graph that are subsets of another graph are known as a subgraph.
+This is a subgraph of:    --------->    this:
+[A]------[B]                            [A]------[B]
+   \      |                              | \    / |
+     --   |                              |   --   |
+        \ |                              | /    \ |
+         [E]                            [D]------[E]
+
+
+//////////////////////////
+
+
+Some real life applications of Graph Data Structure:
+-> Graph data structures can be used to represent the interactions between players on a team, such as passes, 
+   shots, and tackles. Analyzing these interactions can provide insights into team dynamics and areas for 
+   improvement.
+-> Commonly used to represent social networks, such as networks of friends and post sugestions on social media
+   like Facebook, Twitter etc.
+-> Commonly used in e-commerce websites such as Amazon in its product recommendations features
+-> Graphs can be used to represent the topology of computer networks, such as the connections between routers and 
+   switches or the connections between different server/computers in the Internet/Intranet
+-> Graphs are used to represent the connections between different places in a transportation network, such as roads
+   and airports in mapping systems such as Google Maps.
+-> Neural Networks: Vertices represent neurons and edges represent the synapses between them. Neural networks are 
+   used to understand how our brain works and how connections change when we learn. The human brain has about 10^11
+   neurons and close to 10^15 synapses.
+-> Compilers: Graphs are used extensively in compilers. They can be used for type inference, for so-called data 
+   flow analysis, register allocation, and many other purposes. They are also used in specialized compilers, such 
+   as query optimization in database languages.
+-> Robot planning: Vertices represent states the robot can be in and the edges the possible transitions between the 
+   states. Such graph plans are used, for example, in planning paths for autonomous vehicles.
+-> In mapping system we use graph. It is useful to find out which is an excellent place from the location as well 
+   as your nearby location. In GPS we also use graphs.
+
+
+//////////////////////////
+
+
+There is no built-in Data Structure for Graphs (and all its variations) in all of these languages. In 
+this tutorial we have to, and will learn how to build our own Graph Data Structure in Python 
+
+ Data Structure |      Python      |           Java          |              C++
+     Graph      |         -        |             -           |               -
+

@@ -1,0 +1,384 @@
+What is Selection Sort?
+Selection Sort is a sorting algorithm that sorts a list by repeatedly selecting the smallest (or largest) 
+element from the unsorted subarray of the initial unsorted List and moving it to the sorted subarray of the 
+initial unsorted List. 
+
+
+//////////////////////////////////////////////
+
+
+Is the Selection Sort Algorithm implemented iteratively or recursively?
+
+Selection Sort Algorithm is more commonly implemented iteratively. (implementing it recursively is possible
+but its not very useful or practical)
+
+In this tutorial we will be learning how to implement Selection Sort iteratively.
+
+
+//////////////////////////////////////////////
+
+
+How does Selection Sort Algorithm work?
+
+Selection Sort Algorithm work somewhat similarly to Insertion Sort Algorithm, that it splits the initial unsorted
+List into 2 subarrays, the sorted subarray and unsorted subarray.
+
+Here are the steps of Selection Sort Algorithm:
+1. Split the unsorted array/List into 2 subarrays, the sorted subarray and unsorted subarray. We can do this by 
+   creating a pointer pointing to the first element of the unsorted List like so (during Insertion Sort, 
+   this pointer will be created pointing to the second element instead). 
+   
+   The elements on the left side of the element that this pointer is pointing at is part of the sorted subarray 
+   (excluding the element that this pointer is pointing at), while the elements on the right side of the element 
+   that this pointer is pointing at is part of the unsorted subarray (including the element that this pointer is 
+   pointing at)
+
+   Note: - During the starting iteration, for the first element's iteration in the initial unsorted List, there is 
+           no elements in the sorted subarray
+
+2. Within the unsorted subarray of the initial unsorted List, we will find and identify the smallest element
+   (lets assume we have an algorithm that will allows us to find the minimum element in a List, which is quite 
+   simple to implement actually which we will look at in the '2. selection_sort_(function).py' file)
+
+3. We will then do a swap in the positions of the element that the pointer is pointing at, and the minimum element 
+   identified by the seperate algorithm that finds the minimum element in a List.
+
+   This is unless, if the identified minimum element happens to also be the element that the pointer is pointing 
+   at (or that there is a duplicate of the element that the pointer is pointing at in the unsorted subarray, and 
+   both of which also happens to be the identified minimum element), then we will not do this swap, and hence not 
+   execute anything in step 3.
+
+4. Now we will move the pointer down the unsorted List, to the next index/element (unless you've reached the last
+   element of the unsorted List)
+
+5. Repeat steps 2 to 4 iteratively until we reach the last element. There is no need to repeat step 2 to 4 for
+   the last element as it is the only element left in the unsorted subarray. And since the last element is
+   the only element in the initial unsorted List yet to be sorted while all the other elements are already 
+   sorted/in the correct position, this last element must also already be pre-sorted/in its correct position 
+   without having to go through the sorting process that is step 2 to 4
+
+(If during Selection Sort we made the modifications in step 2, if we find and identify the largest element and 
+in step 3, swap the positions of the element that the pointer is pointing at, and the maximum identified by the
+seperate algorithm that finds the maximum element in a List, we will be doing Selection Sort on an initial
+unsorted List, sorting the initial unsorted List in descending order instead of ascending order)
+
+
+To explain the Selection Sort Algorithm visually, we will be using the same initial unsorted List from the
+'Tutorial 15 - Insertion Sort (Sorting Algorithm)' tutorial.
+
+Visualisation of how Selection Sort Algorithm works:
+1. The first step to Selection Sort is to split the unsorted array/List into 2 subarrays, the sorted subarray 
+   and unsorted subarray. How can we do this? We can do this by creating a pointer pointing to the first element ('21')
+   of the unsorted List like so (during Insertion Sort, this pointer will be created pointing to the second 
+   element instead). 
+
+   The elements on the left side of the element that this pointer is pointing at is part of the sorted subarray 
+   (excluding the element that this pointer is pointing at), while the elements on the right side of the element that 
+   this pointer is pointing at is part of the unsorted subarray (including the element that this pointer is pointing at)
+
+   Note: - During the starting iteration, for the first element's iteration in the initial unsorted List, there is 
+           no elements in the sorted subarray
+                  us                              (Let 'ss' be the sorted subarray, 
+      <------------------------->                          'us' be the unsorted subarray)
+      [21][38][29][17][4][25][11]
+        ^
+    (pointer)
+
+
+(Starting iteration, for the first element's iteration)
+2. Next, within the unsorted subarray of the initial unsorted List, we will find and identify the smallest element 
+   ('4') (lets assume we have an algorithm that will allows us to find the minimum element in a List, which is quite 
+   simple to implement actually which we will look at in the '2. selection_sort_(function).py' file)
+                  us                              (Let 'min' be the smallest element identified by the
+      <------------------------->                            seperate algorithm that finds the minimum 
+      [21][38][29][17][4][25][11]                            element in a List)
+        ^              ^
+    (pointer)        (min)
+
+3. Since the minimum element identified by the seperate algorithm does not happen to be the element that the pointer
+   'pointer' is pointing at, we will do a swap in the positions of the element that the pointer 'pointer' is pointing at 
+   ('21'), and the minimum element identified by the seperate algorithm that finds the minimum element in a List ('4').
+
+   Before the swap:
+                  us
+      <------------------------->
+      [21][38][29][17][4][25][11]
+        ^              ^
+    (pointer)        (min)
+
+   After the swap:
+                  us
+      <------------------------->
+      [4][38][29][17][21][25][11]
+       ^               ^
+   (pointer)         (min)
+
+4. Now we will move the pointer down the unsorted List, from pointing at the first element ('4') to pointing at 
+   the second element ('38'). 
+       ss           us
+      <-><---------------------->
+      [4][38][29][17][21][25][11]
+           ^               
+       (pointer)         
+
+(Step 5, for the second element's iteration)
+2. We will then repeat this process, within the unsorted subarray of the initial unsorted List, we will find and 
+   identify the smallest element ('11') (lets assume we have an algorithm that will allows us to find the minimum 
+   element in a List, which is quite simple to implement actually which we will look at in the 
+   '2. selection_sort_(function).py' file)
+       ss           us
+      <-><---------------------->
+      [4][38][29][17][21][25][11]
+           ^                   ^
+       (pointer)             (min)
+
+3. Next, since the minimum element identified by the seperate algorithm does not happen to be the element that the 
+   pointer 'pointer' is pointing at, we will similarly do a swap in the positions of the element that the pointer 
+   'pointer' is pointing at ('38'), and the minimum element identified by the seperate algorithm that finds the 
+   minimum element in a List ('11'). 
+   Before the swap:
+       ss           us
+      <-><---------------------->
+      [4][38][29][17][21][25][11]
+           ^                   ^
+       (pointer)             (min)
+
+   After the swap:
+       ss           us
+      <-><---------------------->
+      [4][11][29][17][21][25][38]
+           ^                   ^
+       (pointer)             (min)
+
+4. Now we will move the pointer down the unsorted List, from pointing at the second element ('4') to pointing at 
+   the third element ('38'). 
+         ss           us
+      <-----><------------------>
+      [4][11][29][17][21][25][38]
+               ^               
+           (pointer)         
+
+
+(Step 5, for the remaining elements' iterations)
+For the remaining elements in the unsorted subarray, here is a visualisation on how Selection Sort will 
+be like:
+(Step 5, for the third element's iteration)
+For the third element ('29'),
+2. Finding the smallest element within the unsorted subarray of the initial unsorted List ('17')
+         ss           us
+      <-----><------------------>
+      [4][11][29][17][21][25][38]
+               ^   ^            
+         (pointer)(min) 
+
+3. Swapping the positions of the element that the pointer 'pointer' is pointing at ('29'), and the minimum 
+   element identified by the seperate algorithm that finds the minimum element in a List ('17').
+   Before the swap:
+         ss           us
+      <-----><------------------>
+      [4][11][29][17][21][25][38]
+               ^   ^            
+         (pointer)(min) 
+
+   After the swap:
+         ss           us
+      <-----><------------------>
+      [4][11][17][29][21][25][38]
+               ^   ^            
+         (pointer)(min) 
+
+4. Now we will move the pointer down the unsorted List, from pointing at the third element ('17') to pointing at 
+   the fourth element ('29'). 
+           ss           us
+      <---------><-------------->
+      [4][11][17][29][21][25][38]
+                   ^              
+               (pointer) 
+
+(Step 5, for the fourth element's iteration)
+For the fourth element ('29'),
+2. Finding the smallest element within the unsorted subarray of the initial unsorted List ('21')
+           ss           us
+      <---------><-------------->
+      [4][11][17][29][21][25][38]
+                   ^   ^            
+             (pointer)(min) 
+   
+3. Swapping the positions of the element that the pointer 'pointer' is pointing at ('29'), and the minimum 
+   element identified by the seperate algorithm that finds the minimum element in a List ('21').
+   Before the swap:
+           ss           us
+      <---------><-------------->
+      [4][11][17][29][21][25][38]
+                   ^   ^            
+             (pointer)(min)  
+
+   After the swap:
+           ss           us
+      <---------><-------------->
+      [4][11][17][21][29][25][38]
+                   ^   ^            
+             (pointer)(min)  
+
+4. Now we will move the pointer down the unsorted List, from pointing at the fourth element ('21') to pointing at 
+   the fifth element ('29'). 
+            ss           us
+      <------------><----------->
+      [4][11][17][21][29][25][38]
+                       ^              
+                   (pointer) 
+
+(Step 5, for the fifth element's iteration)
+For the fifth element ('29'),
+2. Finding the smallest element within the unsorted subarray of the initial unsorted List ('25')
+             ss           us
+      <-------------><---------->
+      [4][11][17][21][29][25][38]
+                       ^   ^            
+                 (pointer)(min)  
+   
+3. Swapping the positions of the element that the pointer 'pointer' is pointing at ('29'), and the minimum 
+   element identified by the seperate algorithm that finds the minimum element in a List ('25').
+   Before the swap:
+             ss           us
+      <-------------><---------->
+      [4][11][17][21][29][25][38]
+                       ^   ^            
+                 (pointer)(min)  
+
+   After the swap:
+             ss           us
+      <-------------><---------->
+      [4][11][17][21][25][29][38]
+                       ^   ^            
+                 (pointer)(min)  
+
+4. Now we will move the pointer down the unsorted List, from pointing at the fifth element ('25') to pointing at 
+   the sixth element ('29'). 
+               ss           us
+      <-----------------><------>
+      [4][11][17][21][25][29][38]
+                           ^              
+                        (pointer) 
+
+
+(Step 5, for the sixth element's iteration)
+For the sixth element ('29'),
+2. Finding the smallest element within the unsorted subarray of the initial unsorted List ('29'). Notice4frg32efr3ede
+               ss           us
+      <-----------------><------>
+      [4][11][17][21][25][29][38]
+                           ^               
+                     (pointer/min) 
+   
+3. Since the minimum element identified by the seperate algorithm ('29') happens to be the element that the pointer
+   'pointer' is pointing at ('29'), we will not do the swap between the minimum element identified by the seperate 
+   algorithm ('29') and the element the pointer 'pointer' is pointing at ('29'), and hence not execute anything in 
+   step 3.
+
+4. Since we have reached the last element of the List, there is no need to move the pointer down the unsorted (now 
+   sorted) List anymore. 
+
+   (Explanation of why we don't need to repeat steps 2 to 4 for the last element in the initial unsorted List and 
+   we can just end the Selection Sort Algorithm here is explained in step 5 in the 'Here are the steps of Selection 
+   Sort Algorithm' section above)
+
+
+Here is the now sorted List via Selection Sort Algorithm.
+
+   [4][11][17][21][25][29][38]
+
+
+//////////////////////////////////////////
+
+
+Explaining the Big O Notation of Time and Space Complexity of Selection Sort:
+
+For Big O Notation of Time Complexity of Selection Sort:
+The Big O Notation of Time Complexity of Selection Sort is determined by the number of comparisons made 
+during step 3 of Selection Sort, during the iteration for every element (minus the last element) in the
+initial unsorted List. 
+
+In step 3 of Selection Sort, in the seperate algorithm that finds and identify the minimum (or maximum) 
+element in the unsorted subarray of the initial unsorted List (which requires the seperate algorithm to 
+traverse and compare every single element in the unsorted subarray, of (n-1) comparison operations) and 
+then do a swap of the identified minimum (or maximum) element in the unsorted subarray with the element 
+the pointer is pointing at (which only requires 1 swap operation, and is hence negligible compared to
+the number of comparison operations in the calculation in the Big O Notation of Time Complexity of 
+Selection Sort)
+      Iteration   |  Number of Comparisons
+        First     |        n - 1	  
+        Second    |        n - 2	  
+        Third     |        n - 3	  
+         ...                ...
+      Last (n-1)  |          1            
+      
+(Last iteration is (n-1), for the second last element in the initial unsorted List since we will not be 
+running step 3 (as well as 2 and 4) of Selection Sort for the last element in the initial unsorted List)
+
+The total number of comparisons is:
+      0 + 1 + 2 + ... + (n-1) = n*(n-1)/2 ~ n^2
+
+giving us O(n^2) overall complexity.
+
+
+For Big O Notation of Space Complexity of Selection Sort:
+It is Big O Notation Space Complexity of O(1) because when you are sorting the elements in the unsorted 
+List, you are not using any additional variables/memory (at least any additional variables/memory 
+proportional to the input size to perform the sorting process), and just doing the sorting process within 
+the same unsorted List. At most you are just using extra variables to facilitate the sorting of the unsorted 
+List, but since this amount of space/memory used is fixed regardless of the n size of the List it means 
+that the Big O Notation of Space Complexity is still O(1).
+
+
+//////////////////////////////////////////
+
+
+Advantages and Disadvantages of Selection Sort Algorithm compared to other sorting algorithms:
+
+Advantages of Selection Sort:
+1. Simplicity: Selection Sort has a straightforward and easy-to-understand implementation, making it a good 
+   choice for educational purposes or situations where simplicity is preferred.
+2. In-place sorting: Selection Sort is an in-place algorithm, meaning it doesn't require additional memory to 
+   perform the sorting. It sorts the elements directly within the input array, making it memory-efficient.
+3. Predictable Behavior: Selection Sort makes the same number of comparisons and swaps for the same input 
+   data, regardless of its distribution. This predictable behavior can be useful in analyzing its performance.
+4. Stable: Selection Sort is a stable sorting algorithm, meaning it preserves the relative order of equal 
+   elements in the input array.
+5. Useful for Small Lists: In cases where the list size is very small, the difference in performance between 
+   Selection Sort and more complex algorithms might not be significant. Selection Sort's simplicity could be 
+   an advantage in such scenarios.
+
+Disadvantages of Selection Sort:
+1. Time complexity: Selection Sort has a time complexity of O(n^2) in the worst and average case scenarios. 
+   This makes it inefficient for large datasets, as the number of comparisons and swaps grows quadratically 
+   with the size of the array.
+2. Slow on Nearly Sorted Data: Selection Sort's repetitive selection and swapping of elements do not take 
+   advantage of nearly sorted data. It performs the same number of comparisons and swaps regardless of the 
+   input order.
+3. Slower than more advanced algorithms: In comparison to more efficient algorithms like Quick Sort, Merge 
+   Sort, or Heap Sort, Selection Sort is significantly slower for most use cases.
+4. Lack of Adaptiveness: Selection Sort doesn't adapt to the data's initial order. Whether the data is 
+   partially sorted or completely unsorted, the number of comparisons and swaps remains the same.
+5. Not Suitable for Hybrid Approaches: Selection Sort is not commonly used in hybrid sorting algorithms, 
+   where different sorting methods are combined to optimize performance.
+
+
+/////////////////////////////////////////
+
+
+Why is Selection Sort called 'Selection Sort'?
+
+Selection sort is called as such from the way it selects elements in the initial unsorted List during the 
+sorting process. The algorithm repeatedly selects the smallest (or largest) element from the unsorted subarray
+of the initial unsorted List and places it in its correct position in the sorted subarray.
+
+
+//////////////////////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Selection Sort Algorithm:
+
+    Sorting Algorithms   |  Space Complexity  |   Time Complexity
+      Selection Sort     |        O(1)	  	    |       O(n^2)
+
