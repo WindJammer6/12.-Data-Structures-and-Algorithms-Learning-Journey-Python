@@ -1,0 +1,54 @@
+A minor detour here, to understand what a Decorator is so that I can create the Decorator that
+measures the time to execute a function and wrap the Decorator around the 'linear_search()' and
+'iterative_binary_search()' function in 
+'4. comparing_performance_of_Linear_Search_and_Binary_Search.py' so that I can do the performance
+comparison between the Binary Search Algorithm and Linear Search Algorithm in 
+'4. comparing_performance_of_Linear_Search_and_Binary_Search.py'
+
+
+//////////////////////////////////////////
+
+
+What is a Decorator?
+Decorators are sort of the 'tags' that allow us to wrap other functions within a function (aka a
+'wrapper function') in order to extend the behaviour of the wrapped function, without permanently 
+modifying it. The Decorator 'tag' will be the name of the 'wrapper function', where the 'wrapper 
+function' will be used to wrap other functions (pass other functions through it)
+
+E.g.
+Here's a sample 'other function', the function that will be wrapped by the 'wrapper' function:
+    def calc_square(numbers):
+        result = []
+        for number in numbers:
+            result.append(number*number)
+        return result
+
+Here's our 'wrapper function' (more technicalities of the code will be explained in 
+'4.4. measuring_time_taken_by_functions_with_a_decorator.py'):
+    def time_it(function):
+        def wrapper(*args, **kwargs):
+            start_time = time.time()
+            result = function(*args, **kwargs)
+            end_time = time.time()
+            print(function.__name__ + "took" + str((end_time - start_time) * 1000) + "milliseconds")
+            return result
+        return wrapper
+
+So if you want the 'other function' to be wrapped by the 'wrapper function', you just simply need
+the 'tag'/Decorator, '@time_it', at the top of the 'other function' (with the name of 'wrapper 
+function' (in this case it is 'time_it') as the name of the 'tag'/Decorator)
+    @time_it
+    def calc_square(numbers):
+        result = []
+        for number in numbers:
+            result.append(number*number)
+        return result
+
+
+Decorators are described to 'wrap' another function because they sort of take in other functions
+within itself, and runs the functions within itself, while running other lines of code within the
+Decorator (that dosen't belong to the functions being taken in the Decorator, but only belongs
+to the Decorator)
+
+
+

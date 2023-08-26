@@ -1,0 +1,248 @@
+What is Binary Search?
+Binary Search is a searching algorithm used in a sorted array that searches for a value by repeatedly 
+dividing the search interval in half and the correct interval to find is decided based on the searched 
+value and the middle value of the interval.
+
+Note that unlike some other Search Algorithms, Binary Search Algorithm works on the concept of the list to 
+be searched, to be sorted beforehand. (So if the list is unsorted then Binary Search Algorithm dosen't 
+work)
+
+
+//////////////////////////////////////////////
+
+
+Is the Binary Search Algorithm implemented iteratively or recursively?
+
+Binary Search Algorithm can be implemented both iteratively and recursively. 
+
+In this tutorial we will be learning how to implement Binary Search both iteratively and recursively.
+
+
+//////////////////////////////////////////////
+
+
+How does Binary Search Algorithm work?
+
+Lets say we want to search for the element '32' in this sorted Array Data Structure/Python's List.
+
+Visualisation of how Binary Search Algorithm works:
+First, we will take the middle element of the sorted Array/List. Then we compare the element we are looking 
+for ('32') with the middle element ('21'). Since the middle element ('21') is smaller than the element we are 
+looking for ('32'), we can rule out the possibility of the element we are looking for ('32') to be on the left
+half of the sorted List (including the middle element ('21')), effectively halving the search space for the 
+element we are looking for ('32') in the sorted List.
+       0  1   2   3   4   5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+                      ^
+
+Next, we will take the (we will take the left middle element for this example if the remaining size of the 
+sorted List is an even number) (left) middle element of the remaining sorted List ('29'). Then we compare the
+element we are looking for ('32') with the new (left) middle element again ('29'). Since the middle element
+('29') is again smaller than the element we are looking for ('32'), we can again rule out the possibility of
+the element we are looking for ('32') being in the left half of the remaining sorted List (including the new
+(left) middle element ('29'))
+      //////////////////  5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+      //////////////////      ^
+
+Next, we will again take the (left) middle element of the remaining sorted List ('32'), which we have found to
+be the element we are looking for ('32'), at index 7 in the sorted List
+      //////////////////////////  7   8
+      [4][9][11][17][21][25][29][32][38]
+      //////////////////////////  ^
+
+('^' represents the element we are at)
+
+Here are the steps of Binary Search Algorithm:
+1. Compare the middle element of the sorted List with the element we are looking for. 
+2. If the element we are looking for is found at middle element, the process is terminated.
+3. If the element we are looking for is not found at middle element, choose which half will be used as the 
+   next search space.
+   -> If the element we are looking for is smaller than the middle element, then the left side is used for 
+      next search.
+   -> If the element we are looking for is larger than the middle element, then the right side is used for 
+      next search.
+4. This process is continued until the element we are looking for is found or the total search space is 
+   exhausted.
+   
+(Note that if the size of the remaining sorted List is an even number, you can choose to take either the left 
+middle or the right middle element of the sorted List as the middle element, it dosen't matter which one you 
+pick. In the below example, we will take the left middle element if the size of the remaining sorted List is
+an even number)
+
+The Binary Search Algorithm has a Big O Notation of Time Complexity of log(n). This is because after every 
+iteration the search space to find the element we are looking for is halved. 
+
+Using mathematical proof:
+   1 = n/2^k
+   n = 2^k
+   log2(n) = log2(2^k)
+   log2(n) = k * log2(2)
+   k = log2(n)
+   k ~~ log(n) (in Big O Notation we can ignore the log base)
+
+In this specific example, we took 3 iterations to find the element we are looking for in the sorted List using
+Binary Search Algorithm.
+
+
+//////////////////////////////////////////
+
+
+What is Linear Search?
+Linear search is a searching algorithm where the list or data set is traversed from one end to the other
+end to find the desired value.
+
+
+How does Linear Search Algorithm work?
+Lets say we want to search for the element '32' in this Array Data Structure/Python's List.
+
+Visualisation of how Linear Search Algorithm works:
+       0  1   2   3   4   5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+       ^
+       0  1   2   3   4   5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+          ^
+       0  1   2   3   4   5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+              ^
+       0  1   2   3   4   5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+                  ^
+       0  1   2   3   4   5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+                      ^
+       0  1   2   3   4   5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+                          ^
+       0  1   2   3   4   5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+                              ^
+       0  1   2   3   4   5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+                                  ^    
+('^' represents the element we are at)
+
+Linear Search Algorithm works to search for the element '32' by moving across from one end to the other end 
+of the List, one element by one element and checking if each element is the element '32' that we are looking for. 
+In the end, you should be able to find the element '32' at the index 7 of the List. 
+
+The Linear Search Algorithm has a Big O Notation of Time Complexity of O(n) because in worst case scenario, you 
+need to do n number (size of the whole Array/List) of iterations to find the element you are looking for.
+
+In this specific example, we took 7 iterations to find the element we are looking for in the sorted List using
+Linear Search Algorithm.
+
+
+//////////////////////////////////////////
+
+
+To better understand Binary Search Algorithm, lets look at the major problem of Linear Search Algorithm that 
+Binary Search Algorithm tries to solve.
+
+
+So what is the major problem of Linear Search Algorithm that Binary Search Algorithm solves?
+As we can see from the above, with the exact same sorted List,
+
+       0  1   2   3   4   5   6   7   8
+      [4][9][11][17][21][25][29][32][38]
+
+Binary Search Algorithm has a faster search time of Big O Notation of Time Complexity of O(logn) than Linear Search, 
+which has a Big O Notation of Time Complexity of Time Complexity O(n) until it finds the element we are looking for
+in a sorted List. Comparing exact numbers from the above examples, Binary Search Algorithm was able to find the 
+element we are looking for ('32') in just 3 iterations while Linear Search Algorithm was only able to find the 
+element we are looking for ('32') in 7 iterations.
+
+
+//////////////////////////////////////////
+
+
+Iterative vs Recursive Binary Search:
+
+Both works using the same concept of Binary Search Algorithm.
+
+The only difference is that while the Big O Notation of Space Complexity is O(1) for iterative Binary Search, the 
+Big O Notation of Space Complexity is O(logn) for recursive Binary Search. 
+
+This is because, during code implementation, iterative Binary Search only operates on the same Array/List 
+variable, which only requires a fixed amount of space in memory to run the iterative Binary Search regardless of 
+the Array/List size.
+
+Meanwhile, recursive Binary Search creates additional memory every iteration to store the halves of the Array/List 
+it is operating on during the recursive Binary Search.
+
+
+//////////////////////////////////////////
+
+
+Advantages and Disadvantages of Binary Search Algorithm compared to other search algorithms:
+
+Advantages of Binary Search:
+1. Efficiency: Binary Search has a time complexity of O(log n), where n is the number of elements in the sorted 
+   array. This logarithmic time complexity makes it much faster than Linear Search algorithms, which have a time 
+   complexity of O(n).
+2. Optimal for sorted data: Binary Search is designed for use with sorted data. If the data is already sorted, 
+   Binary Search is an ideal choice as it can quickly find the target element by dividing the Search space in half 
+   repeatedly.
+3. Minimal comparisons: Binary Search reduces the number of comparisons needed to find the target element 
+   drastically, making it particularly efficient for large datasets.
+4. Easy to implement: The basic logic behind Binary Search is simple, and it is relatively easy to implement in 
+   most programming languages.
+
+Disadvantages of Binary Search:
+1. Requirement of sorted data: Binary Search requires the input array or list to be sorted beforehand. If the 
+   data is unsorted or frequently changing, the sorting process can introduce additional time complexity.
+2. Additional memory: Binary Search is can be implemented recursively, which require additional memory during
+   the recursive loops to store the halves of the array
+3. Limited use on certain data structures: While Binary Search is efficient for arrays and sorted lists, it is 
+   not directly applicable to other data structures like linked lists or hash tables.
+4. Biased towards one half of the search space: If the data is not uniformly distributed, Binary Search may end 
+   up being biased towards one half of the search space, reducing its effectiveness.
+
+
+Advantages and Disadvantages of Linear Search Algorithm compared to other search algorithms:
+
+Advantages of Linear Search:
+1. Simplicity: Linear Search is easy to understand and implement. Its straightforward nature makes it a suitable 
+   choice for small datasets and educational purposes.
+2. Applicability to unsorted data: Linear Search can be used on both sorted and unsorted data. It doesn't require
+   any preprocessing like sorting, which makes it more convenient when the data is not sorted or changes frequently.
+3. Minimal memory usage: Linear Search does not require additional memory overhead, making it an in-place algorithm.
+4. Versatility: Linear Search can be applied to various data structures, including arrays, linked lists, and other 
+   sequential collections.
+5. Early exit: In some cases, if the target element is found early in the list, Linear Search can terminate earlier,
+   leading to better average-case performance.
+
+Disadvantages of Linear Search:
+1. Inefficiency: Linear Search has a time complexity of O(n), where n is the number of elements in the list. This 
+   Linear time complexity makes it slow and inefficient for large datasets.
+2. Not suitable for large data: As the dataset size increases, the time taken to search linearly increases 
+   proportionally, making it impractical for large-scale datasets.
+3. Fewer optimizations: Linear Search lacks the efficiency optimizations found in more advanced Searching 
+   algorithms like Binary Search or hash-based Searches.
+4. Inferior to sorted data search: When dealing with sorted data, Linear Search is much less efficient than Binary 
+   Search or other logarithmic-time Searching algorithms.
+5. Less practical for sorted data: For sorted data, using Linear Search instead of more specialized Searching 
+   algorithms like Binary Search results in unnecessary comparisons and wasted time.
+
+
+//////////////////////////////////////////
+
+
+Why is Binary Search called 'Binary Search'?
+It is called Binary (english definition: something made of two things or parts) because it splits the Array/List
+into two halves as part of the algorithm. Initially, a Binary Search will look at the item in the middle of the 
+Array and compare it to the item it is searching for.
+
+
+//////////////////////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Iterative Binary Search, Recursive Binary Search and 
+Linear Search Algorithm:
+
+   Search Algorithms	    |  Space Complexity  |  Time Complexity
+     Linear Search	    |        O(1)	       |       O(n)
+Iterative Binary Search  |     	 O(1)		    |     O(log n)
+Recursive Binary Search  |      O(log n) 	    |     O(log n)
+
