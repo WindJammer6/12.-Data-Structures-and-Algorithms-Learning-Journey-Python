@@ -1,0 +1,928 @@
+What is Quick Sort?
+Quick Sort is a sorting algorithm that sorts a list by using the Divide and Conquer technique that picks 
+an element as a pivot and partitions the given array around the picked pivot by placing the pivot in its 
+correct position in the array. (In these Algorithm tutorials, the only 2 Algorithms (both Sorting 
+Algorithms) that uses the Divide and Conquer paradigm is Quick Sort Algorithm and Merge Sort Algorithm)
+
+- A pivot is a key element used to partition the unsorted Array/List into two sub-arrays during the Quick  
+  Sort sorting process. The pivot can be any element in the unsorted Array/List (first, last, middle, or 
+  literally any other elements in between), however the pivot choice can significantly impact the Quick 
+  Sort Algorithm's efficiency, but by convention/when first selecting the pivot we will usually either
+  go for the first or last element in the unsorted Array/List. 
+
+  (Note that you will need to select multiple pivots as you divide your unsorted Array/List into smaller 
+  unsorted Array/List throughout the Quick Sort Algorithm, and the pivot selected for these smaller 
+  unsorted Array/List will also need to be the same position (e.g. first, last, middle), relative to the 
+  smaller unsorted Array/List as the initial pivot's position selected to partition the initial unsorted 
+  Array/List relative to the initial unsorted Array/List)
+
+- Partition(ing) is the process of selecting a pivot, then placing the pivot in the correct position in 
+  the unsorted Array/List, and in the process of doing so, re-shuffle the remaining unsorted elements 
+  such that they fall in the correct side with respect to the pivot (but they may or may not become 
+  sorted with respect to the other elements at that same side)
+
+(More elaboration of the 2 terms 'pivot' and 'partition' in the 'How does Quick Sort Algorithm work?' 
+section)
+
+
+//////////////////////////////////////////////
+
+
+Is the Quick Sort Algorithm implemented iteratively or recursively?
+
+Quick Sort Algorithm is more commonly implemented recursively. (implementing it iteratively is possible
+too but recursive implementation is easier to understand and less complicated to implement)
+
+In this tutorial we will be learning how to implement Quick Sort recursively.
+
+
+//////////////////////////////////////////////
+
+
+How does Quick Sort Algorithm work?
+
+Here are the steps of Quick Sort Algorithm:
+1. During the first recursive loop of Partitioning on the initial unsorted List, 
+
+   There are 2 ways of doing this step, via the Hoare Partition scheme (which is more commonly
+   used, and is the scheme we will be using to implement the process of Partitioning in this 
+   tutorial) or the Lomuto Parititon scheme. We will look at these 2 Partitioning schemes later.
+
+   These are the general sub-steps on how the process of Partitioning is done (these sub-steps are
+   are common steps shared between the Hoare Partition scheme and Lomuto Partition scheme):
+   a. Selecting a pivot
+   b. Put the pivot in the correct position while in the process, re-shuffle the remaining unsorted 
+      elements such that they fall in the correct side with respect to the pivot (but they may or may 
+      not become sorted with respect to the other elements at that same side)
+
+2. After the first loop of partioning on the initial unsorted List, we will be left with 2 parts, the 
+   left side of the pivot and right side of the pivot. For each individual side,
+   -> If that side has 0 or 1 elements, then that side is considered 'sorted' and there is no need 
+      to do further partitioning on that side, and we can stop the recursive loop for that side
+   -> Else if that side has more than 1 element, then we will recursively repeat more loops of the same
+      partioning process (Hoare Partition scheme or Lomuto Partition scheme, repeating step 1a and 1b) 
+      on that side
+
+
+Lets first look at the overview of how Quick Sort works, without diving too much into the technical 
+details that is the Hoare Partition scheme or the Lomuto Partition scheme.
+
+Lets say we want to sort an unsorted number Array Data Structure/Python's List.
+
+Visualisation of how Quick Sort Algorithm works with an overview:
+(First recursive loop of Partioning)
+1a. First, we will need to first select a pivot to start our Quick Sort Algorithm. Lets go with the first
+    element as all our pivots for this example. For this pivot, it will be ('11').
+          0  1   2  3  4   5   6  
+        [11][9][29][7][2][15][28]
+          ^ 
+        (pivot)
+
+1b. Next, we will try to put the pivot ('11') in its correct position, which will be at index 3, and in the 
+    process of doing so, re-shuffle the remaining unsorted elements such that they fall in the correct 
+    side with respect to the pivot ('11')
+         0  1  2   3   4   5   6  
+        [7][9][2][11][29][15][28]
+                   ^ 
+                (pivot)
+
+    Notice that now the 'pivot' ('11') is in the right position (that is to say, if you imagine, after fast 
+    forwarding until the unsorted List becomes sorted, this pivot ('11') will still be at index 3, since there 
+    are 3 elements ('2', '7', '9') in the List smaller than 11, which will fill up the first 3 indexes (0, 1, 2) 
+    of the List and there are 3 elements ('15', '28', '29') that are larger than 11, which will fill up the last 
+    3 indexes (4, 5, 6) of the List)
+
+    Also notice that now the remaining unsorted elements have re-shuffled such that they all fall to correct 
+    side with respect to the pivot ('11'), where the elements at the left side are all smaller than the 
+    pivot (<'11') while the elements at the right side are all larger than the pivot (>'11'). However within
+    each side (left and right side), the elements are not yet sorted.
+
+
+    This process of,
+        1. Selecting the pivot
+        2. Putting the pivot in the correct position while in the process, re-shuffle the remaining unsorted 
+        elements such that they fall in the correct side with respect to the pivot (but they may or may not 
+        become sorted with respect to the other elements at that same side)
+
+    is called Partioning.
+
+
+ 2. Next, notice that we now have sort of split the unsorted List into 2 parts, of smaller unsorted Lists that 
+    is the unsorted List at the left side of the pivot and the unsorted List at the right side of the pivot 
+ (left side of pivot)    (right side of pivot)
+             0  1  2   3   4   5   6  
+            [7][9][2][11][29][15][28]
+                       ^ 
+                    (pivot)
+
+    Since the left and right side of pivot ('11') contains more than one element (there are 3 elements left in
+    each side) and there could be a chance that these 3 elements could still be unsorted. Hence, we will need 
+    to carry on doing partioning for the left and right side of pivot ('11')
+
+
+
+    (Second recursive loop of Partioning)
+        We will now repeat the same process of partioning the unsorted List at the left and right hand side of 
+        this pivot ('11'). (Note that we don't actually split and store the left and right side of the unsorted 
+        List in different variables in code like this visualisation may have misunderstandably shown (its just 
+        for learning purposes). The unsorted List is still using the same variable and memory space)
+    For left side of pivot ('11'): 
+    1a. Selecting the pivot (since in the first recursive loop of partitioning we picked the first element 
+        relative to the initial unsorted List, in the second recursive loop of partioning, we will also need
+        to pick the first element relative to this smaller unsorted List/part)
+             0  1  2   
+            [7][9][2]
+                ^
+             (pivot)
+
+    1b. Putting the pivot in the correct position while in the process, re-shuffle the remaining unsorted 
+        elements such that they fall in the correct side with respect to the pivot (but they may or may not 
+        become sorted with respect to the other elements at that same side)
+             0  1  2   
+            [2][7][9]
+                ^
+             (pivot) 
+
+     2. Since within the left side of pivot ('11'), the left and right side of pivot ('7') only contain one 
+        element each, they are automatically 'sorted', so there is no need to do any further partioning in the 
+        left side of pivot ('11')'s left and right side of the pivot ('7')
+                
+    For right side of pivot ('11'): 
+    1a. Selecting the pivot (since in the first recursive loop of partitioning we picked the first element 
+        relative to the initial unsorted List, in the second recursive loop of partioning, we will also need
+        to pick the first element relative to this smaller unsorted List/part)
+              4   5   6
+            [29][15][28]
+              ^
+           (pivot)
+
+    1b. Putting the pivot in the correct position while in the process, re-shuffle the remaining unsorted 
+    elements such that they fall in the correct side with respect to the pivot (but they may or may not 
+    become sorted with respect to the other elements at that same side)
+              4   5   6
+            [28][15][29]
+                      ^
+                   (pivot)
+        
+     2. Since within the right side of pivot ('11'), the right side of pivot ('29') dosen't contain any 
+        elements, hence it is considered 'sorted' and there is no need to do any further partioning in 
+        the right side of the pivot ('11')'s right side of pivot ('29'). However, within the right side 
+        of pivot ('11'), the left side contains more than one elements (the 2 elements, '15' and '28') 
+        and there could be a chance that these 2 elements could still be unsorted. Hence, we will need 
+        to carry on doing partioning for the right side of pivot ('11')'s for the left side of pivot ('29')
+
+
+
+        (Third recursive loop of Partioning)
+            We will now repeat the same process of partioning the unsorted List at the right side of pivot 
+            ('11')'s for the left side of pivot ('29'). (Note that we don't actually split and store the 
+            left and right side of the unsorted List in different variables in code like this visualisation
+            may have misunderstandably shown (its just for learning purposes). The unsorted List is still 
+            using the same variable and memory space)
+        Within the right side of pivot ('11'), for the left side of the pivot ('29'):
+        1a. Selecting the pivot (since in the first recursive loop of partitioning we picked the first element 
+            relative to the initial unsorted List, in the third recursive loop of partioning, we will also need
+            to pick the first element relative to this smaller unsorted List/part)
+                  4   5 
+                [28][15]
+                  ^
+               (pivot)
+
+        1b. Putting the pivot in the correct position while in the process, re-shuffle the remaining unsorted 
+        elements such that they fall in the correct side with respect to the pivot (but they may or may not 
+        become sorted with respect to the other elements at that same side)
+                  4   5
+                [15][28]
+                      ^
+                   (pivot)
+
+         2. Since within the right side of pivot ('11'), for the left side of pivot ('29'), the left side of
+            pivot ('28'), the left and right side only contain one element and no elements respectively, both 
+            sides are automatically 'sorted', so there is no need to do any further partioning in the left 
+            side of pivot ('11')'s left and right side of pivot ('28')
+
+
+
+After joining all the unsorted parts from all the recursive loops of partioning together, the unsorted List 
+should now be sorted like so,
+      0  1  2   3   4   5   6  
+     [2][7][9][11][15][28][29]
+
+
+//////////////////////////////////////////
+
+
+Here will we will delve more into the technical details of Quick Sort Algorithm:
+
+Referring to the 'Here are the steps of Quick Sort Algorithm' section, step 1 of partioning in the Quick 
+Sort Algorithm is split into 2 sub-steps:
+    '1a. Selecting a pivot
+     1b. Put the pivot in the correct position while in the process, re-shuffle the remaining unsorted 
+         elements such that they fall in the correct side with respect to the pivot (but they may or may 
+         not become sorted with respect to the other elements at that same side)'
+
+So, how exactly do we do this step 1 of partioning (especially sub-step 1b)?
+
+There are 2 ways/schemes to do this, 
+1. Hoare Partition scheme (which is more commonly used, and is the scheme we will be using to implement 
+   the process of Partitioning in this tutorial)
+2. Lomuto Partition scheme.
+
+
+///////////////////////////////////////////
+
+
+How does the Hoare Partition scheme work?
+
+Here are the steps of Hoare Partition scheme:
+(Sub-step 1a)
+1. Selecting a pivot. 
+
+   Generally, you will want to pick the first element as your pivots for the Hoare Parititon scheme to 
+   reduce any error even though technically selecting any element in your unsorted List can still work.
+
+(Sub-step 1b)
+2. Introduce a 'start' and 'end' pointer where the first element is the 'start' pointer (since the first 
+   element is the pivot in our example below, our 'start' pointer will be at the second element instead)
+   and the last element is the 'end' pointer (in the case where we chose our pivots to be the last element,
+   then the 'end' pointer will be at the second last element instead)
+
+3. We will start moving, and keep moving the 'start' pointer down the unsorted List until we find an 
+   element that is strictly larger than the pivot and stop there ('strictly' because even if there is 
+   duplicates, with a element equal to the pivot, we still will not stop there, in order for the 'start'
+   pointer to stop, the element must be strictly larger). We will need to also include comparing if the 
+   initial element position the 'start' pointer is at is larger than the pivot during the first iteration
+   only (subsequent iteration there is no need to do so)
+
+4. Then, we will start moving, and keep moving the 'end' pointer up the unsorted List until we find an
+   element that is smaller or equal to the pivot and stop there ('equal' as if there is duplicates, with 
+   an element equal to the pivot, we will also stop there). We will need to also include comparing if the 
+   initial element position the 'end' pointer is at is smaller than the pivot during the first iteration
+   only (subsequent iteration there is no need to do so)
+
+5. Once both the 'start' and 'end' pointer has stopped, as they have found an element that is strictly 
+   larger than pivot and an element smaller or equal to the pivot respectively, we will swap the positions 
+   of the element that the 'start' pointer is currently at and the element the 'end' pointer is currently at
+   (Unless the 'end' pointer has crossed the 'start' pointer, then this step will not run, and will jump to
+   step 7 instead)
+
+6. Keep repeating steps 3 to 5 until the 'end' pointer crosses the 'start' pointer. 
+
+7. Once the 'end' pointer crosses the 'start' pointer (it will be at the element one index in front of 
+   the 'start' pointer), do a swap in positions of the pivot and the element where the 'end' pointer 
+   is currently at. After doing this, the pivot will automatically fall into the right position, with 
+   all the remaining unsorted elements falling in the correct side with respect to the pivot (despite 
+   that they may or may not become sorted with respect to the other elements at that same side)
+
+
+Lets use the first recursive loop of Partitioning in our earlier example (where we explain the overview of 
+the Quick Sort Algorithm) to explain the Hoare Partition scheme.
+
+Visualisation of how Hoare Partition scheme works:
+(First recursive loop of Partioning)
+1. First, lets say we chose to select the first elements as all our pivots like the example above. For 
+   this pivot, it will be ('11')
+          0  1   2  3  4   5   6  
+        [11][9][29][7][2][15][28]
+          ^ 
+       (pivot)
+
+2. Next, we will need to introduce a 'start' and 'end' pointer at the start (since the first element is the
+   pivot ('11'), our 'start' pointer will be at the second element ('9') instead) and end of the unsorted 
+   List ('28') 
+          0  1   2  3  4   5   6                    (Let 'p' be the pivot, 
+        [11][9][29][7][2][15][28]                        's' be the 'start' pointer,
+          ^  ^                 ^                         'e' be the 'end' pointer 
+         (p)(s)               (e)                        to keep the visualisation clean)
+
+3. Lets first focus on the 'start' pointer ('9'). The rule for the 'start' pointer is that we will need to 
+   keep moving the 'start' pointer down the unsorted List until we find an element that is strictly larger 
+   than the pivot ('11') and then stop there ('strictly' because even if there is duplicates, with a element 
+   equal to the pivot, we still will not stop there, in order for the 'start' pointer to stop, the element 
+   must be strictly larger). We will need to also include comparing if the initial element position ('9') 
+   the 'start' pointer is at is strictly larger than the pivot ('11'). Since in this case it is not as 
+   ('9' < '11'), we will start moving the 'start' pointer down the unsorted List.
+         0  1   2  3  4   5   6 
+       [11][9][29][7][2][15][28]
+         ^      ^             ^ 
+        (p)    (s)           (e)
+
+   Coincidentally, the next/element at index 2 ('29') after the element at index 1 ('9') is already strictly
+   larger than the pivot ('11'), hence we will stop our 'start' pointer here at the element at index 2 ('29'). 
+
+4. Now we will move our focus to the 'end' pointer. The rule for the 'end' pointer is that we will need to 
+   keep moving the 'end' pointer up the unsorted List until we find an element that is smaller or equal 
+   ('equal' as if there is duplicates, with an element equal to the pivot, we will also stop there) to the
+   pivot ('11') and then stop there. We will need to also include comparing if the initial element position 
+   ('28') the 'start' pointer is at is smaller or equal to the pivot ('11'). Since in this case it is not as
+   ('28' > '11'), we will start moving the 'start' pointer down the unsorted List.
+         0  1   2  3  4   5   6 
+       [11][9][29][7][2][15][28]
+         ^      ^         ^ 
+        (p)    (s)       (e)
+
+         0  1   2  3  4   5   6 
+       [11][9][29][7][2][15][28]
+         ^      ^     ^ 
+        (p)    (s)   (e)
+
+   Since the element at index 5 ('15') is still larger than pivot ('11') hence we will need to continue moving the 
+   'end' pointer up the unsorted List. Then we moved the 'end' pointer to the element at index 4 ('2') which is
+   smaller or equal to than the pivot ('11'), hence we will stop our 'end' pointer here at the element at index 4 
+   ('2')
+
+5. Now that both the 'start' pointer (currently at element at index 2 ('29')) and 'end' pointer (currently at 
+   element at index 4 ('2')) has stopped as they have found an element ('29') that is strictly larger than pivot 
+   ('11') and an element ('2') smaller or equal to the pivot ('11') respectively, we will do a swap in position of 
+   the element that the 'start' pointer is currently at ('29') and the element the 'end' pointer is currently at 
+   ('2'). (Also, the 'end' pointer has not crossed the 'start' pointer, hence this step will still run, instead of
+   jumping to step 7)
+   Before the swap between the element at the 'start' pointer and the element at the 'end' pointer:
+                -------
+                |     |
+               \ /   \ /
+         0  1   2  3  4   5   6 
+       [11][9][29][7][2][15][28]
+         ^      ^     ^ 
+        (p)    (s)   (e)
+
+   After the swap between the element at the 'start' pointer and the element at the 'end' pointer:
+         0  1  2  3   4   5   6 
+       [11][9][2][7][29][15][28]
+         ^     ^      ^ 
+        (p)   (s)    (e)
+
+6. (first repeat of Step 6, repeating step 3) Now we will repeat the process of focusing back on the 'start' 
+   pointer and continue moving the 'start' pointer down the unsorted List until we find an element that is 
+   strictly larger than the pivot ('11') and then stop there. This time we don't need to include comparing if 
+   the initial element position ('2') the 'start' pointer is at is strictly larger than the pivot ('11') since 
+   it is ('2') guranteed to not be larger than the pivot ('11') due to the swapping of the elements at the 
+   'start' and 'end' pointers in the previous step.
+         0  1  2  3   4   5   6 
+       [11][9][2][7][29][15][28]
+         ^        ^   ^ 
+        (p)      (s) (e)
+
+         0  1  2  3   4   5   6 
+       [11][9][2][7][29][15][28]
+         ^           /\
+        (p)        (s)(e)
+
+   Since the element at index 3 ('7') is still smaller than pivot ('11') hence we will need to continue moving the 
+   'start' pointer down the unsorted List. Then we moved the 'start' pointer to the element at index 4 ('29') which is
+   strictly larger than the pivot ('11'), hence we will stop our 'end' pointer here at the element at index 4 ('29') 
+   (Don't worry about the fact that both the 'start' and 'end' pointer is pointing at the same element ('29') now, 
+   this will be explained later)
+
+6. (first repeat of step 6, repeating step 4) Now, we will again move our focus to the 'end' pointer and continue moving 
+   the 'end' pointer up the unsorted List until we find an element that is smaller or equal to the pivot ('11') and then 
+   stop there. This time, similar to the 'start' pointer, we don't need to include comparing if the initial element 
+   position ('29') the 'end' pointer is at is smaller or equal to the pivot ('11') since it is ('29') guranteed be smaller
+   or equal to the pivot ('11') due to the swapping of the elements at the 'start' and 'end' pointers in the previous step.
+         0  1  2  3   4   5   6 
+       [11][9][2][7][29][15][28]
+         ^        ^   ^ 
+        (p)      (e) (s)
+
+7. Here is where it gets a little tricky. Usually the 'end' pointer should stop here because the element at index 3 
+   ('7') is smaller or equal to than the pivot. But in this situation, the 'end' pointer has stopped here (at the element 
+   one index in front of the 'start' pointer) because it has just crossed the 'start' pointer.
+
+Note: - What if the element one index in front of the 'start' pointer during the crossing of the 'end' pointer
+        with the 'start' pointer is larger than the pivot? No, this will not happen as the element one index in 
+        front of the 'start' pointer (in this case its ('7')) is guranteed going to be smaller or equal to the pivot 
+        ('11') since if it was larger than the pivot ('11'), the 'start' pointer would have stopped there and swapped 
+        that element with the 'end' pointer earlier in the Hoare Partition scheme
+      - Would there be a case where the 'start' pointer is the one that crosses the 'end' pointer while its moving
+        down the unsorted List? No, this will not happen as after the most latest swap of 2 elements at the 'start'
+        and 'end' pointers right before the crossing of the 'start' and 'end' pointers (if there was no swap during 
+        the Hoare Partition scheme, then the 'start' pointer will meet the 'end' pointer at the end of the unsorted 
+        List), the 'start' pointer will definitely move down the unsorted List and stop again at the element the
+        'end' pointer is at after the latest swap before the crossing of the 'start' and 'end' pointers
+        since the element the 'end' pointer is pointing at after the latest swap before the crossing of 
+        the 'start' and 'end' pointers, was an element where the 'start' pointer stopped at before the latest swap,
+        meaning it must have been an element strictly larger than the pivot, and will cause the 'start' pointer to 
+        stop at  the element the 'end' pointer is at after the latest swap before the crossing of the 'start' and 'end' 
+        pointers. After the 'start' pointer has been guranteed to stop at where the 'end' pointer is, the
+        'end' pointer will be the one to move again up the unsorted List, past/crossing the 'start' pointer, 
+        initialising the crossing between the 'start' and 'end' pointers 
+
+   Whenever the 'end' pointer stops after it crosses the 'start' pointer, this marks the end of one recursive loop
+   of Partioning via the Hoare Partition scheme, and instead of going back to continue moving the 'start' pointer 
+   down the unsorted List, what we will want to do here is quite interesting, to swap the positions of the pivot 
+   ('11') and the element where the 'end' pointer is currently at ('7').
+   Before the swap between the pivot and the element at the 'end' pointer (after 'end' pointer crosses the 'start' 
+   pointer):
+         ----------
+         |        |
+        \ /      \ /
+         0  1  2  3   4   5   6 
+       [11][9][2][7][29][15][28]
+         ^        ^   ^ 
+        (p)      (e) (s)
+
+   After the swap between the pivot and the element at the 'end' pointer (after 'end' pointer crosses the 'start' 
+   pointer):
+        0  1  2   3   4   5   6 
+       [7][9][2][11][29][15][28]
+        ^         ^   ^ 
+       (p)       (e) (s)
+
+Notice that now, something magical happens, that the pivot ('11') is now in the right position in the unsorted 
+List, and that all the remaining unsorted elements have fallen in the correct side with respect to the pivot 
+('11') (despite that they may or may not become sorted with respect to the other elements at that same side)
+
+
+
+Does the Hoare Partition scheme handle duplicates in the unsorted List?
+Yes it does. This is due to the fact that the 'start' pointer only stopping at elements that are strictly larger than
+the pivot while the 'end' pointer stopping at elements that are smaller or equal to the pivot. (Don't need think too
+much about it just know that it is due to this mechanic that even duplicates can be sorted)
+
+Lets say in the first recursive loop of Hoare Partition scheme, the pivot has duplicates in the unsorted List. After the
+first recursive loop of Hoare Partition scheme, when this pivot is put in its correct position, where it will be at
+the point of partitioning (the point where the pivot will be at after it swaps positions with the element at the 
+'end' pointer) the duplicates of the pivot may fall on either side with respect to the pivot. But after all the 
+recursive loops of Hoare Partition scheme, when the unsorted List becomes sorted, the duplicates of the initial 
+pivot in the first recursive loop of Hoare Partition scheme will eventually find their way to be beside of the pivot 
+such that all the duplicates of the initial pivot will line up consecutively beside it.
+
+   Initial unsorted List (with duplicates):
+    0  1  2  3  4  5  6  7
+   [4][3][2][6][7][4][8][4]
+    ^  
+ (pivot) 
+
+   After first recursive loop of Hoare Partition scheme:
+    0  1  2  3  4  5  6  7
+   [4][3][2][4][4][7][8][6]
+             ^  
+    (point of partioning) 
+   (Notice that there is a duplicate of the point of partioning ('4') at the left side of the point of partioning 
+   ('4'), and another duplicate of the point of partioning ('4') at the right side of the point of partioning ('4'))
+
+   After all the recursive loops of Hoare Partition scheme when the unsorted List becomes sorted:
+    0  1  2  3  4  5  6  7
+   [2][3][4][4][4][6][7][8]
+             ^  
+      (initial pivot) 
+   (Notice after all the recursive loops of Hoare Partition scheme when the unsorted List becomes sorted, the duplicates
+   of the initial pivot ('4') at the left side and right side of the initial pivot ('4') during the first recursive loop of 
+   Hoare Parititon scheme automatically fell to their correct postitions at the side of the initial pivot)
+
+
+///////////////////////////////////////////
+
+
+How does the Lomuto Partition scheme work?
+
+Here are the steps of Lomuto Partition scheme:
+(Sub-step 1a)
+1. Selecting a pivot. 
+
+   Generally, you will want to pick the last element as your pivots for the Lomuto Parititon scheme to 
+   reduce any error even though technically selecting any element in your unsorted List can still work
+   as well
+
+(Sub-step 1b)
+2. Introduce a 'partition index' pointer where the first element is the 'partition index' pointer.
+
+3. We will start moving, and keep moving the 'partition index' pointer down the unsorted List until we 
+   find an element that is strictly larger than the pivot and stop there ('strictly' because even if there 
+   is duplicates, with a element equal to the pivot, we still will not stop there, in order for the 'start'
+   pointer to stop, the element must be strictly larger). We will need to also include comparing 
+   if the initial element position the 'partition index' pointer is at is strictly larger than the pivot 
+   during the first iteration only (subsequent iteration there is no need to do so)
+
+4. Then, we will introduce a new pointer, the 'index' pointer, which will initially point at the element 
+   one index after where the 'partition index' has stopped, and start moving the 'index' pointer down 
+   the unsorted List until we find an element that is smaller or equal to the pivot and stop there ('equal' 
+   as if there is duplicates, with an element equal to the pivot, we will also stop there). We will 
+   need to also include comparing if the initial element position the 'partition index' pointer is at is 
+   smaller or equal to the the pivot during the first iteration only (subsequent iteration there is no need 
+   to do so)
+
+5. Once both the 'partition index' and 'index' pointer has stopped, as they have found an element that is 
+   strictly larger than pivot and an element smaller or equal to the pivot respectively, we will swap the 
+   positions of the element that the 'partition index' pointer is currently at and the element the 'index' 
+   pointer is currently at
+   (Unless the 'index' pointer reaches the pivot, then this step will not run, and will jump to step 7 
+   instead)
+
+6. Keep repeating steps 3 to 5 until the 'index' pointer reaches the pivot. 
+
+7. Once the 'index' pointer reaches the pivot (which it will stop at since the pivot is smaller or equal
+   to the element the 'end' pointer is pointing at, which is also the pivot), do a swap in positions of 
+   the pivot and the element where the 'partition index' pointer is currently at. After doing this, the 
+   pivot will automatically fall into the right position, with all the remaining unsorted elements falling 
+   in the correct side with respect to the pivot (despite that they may or may not become sorted with respect 
+   to the other elements at that same side)
+
+
+Lets use the first recursive loop of Partitioning in our earlier example (where we explain the overview of 
+the Quick Sort Algorithm) to explain the Lomuto Partition scheme. But instead of selecting the first 
+element as our pivots like the example above in step 1a, lets select the last element as our pivots 
+instead since that is the convention for the Lomuto Partition scheme.
+
+Visualisation of how Lomuto Partition scheme works:
+(First recursive loop of Partioning)
+1. First, lets say we chose to select the last element as all our pivots (unlike the example above in step 1a,
+   which selects the first elements as the pivots instead). For this pivot, it will be ('28')
+         0  1   2  3  4   5   6  
+       [11][9][29][7][2][15][28]
+                              ^ 
+                           (pivot)
+
+2. Next, we will need to introduce a 'partition index' pointer at the end of the unsorted List ('11') 
+         0  1   2  3  4   5   6                    (Let 'p' be the pivot, 
+       [11][9][29][7][2][15][28]                        'par' be the 'partition index' pointer,
+         ^                    ^                         to keep the visualisation clean)
+       (par)                 (p)
+
+3. Now, we will need to start moving the 'partition index' pointer down the unsorted List. The rule for 
+   the 'parition index' pointer is that we will need to keep moving the 'parition index' pointer until 
+   we find an element that is stirctly larger than the pivot ('28') and then stop there. (similar to the 
+   rule for how the 'start' pointer moves in the Hoare Partition scheme). We will need to also include 
+   comparing if the initial element position ('11') the 'partition index' pointer is at is strictly 
+   larger than the pivot ('28'). Since in this case it is not as ('11' < '28'), we will start moving 
+   the 'partition index' pointer down the unsorted List.
+         0  1   2  3  4   5   6
+       [11][9][29][7][2][15][28]
+            ^                 ^
+          (par)              (p)
+
+         0  1   2  3  4   5   6
+       [11][9][29][7][2][15][28]
+                ^             ^
+              (par)          (p)
+
+   Since the element at index 1 ('9') is still smaller than pivot ('28') hence we will need to continue 
+   moving the 'parition index' pointer down the unsorted List. Then we moved the 'parition index' pointer
+   to the element at index 2 ('29') which is strictly larger than the pivot ('11'), hence we will stop 
+   our 'parition index' pointer here at the element at index 2 ('29')
+   
+4. Now we will introduce a new pointer called the 'index' pointer, which will also move down the unsorted
+   List. The rule for the 'index' pointer is that we will need to keep moving the 'index' pointer until
+   we find an element that is smaller or equal to the pivot ('28'), and then stop there ('equal' as if 
+   there is duplicates, with an element equal to the pivot, we will also stop there). By right, its initial 
+   position will be pointing at the same element as the 'partition index' ('29') when it stopped moving, 
+   but since when we include comparing the initial element position ('29') of the 'index' pointer with 
+   the pivot ('28'), it is definitely going be larger than the pivot ('29') anyway (since the 'parition
+   index' pointer will only stop at an element if it is larger than the pivot ('28'), which is where the
+   new 'index' pointer will be created). Hence, we can just create the new 'index' pointer at the element 
+   one index after ('7') where the 'partition index' has stopped ('29'), and start comparing from that
+   element instead where the 'index' pointer was pointing at ('7') when it was created.
+         0  1   2  3  4   5   6                    (Let 'i' be the 'index' pointer) 
+       [11][9][29][7][2][15][28]
+                ^  ^          ^
+             (par)(i)        (p)
+
+   Coincidentally, the element at index 3 ('7') where the 'index' pointer is pointing at when it was 
+   created is already smaller or equal to the pivot ('28'), hence we will stop our 'index' pointer here at 
+   the element at index 3 ('7'). 
+
+5. Now that both the 'partition index' pointer (currently at element at index 2 ('29')) and 'index' 
+   pointer (currently at element at index 3 ('7')) has stopped as they have found an element ('29') 
+   that is strictly larger than pivot ('28') and an element ('7') smaller or equal to the pivot ('28') 
+   respectively, we will do a swap in position of the element that the 'parition index' pointer is 
+   currently at ('29') and the element the 'index' pointer is currently at ('7') (Also, the 'index' 
+   pointer haven't reached the pivot, hence this step will still run, and will not jump to step 7)
+   Before the swap between the element at the 'parition index' pointer and the element at the 'index' 
+   pointer:
+                ----
+                |  |
+               \ /\ /
+         0  1   2  3  4   5   6 
+       [11][9][29][7][2][15][28]
+                ^  ^          ^
+             (par)(i)        (p)
+
+   After the swap between the element at the 'parition index ' pointer and the element at the 'index'
+   pointer:
+         0  1  2   3  4   5   6 
+       [11][9][7][29][2][15][28]
+                ^  ^          ^
+             (par)(i)        (p)
+
+
+6. (first repeat of Step 6, repeating step 3) Now we will repeat the process of focusing back on the 
+   'parititon index' pointer and continue moving the 'parititon index' pointer down the unsorted List 
+   until we find an element that is strictly than the pivot ('28') and then stop there. This time we don't 
+   need to include comparing if the initial element position ('7') the 'parititon index' pointer is at is 
+   larger than the pivot ('28') since it is ('7') guranteed to not be strictly larger than the pivot ('11') 
+   due to the swapping of the elements at the 'parititon index' and 'index' pointers in the previous step.
+         0  1  2   3  4   5   6 
+       [11][9][7][29][2][15][28]
+                  /\          ^
+              (par)(i)       (p)
+
+   Since the element at index 3 ('29') is strictly larger than pivot ('28') hence we will stop our 'index' 
+   pointer here at the element at index 3 ('29') (Don't worry about the fact that both the 'parition index' and 
+   'index' pointer is pointing at the same element ('29'), it dosen't affect anything, you can just carry
+   on with the next step to continue moving the 'index' pointer)
+
+6. (first repeat of step 6, repeating step 4) Now, we will again move our focus to the 'index' pointer and 
+   continue moving the 'index' pointer down the unsorted List until we find an element that is smaller or equal to
+   the pivot ('28') and then stop there. This time, similar to the 'parition index' pointer, we don't need to include 
+   comparing if the initial element position ('29') the 'index' pointer is at is smaller or equal to the pivot ('11') 
+   since it is ('29') guranteed to not be smaller or equal to the pivot ('28') due to the swapping of the elements at 
+   the 'parition index' and 'index' pointers in the previous step.
+         0  1  2   3  4   5   6 
+       [11][9][7][29][2][15][28]
+                   ^  ^       ^
+                (par)(i)     (p)
+    
+   Since the element at index 4 ('2') is smaller or equal to the pivot ('28') hence we will stop our 'index' 
+   pointer here at the element at index 4 ('2')
+
+6. (first repeat of step 6, repeating step 5) Now that both the 'partition index' pointer (currently at 
+   element at index 3 ('29')) and 'index' pointer (currently at element at index 4 ('2')) has stopped as 
+   they have found an element ('29') that is strictly larger than pivot ('28') and an element ('2') smaller 
+   or equal to the pivot ('28') respectively again, we will do a swap in position of the element that the 
+   'parition index' pointer is currently at ('29') and the element the 'index' pointer is currently at ('2')
+   (Also, the 'index' pointer haven't reached the pivot, hence this step will still run, and will not jump
+   to step 7)
+   Before the swap between the element at the 'parition index' pointer and the element at the 'index' 
+   pointer:
+                   ----
+                   |  |
+                  \ /\ /
+         0  1  2   3  4   5   6 
+       [11][9][7][29][2][15][28]
+                   ^  ^       ^
+                (par)(i)     (p)
+
+   After the swap between the element at the 'parition index ' pointer and the element at the 'index'
+   pointer:
+         0  1  2  3   4   5   6 
+       [11][9][7][2][29][15][28]
+                  ^   ^       ^
+                (par)(i)     (p)
+
+6. (second repeat of Step 6, repeating step 3) Now we will repeat the process of focusing back on the 
+   'parititon index' pointer and continue moving the 'parititon index' pointer down the unsorted List 
+   until we find an element that is strictly larger than the pivot ('28') and then stop there. 
+         0  1  2  3   4   5   6 
+       [11][9][7][2][29][15][28]
+                     /\       ^
+                 (par)(i)    (p)
+
+   Since the element at index 4 ('29') is strictly larger than the pivot ('28') hence we will stop our 
+   'index' pointer here at the element at index 4 ('29')
+
+6. (second repeat of step 6, repeating step 4) Now, we will again move our focus to the 'index' pointer and 
+   continue moving the 'index' pointer down the unsorted List until we find an element that is smaller or
+   equal to the pivot ('28') and then stop there. 
+         0  1  2  3   4   5   6 
+       [11][9][7][2][29][15][28]
+                      ^   ^   ^
+                    (par)(i) (p)
+    
+   Since the element at index 5 ('15') is smaller or equal to the pivot ('28'), hence we will stop our 
+   'index' pointer here at the element at index 5 ('15'). 
+
+6. (second repeat of step 6, repeating step 5) Now that both the 'partition index' pointer (currently at 
+   element at index 4 ('29')) and 'index' pointer (currently at element at index 5 ('15')) has stopped 
+   again as they have found an element ('29') that is strictly larger than pivot ('28') and an element 
+   ('15') smaller or equal to the pivot ('28') respectively again, we will do a swap in position of the 
+   element that the 'parition index' pointer is currently at ('29') and the element the 'index' pointer 
+   is currently at ('15') (Also, the 'index' pointer haven't reached the pivot, hence this step will 
+   still run, and will not jump to step 7)
+   Before the swap between the element at the 'parition index' pointer and the element at the 'index' 
+   pointer:
+                      ----
+                      |  |
+                     \ /\ /
+         0  1  2   3  4   5   6 
+       [11][9][7][2][29][15][28]
+                      ^   ^   ^
+                    (par)(i) (p)
+
+   After the swap between the element at the 'parition index ' pointer and the element at the 'index'
+   pointer:
+         0  1  2   3  4   5   6 
+       [11][9][7][2][15][29][28]
+                      ^   ^   ^
+                    (par)(i) (p)
+
+6. (third repeat of Step 6, repeating step 3) Now we will repeat the process of focusing back on the 
+   'parititon index' pointer and continue moving the 'parititon index' pointer down the unsorted List 
+   until we find an element that is strictly larger than the pivot ('28') and then stop there. 
+         0  1  2   3  4   5   6 
+       [11][9][7][2][15][29][28]
+                         /\   ^
+                     (par)(i)(p)
+
+   Since the element at index 5 ('29') is larger than the pivot ('28') hence we will stop our 'index' 
+   pointer here at the element at index 5 ('29')
+
+6. (third repeat of step 6, repeating step 4) Now, we will again move our focus to the 'index' pointer and 
+   continue moving the 'index' pointer down the unsorted List until we find an element that is smaller or
+   equal to the pivot ('28') and then stop there. 
+         0  1  2   3  4   5   6 
+       [11][9][7][2][15][29][28]
+                          ^  /\   
+                       (par)(i)(p)
+
+    
+    (Notice that during every single iteration of step 5, during step 2, the 'partition index' will move down
+    the unsorted List, and end up stopping at where the 'index' pointer is? This is because the element
+    that the 'index' pointer is at after the first iteration is always an element strictly larger than the pivot 
+    (which causes the 'partition index' to stop there) due to the swapping of elements at the 'partition index' 
+    and 'index' during each swapping step (step 4), causing the element the 'index' pointer is at after the first 
+    iteration to always be an element striclty larger than the pivot)
+
+    
+7. Whenever the 'index' pointer reaches the pivot ('28'), such that the 'index' pointer is pointing at the 
+   pivot ('28'), (which it will stop at since the pivot is smaller or equal to the element the 'end' pointer 
+   is pointing at, which is also the pivot)this marks the end of one recursive loop of Partioning via the 
+   Lomuto Partition scheme, and what we will want to do here is quite interesting, to swap the positions of 
+   the pivot ('11') and the element where the 'partition index' pointer is currently at ('29').
+   Before the swap between the pivot and the element at the 'partition index' pointer (after 'index' pointer 
+   reaches the pivot):
+                          ----
+                          |  |
+                         \ /\ /
+         0  1  2   3  4   5   6 
+       [11][9][7][2][15][29][28]
+                          ^  /\   
+                       (par)(i)(p)
+
+   After the swap between the pivot and the element at the 'partition index' pointer (after 'index' pointer 
+   reaches the pivot):
+         0  1  2   3  4   5   6 
+       [11][9][7][2][15][28][29]
+                          ^  /\   
+                       (par)(i)(p)
+
+Notice that now, something magical happens, that the pivot ('28') is now in the right position in the unsorted 
+List, and that all the remaining unsorted elements have fallen in the correct side with respect to the pivot 
+('28') (despite that they may or may not become sorted with respect to the other elements at that same side)
+
+
+
+Does the Lomuto Partition scheme handle duplicates in the unsorted List?
+Yes it does. This is due to the fact that the 'partition index' pointer only stopping at elements that are strictly 
+larger than the pivot while the 'index' pointer stopping at elements that are smaller or equal to the pivot. (Don't 
+need think too much about it just know that it is due to this mechanic that even duplicates can be sorted)
+
+Lets say in the first recursive loop of Lomuto Partition scheme, the pivot has duplicates in the unsorted List. 
+After the first recursive loop of Lomuto Partition scheme, when this pivot is put in its correct position, where it 
+will be at the point of partitioning (the point where the pivot will be at after it swaps positions with the element
+at the 'partition index' pointer), the duplicates of the pivot may fall on either side with respect to the pivot. 
+But after all the recursive loops of Lomuto Partition scheme, when the unsorted List becomes sorted, the duplicates 
+of the initial pivot in the first recursive loop of Lomuto Partition scheme will eventually find their way to be
+beside of the pivot such that all the duplicates of the initial pivot will line up consecutively beside it.
+
+   Initial unsorted List (with duplicates):
+    0  1  2  3  4  5  6  7
+   [4][3][2][6][7][4][8][4]
+                         ^  
+                      (pivot) 
+
+   After first recursive loop of Lomuto Partition scheme:
+    0  1  2  3  4  5  6  7
+   [4][3][2][4][4][6][8][7]
+                ^  
+      (point of partitioning) 
+   (Notice that there is a 2 duplicates of the point of partitioning ('4') at the left side of the point of 
+   partitioning ('4')) (this isn't the best example, but there may be cases where there will be duplicates of the 
+   point of partitioning ('4') on both the left and right side of the point of partioning)
+
+   After all the recursive loops of Lomuto Partition scheme when the unsorted List becomes sorted:
+    0  1  2  3  4  5  6  7
+   [2][3][4][4][4][6][7][8]
+                ^  
+         (initial pivot) 
+   (Notice after all the recursive loops of Lomuto Partition scheme when the unsorted List becomes sorted, the 
+   duplicates of the initial pivot ('4') of the initial pivot ('4') during the first recursive loop of 
+   Lomuto Parititon scheme automatically fell to their correct postitions at the side of the initial pivot)
+
+
+//////////////////////////////////////////
+
+
+Explaining the Big O Notation of Time and Space Complexity of Quick Sort:
+
+For Big O Notation of Time Complexity of Quick Sort:
+For an ideal sorting testcase:
+In the ideal case we hope each partitioning step breaks the input in half. The "halves" probably won't be 
+precisely equal, but if we choose the pivot well, they should be pretty close. To keep the math simple, 
+let's assume perfect partitioning, so we get exact halves every time.
+
+In this case, the number of times we can break it in half will be the base-2 logarithm of the number of 
+inputs. For example, given 128 inputs, we get partition sizes of 64, 32, 16, 8, 4, 2, and 1. That's 7 levels
+of partitioning (log2(128) = 7).
+
+So, we have log(n) partitioning "levels", and each level has to visit all n inputs. So, 
+
+    log(n) levels of partitioning  x  n operations per level = n log n
+
+gives us O(n log n) overall complexity.
+
+For a worst sorting testcase:
+Now let's revisit that assumption that each partitioning level will "break" the input precisely in half. 
+Depending on how good a choice of partitioning element we make, we might not get precisely equal halves. 
+So what's the worst that could happen? The worst case is a pivot that's actually the smallest or largest
+of equal size, we've ended up with one partition of one element, and one partition of n-1 elements. If 
+that happens for every level of partitioning, we obviously end up doing O(n) partitioning levels before 
+even partition is down to one element.
+
+This gives the technically correct Big O Notation of Time Complexity for Quicksort (since Big O Notation
+officially refers to the upper bound on complexity). Since we have,
+
+    n levels of partitioning  x  n operations per level = n^2
+
+giving us O(n * n), or O(n^2) overall complexity.
+
+
+So is the Big O Notation of Time Complexity for Quick Sort O(n log n) or O(n^2)? And why think about Quick
+Sort when other sorting algorithms such as Merge Sort is at least as good? 
+That's because the chance for an average/ideal sorting testcase (with Big O Notation of Time Complexity
+of O(n log n)) for Quick Sort is quite good compared to other sorting algorithms. In practice, Quicksort 
+outperforms Merge sort, and it significantly outperforms Bubble Sort, Selection sort and Insertion sort.
+
+
+/////////////////////////////////////////////////
+
+
+For Big O Notation of Space Complexity of Quick Sort:
+
+For a best sorting testcase (Best Case Time Complexity):
+In the ideal case we hope each partitioning step breaks the input in half. The "halves" probably won't be 
+precisely equal, but if we choose the pivot well, they should be pretty close. To keep the math simple, 
+let's assume perfect partitioning, so we get exact halves every time.
+
+Since Quick Sort is often implemented recursively, the number of recursive loop that can be done, and 
+break the initial unsorted List in half will be the base-2 logarithm of the number of inputs. For example, 
+given 128 inputs, we get partition sizes of 64, 32, 16, 8, 4, 2, and 1. That's 7 levels of partitioning 
+(log2(128) = 7). 
+
+Each one of these levels is created during a recursive loop, which during implementation of Quick Sort 
+Algorithm, stores these levels in a seperate variable/new space in memory. Since the number of levels
+created is log n, hence the Big O Notation of Space Complexity of Quick Sort for an ideal sorting testcase 
+is O(log n)
+
+
+For a worst sorting testcase (Worst Case Time Complexity):
+Now let's revisit that assumption that each partitioning level will "break" the input precisely in half. 
+Depending on how good a choice of partitioning element we make, we might not get precisely equal halves. 
+So what's the worst that could happen? The worst case is a pivot that's actually the smallest or largest
+of equal size, we've ended up with one partition of one element, and one partition of n-1 elements. If 
+that happens for every level of partitioning, we obviously end up doing O(n) partitioning levels before 
+even partition is down to one element.
+
+Each one of this levels is created during a recursive loop, which during implementation of Quick Sort 
+Algorithm, stores these levels in a seperate variable/new space in memory. Since the number of levels
+created is n, hence the Big O Notation of Space Complexity of Quick Sort for a worst sorting testcase 
+is O(n)
+
+
+//////////////////////////////////////////
+
+
+Advantages and Disadvantages of Quick Sort Algorithm compared to other sorting algorithms:
+
+Advantages of Quick Sort:
+1. Efficiency: Quick Sort has an average-case time complexity of O(n log n), where n is the number of 
+   elements in the array. This makes it one of the fastest sorting algorithms for most real-world 
+   scenarios.
+2. In-place sorting: Quick Sort is an in-place sorting algorithm, meaning it doesn't require additional
+    memory to perform the sorting, making it memory-efficient.
+3. Cache-friendly: Quick Sort exhibits good cache performance due to its locality of reference. This 
+   can result in faster execution on modern computer architectures.
+4. Low auxiliary space: Quick Sort uses a small amount of auxiliary space for recursion compared to 
+   other divide-and-conquer algorithms like Merge Sort.
+5. Adaptive: Quick Sort's performance can be adaptive based on the initial order of the elements. It 
+   can switch to a more efficient algorithm when the input data is partially sorted.
+
+Disadvantages of Quick Sort:
+1. Non-stable: Quick Sort is not a stable sorting algorithm, meaning it may change the relative order 
+   of equal elements in the input array.
+2. Worst-case time complexity: In the worst-case scenario, particularly when the pivot selection is 
+   not optimal, Quick Sort can degrade to O(n^2) time complexity. This occurs when the array is 
+   already sorted or nearly sorted.
+3. Pivot selection: The choice of the pivot element can significantly affect the performance of Quick 
+   Sort. Poor pivot selection can lead to inefficient sorting, especially in degenerate cases.
+4. Not suitable for some data distributions: Quick Sort's performance can degrade when dealing with 
+   certain distributions of data, such as highly skewed datasets.
+5. Not naturally stable for linked lists: While Quick Sort can be adapted for linked lists, it is not 
+   as natural as some other sorting algorithms like MergeSort.
+
+
+//////////////////////////////////////////
+
+
+Why is Quick Sort called 'Quick Sort'?
+The name 'Quick Sort' stems from the fact that it can sort a list of elements substantially faster than any 
+other sorting algorithms. 
+
+
+//////////////////////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Quick Sort Algorithm:
+
+    Sorting Algorithms   |  Space Complexity  |   Time Complexity
+       Quick Sort	       |      O(log n)      | 	O(n log n)
+
