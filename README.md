@@ -3,8 +3,7 @@ My learning journey of Data Structures and Algorithms in Python (work in progres
 
 ## Thoughts on starting this learning journey
 Back before I started programming,  I was introduced to a website for programmers to test their skills called LeetCode, which provides coding interview questions for coders
-to try out. Curious, I went to look at the questions and found myself overwhelmed by how bizzare the questions look. I took a look around the internet to see how people solve
-LeetCode questions and realised they understood this important programming concept that I haven't touched before - Data Structures and Algorithms.
+to try out. Curious, I went to look at the questions and found myself overwhelmed by how bizzare the questions look. I took a look around the internet to see how people solve LeetCode questions and realised they understood this important programming concept that I haven't touched before - Data Structures and Algorithms.
 
 Hence the birth of this repository, for me to bridge this gap.
 
@@ -13,8 +12,6 @@ it contained many different kinds of programming languages. Obviously I went for
 the starting code (at the time I didn't know about Object-Oriented Programming and Classes yet) and I couldn't tell which was the one I was supposed to use. Furthermore, I 
 was literally unable to understand any of the questions and give any relevant answer. So as you can see, this is how disastrous my first LeetCode experience was. (Eventually I found out I was using Python3, which I'm pretty sure is the version everyone using Python is using, after copy-pasting some of the usual codes I've written and asking ChatGPT hahaha...))
 
-there are thousands different kinds of data structures and algorithms out there the ones here are the usual starting ones the teach to new programmers to familiarise them to DSA
-
 Learning and Practices are both organised under each folder for their respective Data Structure/Algorithm.
 
 <br>
@@ -22,8 +19,11 @@ Learning and Practices are both organised under each folder for their respective
 **Source(s):**
 + https://www.youtube.com/playlist?list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12 (codebasics) 
 
+<br>
+
 ## Table of Contents:
-+ [Code Description](#codedescription)  
++ [Code Description](#codedescription)
+
   + [On Data Structures](#datastructures):
     + [Tutorial 1 - What are Data Structures](#tutorial1)  
     + [Tutorial 2 - Big O Notation](#tutorial2)  
@@ -36,8 +36,8 @@ Learning and Practices are both organised under each folder for their respective
     + [Tutorial 8 - Queues (Data Structure)](#tutorial8)  
     + [Tutorial 9 - Trees and General Trees (Data Structure)](#tutorial9)  
       + [Tutorial 9.1 - Binary Trees (Tree Data Structure variation) and Binary Search Trees (Binary Tree Data Structure variation)](#tutorial9.1)  
-    + [Tutorial 10 - Graphs (Data Structure)](#tutorial10)
-  
+    + [Tutorial 10 - Graphs (Data Structure)](#tutorial10)  
+
   + [On Algorithms (Searching and Sorting Algorithms)](#algorithms):
     + [Tutorial 11 - What are Algorithms)](#tutorial11)  
     + [Tutorial 12 - Binary Search (Searching Algorithm) and Linear Search (Searching Algorithm)](#tutorial12)  
@@ -58,74 +58,145 @@ Learning and Practices are both organised under each folder for their respective
 
 <br>
 
-## [On Data Structures] <a name = "algorithms"></a>
+## On Data Structures <a name = "datastructures"></a>
 ### 1. Tutorial 1 - What are Data Structures <a name = "tutorial1"></a>
+What are Data Structures?  
+Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
 
-<br>
+Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
 
 ### 2. Tutorial 2 - Big O Notation <a name = "tutorial2"></a>
+What is the Big O Notation?  
+The Big O Notation measures the running time (time complexity) or space requirements (space complexity)
+for your computer program/algorithm (not very accurate to say it measures running time for your Data
+Structure) grow as input grows for the worst case scenario.
 
-<br>
+Source(s): https://www.youtube.com/watch?v=IR_S8BC8KI0&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=2 (codebasics)
 
 <br>
 
 ### 3. Tutorial 3 - Concept of Recursion <a name = "tutorial3"></a>
+What is the concept of Recursion?  
+Recursion is a method of solving a computational problem where the solution depends on solutions to smaller instances of the same problem. Recursive function works and are functions that calls itself within the function.
 
-<br>
+Source(s): https://www.youtube.com/watch?v=9bsK03SlmNM&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=20 (codebasics)
 
 <br>
 
 ### 4. Tutorial 4 - Arrays (Data Structure) <a name = "tutorial4"></a>
+What is an Array?  
+An Array is a linear data structure that is a collection of similar data elements stored at contiguous memory locations.
 
-<br>
+Source(s): https://www.youtube.com/watch?v=gDqQf4Ekr2A&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=3 (codebasics)
 
 <br>
 
 ### 5. Tutorial 5 - Linked Lists (Data Structure) <a name = "tutorial5"></a>
+What is a Linked List?  
+A Linked List is a linear data structure consisting of nodes where each node contains a data field and a reference(link)/pointer to the next node in the list. Each node consists of 2 components, data of an element in the Data Structure, and a pointer. 
 
-<br>
+What is a Node?  
+Each node is stored at a random memory space (not continuous to other elements of the Linked List Data Structure, unlike Arrays) and is linked to other nodes via a pointer. (which stores the address of the memory storing the next element)
+
+In this tutorial, we explored 2 types of Linked List Data Structures,  
+  1. (Singly) Linked Lists
+  2. Doubly Linked Lists
+
+Source(s): https://www.youtube.com/watch?v=qp8u-frRAnU&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=4 (codebasics)
 
 <br>
 
 ### 6. Tutorial 6 - Hash Tables (Data Structure) <a name = "tutorial6"></a>
+What is a Hash Table?  
+A Hash Table is a linear data structure that maps keys to values. 
 
-<br>
+A Hash Table uses a hash function to compute an index, also called a hash code, into an array of buckets or slots in memory, from which the desired value can be found. During lookup, the key (object name/string) is hashed (is put through the hash function) and the resulting hash (result after the key is put through the hash function) indicates where the corresponding value is stored.
+
+Note: You might sometimes come across the term 'Hash Map' which is essentially the same thing as a Hash Table (with some very minor differences)
+
+Source(s): https://www.youtube.com/watch?v=ea8BRGxGmlA&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=5 (codebasics)
 
 <br>
 
 ### 7. Tutorial 6.1 - Hash Tables Collision Handling <a name = "tutorial6.1"></a>
+What is a Collision in Hash Tables? And what is the Problem of Collisions when making Hash Tables?  
+A Collision occurs when more than one value (of key-pair values) is hashed by a particular hash function hash to the same slot/produces the same hash (or index in the memory array) in the Hash Table being generated by that hash function.
 
-<br>
+What is Hash Table Collision Handling?  
+Collision Handling is when we modify our existing Hash Table Data Structure such that it is able to handle these Collisions and still be able to store every key-value pair being given to it at a unique spot in the Hash Table's memory array such that they are still unique and won't override or affect other key-value pairs in the Hash Table.
+
+In this tutorial, we explored 2 ways of Hash Table Collision Handling, 
+  1. Seperate Chaining
+  2. Linear Probing
+
+Source(s): https://www.youtube.com/watch?v=54iv1si4YCM&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=6 (codebasics)
 
 <br>
 
 ### 8. Tutorial 7 - Stacks (Data Structure) <a name = "tutorial7"></a>
+What is a Stack?  
+A Stack is a linear data structure that only opens at one end, stores items and perform operations using the Last In, First Out (LIFO) method. Whenever a new element is added to a stack, it is added to the top of the stack, and the top element is always removed first from a stack.
 
-<br>
+Source(s): https://www.youtube.com/watch?v=zwb3GmNAtFk&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=7 (codebasics)
 
 <br>
 
 ### 9. Tutorial 8 - Queues (Data Structure) <a name = "tutorial8"></a>
+What is a Queue?  
+A Queue is a linear data structure that opens at both ends, stores items and perform operations using the First In First Out (FIFO) method. Whenever a new element is added, it is added from one end of the queue, and all deletions froma Queue are made from the other end, always first removing the first element added into the queue. 
+
+Source(s): https://www.youtube.com/watch?v=rUUrmGKYwHw&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=8 (codebasics)
 
 <br>
+
+***(Side lesson, for the Queue Data Structure excercise)***  
+What is Multithreading?  
+Lets define what a thread is first: A thread is a seperate flow of code execution. 
+
+Each program has one thread by default, but we may need to create new threads to execute tasks concurrently within a single program.
+
+Multithreading is a model of program execution that allows for multiple threads to be created and executed within a process, executing independently but concurrently sharing process resources. 
+
+Source(s): https://www.youtube.com/watch?v=PJ4t2U15ACo&list=PLeo1K3hjS3uub3PRhdoCTY8BxMKSW7RjN&index=1 (codebasics)
 
 <br>
 
 ### 10. Tutorial 9 - Trees and General Trees (Data Structure) <a name = "tutorial9"></a>
+What is a Tree?  
+A Tree is a collection of non-linear data structures with a hierarchy-based structure with a set of connected nodes. (like those used in Linked Lists Data Structure)
 
-<br>
+What is a General Tree?  
+You can sort of think of General Tree as the foundational Tree Data Structure blueprint for all other Tree Data Structure variations, such that other Tree Data Structure variations are modifications of the General Tree.
+
+A General Tree is a Tree Data Structure where each node may have zero or more children nodes for every node (number of children nodes may vary depending on the Tree Data Structure variation).
+
+Source(s): https://www.youtube.com/watch?v=4r_XR9fUPhQ&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=9 (codebasics)
 
 <br>
 
 ### 11. Tutorial 9.1 - Binary Trees (Tree Data Structure variation) and Binary Search Trees (Binary Tree Data Structure variation) <a name = "tutorial9.1"></a>
+What is a Binary Tree?  
+A Binary Tree is a variation of the (General) Tree Data Structure, a non-linear Data Structure with maximum of two children nodes for each node. The difference/modification between a General Tree and a Binary Tree is that each node in a General Tree can have zero to infinity number of children, while each node in a Binary Tree can only have a (zero to) maximum of 2 nodes left and right. 
 
-<br>
+Similar to a General Tree, a Binary Tree does not have its Nodes sorted. Usually, by itself, the Binary Tree is not very applicable/useful as its Nodes are unsorted, hence, it is usually implemented as one of its further variations, more commonly in the form of a Binary Search Tree (BST) (aka ordered/sorted Binary Tree).
+
+What is a Binary Search Tree (BST)?  
+A Binary Search Tree (BST) is a further variation of the Binary Tree Data Structure, sometimes known as an ordered/sorted Binary Tree. The 2 differences/modifications between a Binary Tree and Binary Search Tree is that a normal Binary Tree is unordered, and allows duplicates, while a Binary Search Tree is ordered (by some manner) that allows easy searching of a particular node, and dosen't allow duplicates (its not like BST don't allow, but we tell our BST to not allow it as duplicate data nodes sort of messes up the BST's ordering/sorting and subsequently the search function. We will be able to understand this once we learn how the BST's ordering/sorting works)
+
+By the way, Binary Search Tree are called as such as due to their ordered/sorted characteristic, it increases the efficiency (Big O Notation) of searching (search operation) in a Binary Tree.
+
+Source(s): https://www.youtube.com/watch?v=lFq5mYUWEBk&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=10 (Part 1) (codebasics)
+           https://www.youtube.com/watch?v=JnrbMQyGLiU&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=11 (Part 2) (codebasics)
 
 <br>
 
 ### 12. Tutorial 10 - Graphs (Data Structure) <a name = "tutorial10"></a>
+What are Data Structures?  
+Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+
+Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
 
@@ -134,60 +205,81 @@ Learning and Practices are both organised under each folder for their respective
 ## On Algorithms (Searching Algorithms and Sorting Algorithms) <a name = "algorithms"></a>
 
 ### 13. Tutorial 11 - What are Algorithms <a name = "tutorial11"></a>
+there are thousands different kinds of data structures and algorithms out there the ones here are the usual starting ones the teach to new programmers to familiarise them to DSA
+What are Data Structures?  
+Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+
+Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
 
 <br>
 
 ### 14. Tutorial 12 - Binary Search (Searching Algorithm) and Linear Search (Searching Algorithm) <a name = "tutorial12"></a>
+What are Data Structures?  
+Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
 
-<br>
-
-<br>
-
-### 13. Tutorial 11 - What are Algorithms <a name = "tutorial6"></a>
-
-<br>
-
-<br>
-
-### 14. Tutorial 12 - Binary Search (Searching Algorithm) and Linear Search (Searching Algorithm) <a name = "tutorial6.1"></a>
+Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
 
 <br>
 
 ### 15. Tutorial 13 - Bubble Sort (Sorting Algorithm) <a name = "tutorial13"></a>
+What are Data Structures?  
+Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+
+Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
 
 <br>
 
 ### 16. Tutorial 14 - Quick Sort (Sorting Algorithm) <a name = "tutorial14"></a>
+What are Data Structures?  
+Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+
+Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
 
 <br>
 
 ### 17. Tutorial 15 - Insertion Sort (Sorting Algorithm) <a name = "tutorial15"></a>
+What are Data Structures?  
+Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+
+Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
 
 <br>
 
 ### 18. Tutorial 15.1 - Shell Sort (Sorting Algorithm) (improved Insertion Sort Algorithm variation) <a name = "tutorial15.1"></a>
+What are Data Structures?  
+Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+
+Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
 
 <br>
 
 ### 19. Tutorial 16 - Merge Sort (Sorting ALgorithm) <a name = "tutorial16"></a>
+What are Data Structures?  
+Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+
+Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
 
 <br>
 
 ### 20. Tutorial 17 - Selection Sort (Sorting ALgorithm) <a name = "tutorial17"></a>
+What are Data Structures?  
+Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+
+Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
 
