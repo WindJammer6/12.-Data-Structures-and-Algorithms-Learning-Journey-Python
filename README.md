@@ -16,14 +16,14 @@ Learning and Practices are both organised under each folder for their respective
 
 <br>
 
-**Source(s):**
+**Most of my sources come from this Youtube playlist by [codebasics](https://www.youtube.com/@codebasics):**
 + https://www.youtube.com/playlist?list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12 (codebasics) 
 
 <br>
 
 ## Table of Contents:
 + [Code Description](#codedescription)
-
+  + [Introduction to Data Structures and Algorithms](#datastructuresandalgorithms) 
   + [On Data Structures](#datastructures):
     + [Tutorial 1 - What are Data Structures](#tutorial1)  
     + [Tutorial 2 - Big O Notation](#tutorial2)  
@@ -55,6 +55,11 @@ Learning and Practices are both organised under each folder for their respective
 <br>
 
 ## Code Description <a name = "codedescription"></a>  
+
+<br>
+
+### Introduction to Data Structures and Algorithms <a name = "datastructuresandalgorithms"></a>  
+[Here](https://github.com/WindJammer6/12.-Data-Structures-and-Algorithms-Learning-and-Practice-Python/blob/main/Introduction_to_Data_Structures_and_Algorithms.txt) is the file that summarises everything that I learnt in this Data Structures and Algorithms learning journey.
 
 <br>
 
@@ -302,7 +307,7 @@ Shell Sort is a sorting algorithm that sorts a list by dividing the array into s
 
 In this tutorial, we implemented the Shell Sort Algorithm iteratively.
 
-Source(s): 
+Source(s):   
 ~~https://www.youtube.com/watch?v=VxNr9Vudp4Y&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=18~~ (codebasics) (I didn't like codebasics' video on how he explained the Shell Sort Algorithm, so I sourced from other websites for a better explanation of the Shell Sort Algorithm)  
 https://www.youtube.com/watch?v=IViqgakt-Eg (Geekific)  
 https://www.youtube.com/watch?v=SHcPqUe2GZM&t=1s (GeeksforGeeks)
