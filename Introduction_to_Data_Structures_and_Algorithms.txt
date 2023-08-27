@@ -1,0 +1,60 @@
+What are Data Structures?
+They are a specificied way to organise, manage, and store data in a specific memory layout. Similar 
+to that of a physical container, which you can put and keep stuff in it. 
+
+Examples of Data Structures:
+1. Arrays
+2. Linked Lists
+3. Hash Tables
+4. Stacks
+5. Queues
+6. Trees
+7. Graphs
+
+
+//////////////////////////
+
+
+What are Algorithms?
+They are a list set of instructions of how to solve a computational problem. These Algorithms are 
+executed on Data Structures and together, Data Structures and Algorithms, creates a computer program.
+
+Examples are infinite (possibilities are endless, much wider in variety than Data Structures), but 
+common Algorithms that are first taught to new programmers will always be Searching and Sorting 
+Algorithms.
+
+Examples of Searching Algorithms: 
+Linear Search
+Binary Search
+
+Examples of Sorting Algorithms: 
+Bubble Sort
+Quick Sort
+Insertion Sort
+Merge Sort
+Shell Sort
+Selection Sort
+
+
+//////////////////////////
+
+
+How does Data Structure and Algorithms work together?
+Data Structures are the building materials/raw material to build any computer program. Selecting the
+right Data Structure will drastically improve the performance of the Algorithm used/or allow you
+to select the most efficient Algorithm in the computer program. 
+
+
+//////////////////////////
+
+
+Other important concepts/tricks you need to know that will help you understand the topic of Data 
+Structures and Algorithms better:
+
+Big O notation: The Big O notation measures how running time (time complexity) OR space requirements 
+(space complexity) for your program grow as input grows for the worst case scenario.
+
+Recursion: When a function calls itself in the computer program.
+
+Iteration: When a code keeps executes repeating steps, or instructions over and over again. Often 
+called a 'loop'.
