@@ -151,7 +151,7 @@ Source(s): https://www.youtube.com/watch?v=rUUrmGKYwHw&list=PLeo1K3hjS3uu_n_a__M
 
 <br>
 
-***(Side lesson, for the Queue Data Structure excercise)***  
+***(Side lesson, for the Queue Data Structure excercise 1)***  
 What is Multithreading?  
 Lets define what a thread is first: A thread is a seperate flow of code execution. 
 
@@ -187,16 +187,36 @@ A Binary Search Tree (BST) is a further variation of the Binary Tree Data Struct
 
 By the way, Binary Search Tree are called as such as due to their ordered/sorted characteristic, it increases the efficiency (Big O Notation) of searching (search operation) in a Binary Tree.
 
-Source(s): https://www.youtube.com/watch?v=lFq5mYUWEBk&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=10 (Part 1) (codebasics)
-           https://www.youtube.com/watch?v=JnrbMQyGLiU&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=11 (Part 2) (codebasics)
+Source(s): 
+https://www.youtube.com/watch?v=lFq5mYUWEBk&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=10 (Part 1) (codebasics)  
+https://www.youtube.com/watch?v=JnrbMQyGLiU&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=11 (Part 2) (codebasics)
 
 <br>
 
 ### 12. Tutorial 10 - Graphs (Data Structure) <a name = "tutorial10"></a>
-What are Data Structures?  
-Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+What is a Graph?  
+A Graph is a non-linear data structure consisting of nodes and edges. The nodes are sometimes also referred to as vertices and the edges are lines or arcs that connect any two nodes in the Graph. 
 
-Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
+A node refers to the individual entity storing data, while an edge refers to the line connecting 2 nodes.
+
+There are 2 types of Graph Data Structures:  
+  1. Undirected Graph
+  2. Directed Graph
+
+Also, the edges of Graph Data Structures may or may not be weighted.
+
+In this tutorial, out of the 2 common ways to implement Graph Data Structures, as an Adjacency Matrix or Adjacency List, we only covered implementing Adjacency List Graph Data Structures.
+
+In this tutorial, we explored 4 types of Graphs,  
+  1. Adjacency List Directed Graph
+  2. Adjacency List Undirected Graph
+  3. Adjacency List Directed Weighted Graph
+  4. Adjacency List Undirected Weighted Graph
+
+Source(s): 
+https://www.youtube.com/@AmulsAcademy/videos (Amulya's Academy)(referenced from various videos on Graph Data Structures from this Youtube channel)
+https://www.youtube.com/watch?v=j0IYCyBdzfA&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=12 (codebasics)
+https://www.simplilearn.com/tutorials/data-structure-tutorial/graphs-in-data-structure (simplilearn)
 
 <br>
 
@@ -205,53 +225,65 @@ Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__M
 ## On Algorithms (Searching Algorithms and Sorting Algorithms) <a name = "algorithms"></a>
 
 ### 13. Tutorial 11 - What are Algorithms <a name = "tutorial11"></a>
-there are thousands different kinds of data structures and algorithms out there the ones here are the usual starting ones the teach to new programmers to familiarise them to DSA
-What are Data Structures?  
-Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+What are Algorithms?  
+Algorithms are a list set of instructions of how to solve a computational problem. These Algorithms are executed on Data Structures and together, Data Structures and Algorithms, creates a computer program.
 
-Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
+Examples are infinite (possibilities are endless, much wider in variety than Data Structures), but common Algorithms that are first taught to new programmers will always be Searching and Sorting Algorithms.
 
-<br>
+Source(s): NIL
 
 <br>
 
 ### 14. Tutorial 12 - Binary Search (Searching Algorithm) and Linear Search (Searching Algorithm) <a name = "tutorial12"></a>
-What are Data Structures?  
-Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+What is Binary Search?  
+Binary Search is a searching algorithm used in a sorted array that searches for a value by repeatedly dividing the search interval in half and the correct interval to find is decided based on the searched value and the middle value of the interval.
 
-Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
+Note that unlike some other Search Algorithms, Binary Search Algorithm works on the concept of the list to be searched, to be sorted beforehand. (So if the list is unsorted then Binary Search Algorithm dosen't work)
 
-<br>
+In this tutorial, we implemented the Binary Search Algorithm both iteratively and recursively.
+
+What is Linear Search?  
+Linear search is a searching algorithm where the list or data set is traversed from one end to the other end to find the desired value.
+
+In this tutorial, we implemented the Linear Search Algorithm iteratively.
+
+Source(s): https://www.youtube.com/watch?v=GnZ9ppr_zaI&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=13 (codebasics)
 
 <br>
 
 ### 15. Tutorial 13 - Bubble Sort (Sorting Algorithm) <a name = "tutorial13"></a>
-What are Data Structures?  
-Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+What is Bubble Sort?  
+Bubble Sort is a sorting algorithm that sorts a list by examining each set of adjacent elements in the list, from left to right, switching their positions if they are out of order. The Bubble Sort Algorithm then repeats this process until it can run through the entire string and find no two elements that need to be swapped.
 
-Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
+In this tutorial, we implemented the Bubble Sort Algorithm iteratively.
+
+Source(s): https://www.youtube.com/watch?v=ppmIOUIz4uI&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=14 (codebasics)
 
 <br>
 
 <br>
 
 ### 16. Tutorial 14 - Quick Sort (Sorting Algorithm) <a name = "tutorial14"></a>
-What are Data Structures?  
-Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+What is Quick Sort?  
+Quick Sort is a sorting algorithm that sorts a list by using the Divide and Conquer technique that picks an element as a pivot and partitions the given array around the picked pivot by placing the pivot in its correct position in the array. (In these Algorithm tutorials, the only 2 Algorithms (both Sorting Algorithms) that uses the Divide and Conquer paradigm is Quick Sort Algorithm and Merge Sort Algorithm)
 
-Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
+In this tutorial, we implemented the Quick Sort Algorithm recursively.
 
-<br>
+In this tutorial, we explored 2 schemes of Partitioning,
+  1. Hoare Partition scheme
+  2. Lomuto Partition scheme
+
+Source(s): https://www.youtube.com/watch?v=5iSZ7mh_RAk&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=15 (codebasics)
 
 <br>
 
 ### 17. Tutorial 15 - Insertion Sort (Sorting Algorithm) <a name = "tutorial15"></a>
-What are Data Structures?  
-Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
+What is Insertion Sort?  
+Insertion Sort is a sorting algorithm that sorts a list by iteratively building a sorted subarray within the given unsorted array. The algorithm splits the unsorted array into 2 subarrays, the sorted subarray and unsorted subarray. It starts with the first element as the sorted subarray (since a single element is always considered sorted), and then it repeatedly takes the next element from the unsorted part of the array and inserts it into its correct position in the sorted subarray until the whole array becomes sorted (all the elements in the unsorted subarray is brought to the sorted subarray, and there is no more unsorted subarray, and the initial List now only contains the sorted subarray and is now sorted)
 
-Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
+In this tutorial, we implemented the Insertion Sort Algorithm iteratively.
 
-<br>
+Source(s): https://www.youtube.com/watch?v=K0zTIF3rm9s&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=16 (codebasics)
 
 <br>
 
