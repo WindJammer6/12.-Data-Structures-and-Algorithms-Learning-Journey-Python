@@ -45,7 +45,7 @@ Learning and Practices are both organised under each folder for their respective
     + [Tutorial 14 - Quick Sort (Sorting Algorithm)](#tutorial14)  
     + [Tutorial 15 - Insertion Sort (Sorting Algorithm)](#tutorial15)   
       + [Tutorial 15.1 - Shell Sort (Sorting Algorithm) (improved Insertion Sort Algorithm variation)](#tutorial15.1)  
-    + [Tutorial 16 - Merge Sort (Sorting ALgorithm)](#tutorial16)  
+    + [Tutorial 16 - Merge Sort (Sorting Algorithm)](#tutorial16)  
     + [Tutorial 17 - Selection Sort (Sorting Algorithm)](#tutorial17)  
     
 + [Thoughts after the learning journey](#thoughts)
@@ -314,7 +314,7 @@ https://www.youtube.com/watch?v=SHcPqUe2GZM&t=1s (GeeksforGeeks)
 
 <br>
 
-### Tutorial 16 - Merge Sort (Sorting ALgorithm) <a name = "tutorial16"></a>
+### Tutorial 16 - Merge Sort (Sorting Algorithm) <a name = "tutorial16"></a>
 *What is Merge Sort?*  
 Merge Sort is a sorting algorithm that sorts a list by using the Divide and Conquer technique that divides an array into smaller subarrays, sorting each subarray recursively (via the same Merge Sort Algorithm), and then merging the sorted subarrays back together to form the final sorted array. (In these Algorithm tutorials, the only 2 Algorithms (both Sorting Algorithms) that uses the Divide and Conquer paradigm is Quick Sort Algorithm and Merge Sort Algorithm)
 
@@ -326,7 +326,7 @@ Source(s): https://www.youtube.com/watch?v=nCNfu_zNhyI&list=PLeo1K3hjS3uu_n_a__M
 
 <br>
 
-### Tutorial 17 - Selection Sort (Sorting ALgorithm) <a name = "tutorial17"></a>
+### Tutorial 17 - Selection Sort (Sorting Algorithm) <a name = "tutorial17"></a>
 *What is Selection Sort?*  
 Selection Sort is a sorting algorithm that sorts a list by repeatedly selecting the smallest (or largest) element from the unsorted subarray of the initial unsorted List and moving it to the sorted subarray of the initial unsorted List. 
 
