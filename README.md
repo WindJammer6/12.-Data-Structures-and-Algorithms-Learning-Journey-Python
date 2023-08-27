@@ -24,7 +24,7 @@ Learning and Practices are both organised under each folder for their respective
 
 ## Table of Contents:
 + [Code Description](#codedescription)  
-  + On Data Structures:  
+  + [On Data Structures](#datastructures):
     + [Tutorial 1 - What are Data Structures](#tutorial1)  
     + [Tutorial 2 - Big O Notation](#tutorial2)  
     + [Tutorial 3 - Concept of Recursion](#tutorial3)  
@@ -37,7 +37,8 @@ Learning and Practices are both organised under each folder for their respective
     + [Tutorial 9 - Trees and General Trees (Data Structure)](#tutorial9)  
       + [Tutorial 9.1 - Binary Trees (Tree Data Structure variation) and Binary Search Trees (Binary Tree Data Structure variation)](#tutorial9.1)  
     + [Tutorial 10 - Graphs (Data Structure)](#tutorial10)
-  + On Algorithms (Searching and Sorting Algorithms):  
+  
+  + [On Algorithms (Searching and Sorting Algorithms)](#algorithms):
     + [Tutorial 11 - What are Algorithms)](#tutorial11)  
     + [Tutorial 12 - Binary Search (Searching Algorithm) and Linear Search (Searching Algorithm)](#tutorial12)  
     + [Tutorial 13 - Bubble Sort (Sorting Algorithm)](#tutorial13)  
@@ -57,7 +58,7 @@ Learning and Practices are both organised under each folder for their respective
 
 <br>
 
-## On Data Structures
+## [On Data Structures] <a name = "algorithms"></a>
 ### 1. Tutorial 1 - What are Data Structures <a name = "tutorial1"></a>
 
 <br>
@@ -130,7 +131,7 @@ Learning and Practices are both organised under each folder for their respective
 
 <br>
 
-## On Algorithms (Searching Algorithms and Sorting Algorithms)
+## On Algorithms (Searching Algorithms and Sorting Algorithms) <a name = "algorithms"></a>
 
 ### 13. Tutorial 11 - What are Algorithms <a name = "tutorial11"></a>
 
