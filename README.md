@@ -23,39 +23,41 @@ Learning and Practices are both organised under each folder for their respective
 + https://www.youtube.com/playlist?list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12 (codebasics) 
 
 ## Table of Contents:
-+ [Code Description](#codedescription)
++ [Code Description](#codedescription)  
   + On Data Structures:  
-    1.  [Tutorial 1 - What are Data Structures](#tutorial1)
-    2.  [Tutorial 2 - Big O Notation](#tutorial2)
-    3.  [Tutorial 3 - Concept of Recursion](#tutorial3)
-    4.  [Tutorial 4 - Arrays (Data Structure)](#tutorial4)
-    5.  [Tutorial 5 - Linked Lists (Data Structure)](#tutorial5)
-    6.  [Tutorial 6 - Hash Tables (Data Structure)](#tutorial6)  
-        -> [Tutorial 6.1 - Hash Tables Collision Handling](#tutorial6.1)
-    7.  [Tutorial 7 - Stacks (Data Structure)](#tutorial7)
-    8.  [Tutorial 8 - Queues (Data Structure)](#tutorial8)
-    9.  [Tutorial 9 - Trees and General Trees (Data Structure)](#tutorial9)
-        -> [Tutorial 9.1 - Binary Trees (Tree Data Structure variation) and Binary Search Trees (Binary Tree Data Structure variation)](#tutorial9.1)
-    10. [Tutorial 10 - Graphs (Data Structure)](#tutorial10)  
-
-  + On Algorithms (Searching and Sorting Algorithms):
-    11. [Tutorial 11 - What are Algorithms)](#tutorial11)  
-    12. [Tutorial 12 - Binary Search (Searching Algorithm) and Linear Search (Searching Algorithm)](#tutorial12)  
-    13. [Tutorial 13 - Bubble Sort (Sorting Algorithm)](#tutorial13)  
-    14. [Tutorial 14 - Quick Sort (Sorting Algorithm)](#tutorial14)  
-    15. [Tutorial 15 - Insertion Sort (Sorting Algorithm)](#tutorial15)  
-        -> [Tutorial 15.1 - Shell Sort (Sorting Algorithm) (improved Insertion Sort Algorithm variation)](#tutorial15.1)  
-    16. [Tutorial 16 - Merge Sort (Sorting ALgorithm)](#tutorial16)  
-    17. [Tutorial 17 - Selection Sort (Sorting ALgorithm)](#tutorial17)  
+    + [Tutorial 1 - What are Data Structures](#tutorial1)  
+    + [Tutorial 2 - Big O Notation](#tutorial2)  
+    + [Tutorial 3 - Concept of Recursion](#tutorial3)  
+    + [Tutorial 4 - Arrays (Data Structure)](#tutorial4)  
+    + [Tutorial 5 - Linked Lists (Data Structure)](#tutorial5)  
+    + [Tutorial 6 - Hash Tables (Data Structure)](#tutorial6)  
+      + [Tutorial 6.1 - Hash Tables Collision Handling](#tutorial6.1)  
+    + [Tutorial 7 - Stacks (Data Structure)](#tutorial7)  
+    + [Tutorial 8 - Queues (Data Structure)](#tutorial8)  
+    + [Tutorial 9 - Trees and General Trees (Data Structure)](#tutorial9)  
+      + [Tutorial 9.1 - Binary Trees (Tree Data Structure variation) and Binary Search Trees (Binary Tree Data Structure variation)](#tutorial9.1)  
+    + [Tutorial 10 - Graphs (Data Structure)](#tutorial10)
+  + On Algorithms (Searching and Sorting Algorithms):  
+    + [Tutorial 11 - What are Algorithms)](#tutorial11)  
+    + [Tutorial 12 - Binary Search (Searching Algorithm) and Linear Search (Searching Algorithm)](#tutorial12)  
+    + [Tutorial 13 - Bubble Sort (Sorting Algorithm)](#tutorial13)  
+    + [Tutorial 14 - Quick Sort (Sorting Algorithm)](#tutorial14)  
+    + [Tutorial 15 - Insertion Sort (Sorting Algorithm)](#tutorial15)   
+      + [Tutorial 15.1 - Shell Sort (Sorting Algorithm) (improved Insertion Sort Algorithm variation)](#tutorial15.1)  
+    + [Tutorial 16 - Merge Sort (Sorting ALgorithm)](#tutorial16)  
+    + [Tutorial 17 - Selection Sort (Sorting Algorithm)](#tutorial17)  
     
-+ [Th7ughts after the learning journey](#thoughts)
++ [Thoughts after the learning journey](#thoughts)
 
 <br>
 
 <br>
 
-## Code Description <a name = "codedescription"></a>
+## Code Description <a name = "codedescription"></a>  
 
+<br>
+
+## On Data Structures
 ### 1. Tutorial 1 - What are Data Structures <a name = "tutorial1"></a>
 
 <br>
@@ -98,48 +100,97 @@ Learning and Practices are both organised under each folder for their respective
 
 <br>
 
-### 1. Tutorial 1 - What are Data Structures <a name = "tutorial1"></a>
+### 8. Tutorial 7 - Stacks (Data Structure) <a name = "tutorial7"></a>
 
 <br>
 
 <br>
 
-### 2. Tutorial 2 - Big O Notation <a name = "tutorial2"></a>
+### 9. Tutorial 8 - Queues (Data Structure) <a name = "tutorial8"></a>
 
 <br>
 
 <br>
 
-### 3. Tutorial 3 - Concept of Recursion <a name = "tutorial3"></a>
+### 10. Tutorial 9 - Trees and General Trees (Data Structure) <a name = "tutorial9"></a>
 
 <br>
 
 <br>
 
-### 4. Tutorial 4 - Arrays (Data Structure) <a name = "tutorial4"></a>
+### 11. Tutorial 9.1 - Binary Trees (Tree Data Structure variation) and Binary Search Trees (Binary Tree Data Structure variation) <a name = "tutorial9.1"></a>
 
 <br>
 
 <br>
 
-### 5. Tutorial 5 - Linked Lists (Data Structure) <a name = "tutorial5"></a>
+### 12. Tutorial 10 - Graphs (Data Structure) <a name = "tutorial10"></a>
 
 <br>
 
 <br>
 
-### 6. Tutorial 6 - Hash Tables (Data Structure) <a name = "tutorial6"></a>
+## On Algorithms (Searching Algorithms and Sorting Algorithms)
+
+### 13. Tutorial 11 - What are Algorithms <a name = "tutorial11"></a>
 
 <br>
 
 <br>
 
-### 7. Tutorial 6.1 - Hash Tables Collision Handling <a name = "tutorial6.1"></a>
+### 14. Tutorial 12 - Binary Search (Searching Algorithm) and Linear Search (Searching Algorithm) <a name = "tutorial12"></a>
 
 <br>
 
 <br>
 
+### 13. Tutorial 11 - What are Algorithms <a name = "tutorial6"></a>
+
+<br>
+
+<br>
+
+### 14. Tutorial 12 - Binary Search (Searching Algorithm) and Linear Search (Searching Algorithm) <a name = "tutorial6.1"></a>
+
+<br>
+
+<br>
+
+### 15. Tutorial 13 - Bubble Sort (Sorting Algorithm) <a name = "tutorial13"></a>
+
+<br>
+
+<br>
+
+### 16. Tutorial 14 - Quick Sort (Sorting Algorithm) <a name = "tutorial14"></a>
+
+<br>
+
+<br>
+
+### 17. Tutorial 15 - Insertion Sort (Sorting Algorithm) <a name = "tutorial15"></a>
+
+<br>
+
+<br>
+
+### 18. Tutorial 15.1 - Shell Sort (Sorting Algorithm) (improved Insertion Sort Algorithm variation) <a name = "tutorial15.1"></a>
+
+<br>
+
+<br>
+
+### 19. Tutorial 16 - Merge Sort (Sorting ALgorithm) <a name = "tutorial16"></a>
+
+<br>
+
+<br>
+
+### 20. Tutorial 17 - Selection Sort (Sorting ALgorithm) <a name = "tutorial17"></a>
+
+<br>
+
+<br>
 
 ## Thoughts after the learning journey <a name = "thoughts"></a>
 
