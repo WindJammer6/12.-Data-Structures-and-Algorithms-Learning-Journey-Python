@@ -254,6 +254,7 @@ In this tutorial, we implemented the Linear Search Algorithm iteratively.
 
 Source(s): https://www.youtube.com/watch?v=GnZ9ppr_zaI&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=13 (codebasics)
 
+<br>
 
 ***(Side lesson, for comparing the time complexity of Binary Search Algorithm and Linear Search Algorithm in [this](https://github.com/WindJammer6/12.-Data-Structures-and-Algorithms-Learning-and-Practice-Python/blob/main/zTutorial%2012%20-%20Binary%20Search%20(Searching%20Algorithm)%20and%20Linear%20Search%20(Searching%20Algorithm)/4.%20comparing_performance_of_Linear_Search_and_Binary_Search.py) file)***   
 *What is a Decorator?*  
