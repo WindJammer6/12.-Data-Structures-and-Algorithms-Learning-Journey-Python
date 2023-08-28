@@ -55,9 +55,6 @@ Learning and Practices are both organised under each folder for their respective
 <br>
 
 ## Code Description <a name = "codedescription"></a>  
-
-<br>
-
 ### Introduction to Data Structures and Algorithms <a name = "datastructuresandalgorithms"></a>  
 [Here](https://github.com/WindJammer6/12.-Data-Structures-and-Algorithms-Learning-and-Practice-Python/blob/main/Introduction_to_Data_Structures_and_Algorithms.txt) is the file that summarises everything that I learnt in this Data Structures and Algorithms learning journey.
 
