@@ -39,7 +39,7 @@ Learning and Practices are both organised under each folder for their respective
     + [Tutorial 10 - Graphs (Data Structure)](#tutorial10)  
 
   + [On Algorithms (Searching and Sorting Algorithms)](#algorithms):
-    + [Tutorial 11 - What are Algorithms)](#tutorial11)  
+    + [Tutorial 11 - What are Algorithms](#tutorial11)  
     + [Tutorial 12 - Binary Search (Searching Algorithm) and Linear Search (Searching Algorithm)](#tutorial12)  
     + [Tutorial 13 - Bubble Sort (Sorting Algorithm)](#tutorial13)  
     + [Tutorial 14 - Quick Sort (Sorting Algorithm)](#tutorial14)  
