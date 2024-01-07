@@ -65,6 +65,8 @@ The ['Introduction_to_Data_Structures_and_Algorithms.txt'](https://github.com/Wi
 *What are Data Structures?*  
 Data Structures are a specificied way to organise, manage, and store data in a specific memory layout. Similar to that of a physical container, which you can put and keep stuff in it. 
 
+Examples are more finite compared to Algorithms, due to the fundamental concepts of Data Structures being well-defined, and that each of them serve a clear, specific purpose in managing and organizing data efficiently.
+
 Source(s): https://www.youtube.com/watch?v=_t2GVaQasRY&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=1&t=5s (codebasics)
 
 <br>
