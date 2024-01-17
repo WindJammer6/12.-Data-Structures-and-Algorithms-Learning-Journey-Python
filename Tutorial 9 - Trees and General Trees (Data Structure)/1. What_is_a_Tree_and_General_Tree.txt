@@ -25,7 +25,7 @@ Visual representation on how a General Tree looks like:
 All the Data Structures we learnt so far (Arrays, Linked Lists, Hash Tables, Stacks, Queues) are all Linear 
 Data Structures that stores data in sequence. However, Tree Data Structures and Graph Data Structure (which
 we will learn in 'Tutorial 10 - Graphs (Data Structure)') are Non-Linear Data Structures, storing data in 
-multiple levels instead of in a s ingle level, connected in sequence, storing data adjacent to one another.
+multiple levels instead of in a single level, connected in sequence, storing data adjacent to one another.
 
 Difference in Non-Linear Data Structures Trees and Graphs is that Trees stores data in multi-level, with 
 each node connected to each other hierarchically, while nodes in Graphs can be connected to other nodes in 
