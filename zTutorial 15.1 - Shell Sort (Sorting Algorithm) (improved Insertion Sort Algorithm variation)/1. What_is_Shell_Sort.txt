@@ -676,7 +676,7 @@ weren't the standard Insertion Sort due to the presence of gaps between the elem
 
 Explaining the Big O Notation of Time and Space Complexity of Shell Sort:
 
-For Big O Notation of Time Complexity of Quick Sort:
+For Big O Notation of Time Complexity of Shell Sort:
 Shell Sort's time complexity is more complex to analyze than some other sorting algorithms due to its dependence on 
 the gap sequence chosen and the input data's characteristics (which will affect the number of comparisons and 
 shifts/swapping operations required). The time complexity can vary based on these factors.
